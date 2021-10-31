@@ -11,7 +11,7 @@ const addressSchmea =  new mongoose.Schema({
 
     apt_no:{
         type: String,
-        required: true
+        required: false
     },
     streetName:{
         type: String,

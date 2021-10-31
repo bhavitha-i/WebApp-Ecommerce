@@ -7,9 +7,9 @@ const router = new express.Router()
 
 
 
-router.post('/address/add', async (req,res) =>{
+router.post('/address/add', auth,async (req,res) =>{
     console.log('inside address add')
-    const address  = new Address(req.body)
+    const address  = new Address({...req.body,owner:req.customer._id})
     await address.save().then(() =>{
    
      
@@ -35,11 +35,11 @@ router.get('/address/all', async (req,res)=>{
  
 })
 
-router.get('/address/:id', async (req,res)=>{
+router.get('/address/:id', auth, async (req,res)=>{
     const _id = req.params.id
     
     try{
-        const address = await Address.findById({_id})
+        const address = await Address.find({_id,owner:req.customer._id})
         res.send(address)
         
 
@@ -49,16 +49,20 @@ router.get('/address/:id', async (req,res)=>{
  
 })
 
-router.get('/address/mine', auth, async (req,res)=>{
-    console.log('inside address min get all')
+router.get('/addresses/mine', auth, async (req,res)=>{
+    
+    console.log("sssssss")
     
     try{
-        await req.vendor.populate('addresses').execPopulate()
+        await req.customer.populate('addresses').execPopulate()
     
-        res.send(req.vendor.addresses)
+        res.send(req.customer.addresses)
+
+
 
     }catch(e){
-        res.status(500).send(e)
+        console.log("inisde ")
+        res.status(400).send(e)
     }
  
 })

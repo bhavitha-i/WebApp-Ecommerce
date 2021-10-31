@@ -1,4 +1,7 @@
 import * as React from 'react';
+import  { useState } from "react"
+import Cookies from 'js-cookie';
+import axios from "axios";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +15,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import FloatingActionButtons from './FloatingButton';
+import CustomizedSnackbars from './CustomizedSnackbars';
+
 
 function Copyright(props) {
   return (
@@ -80,6 +86,7 @@ export default function VendorSignUp() {
                   autoComplete="family-name"
                 />
               </Grid>
+        
               <Grid item xs={12}>
                 <TextField
                   required
@@ -101,12 +108,27 @@ export default function VendorSignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="age"
+                  label="Age"
+                  name="age"
+                  autoComplete="family-name"
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="contact"
+                  label="Contact"
+                  name="contact"
+                  autoComplete="family-name"
+                />
+              </Grid>
+            
             </Grid>
             <Button
               type="submit"
@@ -118,15 +140,18 @@ export default function VendorSignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/vendor/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        
       </Container>
+      <Link href="/customer/login" variant="body2">
+      <FloatingActionButtons text="Register as Customer"/>
+      </Link>
     </ThemeProvider>
   );
 }

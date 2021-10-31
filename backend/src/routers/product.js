@@ -114,7 +114,7 @@ router.patch('/product/:id', auth, async (req,res)=>{
         res.status(200).send(product)
     }catch(e){
         
-            res.body(e)
+            res.status(400).send("please update only your products")
     }
  
 })
@@ -150,8 +150,9 @@ router.patch('/product/:id', auth, async (req,res)=>{
 
 // //delete vendor
 
-router.delete('/product/:id', async (req,res)=>{
+router.delete('/product/:id',auth,async (req,res)=>{
     const _id = req.params.id
+    console.log("in pro")
     
     try{
         // const product = await Product.findByIdAndDelete(req.params.id)

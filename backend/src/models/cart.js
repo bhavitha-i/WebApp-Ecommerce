@@ -7,7 +7,9 @@ const cartSchema = new mongoose.Schema({
         required: true,
         ref:'Customer'
     },
+    status:{type: String},
     productlist:[{
+        
         quantity: {type:Number},
         product:{
         type: mongoose.Schema.Types.ObjectId}
@@ -15,6 +17,10 @@ const cartSchema = new mongoose.Schema({
     price:{
         type:Number,
         default: 0
+    },
+    isActive:{
+        type:Boolean,
+        default: true
     }
 })
 

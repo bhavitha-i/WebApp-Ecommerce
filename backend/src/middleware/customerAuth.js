@@ -22,6 +22,7 @@ const customerAuth = async(req,res,next) =>{
    
 
     }catch(e){
+        console.log("here in auth error customer")
         res.status(401).send({error: "Please authenticate"})
     }
 

@@ -7,7 +7,12 @@ const jwt = require('jsonwebtoken')
 //might requrie is vendor to restrict data
 
 const vendorSchema = new mongoose.Schema({
-    name:{
+    firstName:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    lastName:{
         type:String,
         required:true,
         trim:true
@@ -37,7 +42,7 @@ const vendorSchema = new mongoose.Schema({
     },
     age: {
         type:Number,
-        default:0,
+        default:18,
         validate(value){
             if(value < 0){
                 throw new Error('Age must be postive')

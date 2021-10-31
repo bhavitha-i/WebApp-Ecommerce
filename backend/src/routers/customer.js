@@ -19,7 +19,11 @@ router.post('/customer/signup', async (req,res) =>{
         cart.save()
         customer.cart = cart._id
         const token = await customer.generateAuthToken()
-        res.status(200).send({customer,token})
+        res.status(200).cookie("token", token,"customer",customer, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+          }).send({customer,token})
     } catch(e){
         res.status(400).send(e)
     }
@@ -30,9 +34,17 @@ router.post('/customer/signup', async (req,res) =>{
 router.post('/customer/login',async(req,res)=>{
     try{
         const customer = await Customer.findByCredentials(req.body.email,req.body.password)
-        res.send({customer,token})
+        console.log(customer.firstName,"----------------")
+        const token = await customer.generateAuthToken()
+        res.status(200).cookie("token", token,"customer",customer, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+          }).send({customer,token})
+
     }catch(e){
-        res.status(400).send()
+        console.log("here in error")
+        res.status(400).send(e)
     }
 })
 
@@ -118,7 +130,7 @@ router.get('/customer/:id',auth, async (req,res)=>{
  
 })
 
-router.get('/customer/myCart', auth, async (req,res)=>{
+router.get('/customers/myCart', auth, async (req,res)=>{
     console.log('inside mycart get all')
     
     try{
@@ -132,7 +144,7 @@ router.get('/customer/myCart', auth, async (req,res)=>{
  
 })
 
-router.get('/customer/myOrders', auth, async (req,res)=>{
+router.get('/customers/myOrders', auth, async (req,res)=>{
     console.log('inside myorders get all')
     
     try{
@@ -150,7 +162,7 @@ router.patch('/customers/me', auth ,async (req,res)=>{
     
     const _id = req.params.id
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name','password','age']
+    const allowedUpdates = ['name','password','age','firstName','lastName']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     if(!isValidOperation){
         return res.status(400).send({error:'Invalid updates'})
