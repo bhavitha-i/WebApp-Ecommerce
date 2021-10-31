@@ -5,8 +5,13 @@ const jwt = require('jsonwebtoken')
 const Cart = require('./cart')
 
 const customerSchema = new mongoose.Schema({
-    name:{
-        type: String,
+    firstName:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    lastName:{
+        type:String,
         required:true,
         trim:true
     },
