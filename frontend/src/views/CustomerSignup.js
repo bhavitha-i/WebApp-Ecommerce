@@ -24,7 +24,7 @@ import theme from '../components/theme'
 
 
 
-function VendorSignUp() {
+function CustomerSignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -147,4 +147,4 @@ function VendorSignUp() {
   );
 }
 
-export default withRoot(VendorSignUp);
+export default withRoot(CustomerSignUp);

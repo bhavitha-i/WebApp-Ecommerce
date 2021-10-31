@@ -25,7 +25,7 @@ import theme from '../components/theme'
 
 
 
-function VendorSignIn() {
+function CustomerSignin() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [loggedin,setLoggedin] = useState(false);
@@ -148,4 +148,4 @@ function VendorSignIn() {
   );
 }
 
-export default withRoot(VendorSignIn);
+export default withRoot(CustomerSignin);
