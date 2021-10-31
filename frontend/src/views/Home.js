@@ -1,8 +1,12 @@
 import * as React from 'react';
 import AppBar from '../components/AppBar';
+import withRoot from '../components/WithRoot';
 
-export default function Home(){
+
+function Home(){
     return (
         <AppBar/>
     );
 }
+
+export default withRoot(Home);
