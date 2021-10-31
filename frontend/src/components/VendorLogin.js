@@ -1,4 +1,7 @@
 import * as React from 'react';
+import  { useState } from "react"
+import Cookies from 'js-cookie';
+import axios from "axios";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,8 +15,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import FloatingActionButtons from './FloatingButton';
+import CustomizedSnackbars from './CustomizedSnackbars';
 
 function Copyright(props) {
+
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
@@ -29,18 +35,61 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function VendorSignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const [loggedin,setLoggedin] = useState(false);
+  const [user,setUser] = useState("");
+  const [errAlert,setErrAlert] = useState("");
+  const [message,setMessage] = useState("");
+
+
+  async function login(e){
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const loginData={
       email: data.get('email'),
       password: data.get('password'),
-    });
-  };
+
+    };
+    
+    try{
+      setLoggedin(false)
+      const hitback = await axios.post("http://localhost:5000/vendor/login",loginData,{
+                withCredentials: true
+            });
+            console.log(hitback)
+            if(hitback){
+              
+              setLoggedin(true)
+              setErrAlert("success")
+              setMessage("Welcome")
+              setUser(hitback.data.vendor.firstName)
+            }
+            
+    }
+    catch(err){
+      setUser("")
+      setErrAlert("error")
+      setLoggedin(true)
+      setMessage("Invalid Credentials")
+      console.log("in error")
+      console.log(err)
+  }
+   
+
+  }
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   // eslint-disable-next-line no-console
+   
+  // };
 
   return (
     <ThemeProvider theme={theme}>
+      { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} user={user} /> }
+      
+      
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -55,9 +104,9 @@ export default function VendorSignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+           Vendor Log in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -67,6 +116,7 @@ export default function VendorSignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => setEmail(e.target.value)} value={email}
             />
             <TextField
               margin="normal"
@@ -77,6 +127,7 @@ export default function VendorSignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)} value={password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -92,20 +143,21 @@ export default function VendorSignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+              
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/vendor/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        
       </Container>
+      <Link href="/customer/login" variant="body2">
+      <FloatingActionButtons text="Login as Customer"/>
+      </Link>
     </ThemeProvider>
   );
 }

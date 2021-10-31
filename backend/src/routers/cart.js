@@ -2,6 +2,9 @@ const express = require('express')
 const Cart = require('../models/cart')
 const auth = require('../middleware/customerAuth')
 const router = new express.Router()
+const Product = require('../models/product')
+const prodDetails = require('../middleware/getprod')
+
 
 
 
@@ -33,11 +36,11 @@ router.get('/cart/all', async (req,res)=>{
  
 })
 
-router.get('/carts/:id', async (req,res)=>{
+router.get('/carts/:id', auth,async (req,res)=>{
     const _id = req.params.id
     
     try{
-        const cart = await Cart.findById({_id})
+        const cart = await Cart.findOne({_id,owner:req.customer._id})
         res.send(cart)
         
 
@@ -47,16 +50,46 @@ router.get('/carts/:id', async (req,res)=>{
  
 })
 
+router.get('/cart/mine',auth, async (req,res)=>{
+    console.log("inside cart patch")
+
+
+  
+    
+    try{
+    
+     
+        const cart =  await Cart.findOne({isActive:true,owner:req.customer._id})
+
+        if(!cart){
+            console.log("inside not found")
+            return res.status(404).send()
+        }
+        res.status(200).send(cart)
+    }catch(e){
+        console.log(e)
+        
+            res.send(e)
+    }
+ 
+})
+
+
 
 
 // //update customer
 
-router.patch('/cart/:id', async (req,res)=>{
+router.patch('/cart/mine',auth, async (req,res)=>{
     console.log("inside cart patch")
     const updates = Object.keys(req.body)
+
+  
     
     try{
-        const cart = await Cart.findById(req.params.id)
+    
+     
+        const cart =  await Cart.findOne({isActive:true,owner:req.customer._id})
+       
 
         updates.forEach((update) => cart[update] = req.body[update])
 
@@ -68,8 +101,9 @@ router.patch('/cart/:id', async (req,res)=>{
         }
         res.status(200).send(cart)
     }catch(e){
+        console.log(e)
         
-            res.body(e)
+            res.send(e)
     }
  
 })

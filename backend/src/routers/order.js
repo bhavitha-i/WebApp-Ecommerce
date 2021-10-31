@@ -2,19 +2,43 @@ const express = require('express')
 const auth = require('../middleware/customerAuth')
 const Order = require('../models/order')
 const Customer = require('../models/customer')
-const router = new express.Router()
+const Cart = require('../models/cart')
+const roduct = require('../models/product')
+const cartDetails = require('../middleware/cartDetails')
 
+const router = new express.Router()
 
 
 
 router.post('/order/add', auth,async (req,res) =>{
     console.log('inside irder add')
     const order  = new Order({...req.body,owner:req.customer._id})
+    console.log("1___________"+  order)
+    const _id = req.customer.cart
+    try{
+    const cart = await Cart.findById(_id)
+    cart.status = "order placed"
+    cart.isActive = false
+    await cart.save().then(()=>{
+        console.log("saved")
+    }).catch((error)=>{
+        res.status(400).send(error)
+    })
+
+    const newCart = new Cart({owner:req.customer._id})
+    await newCart.save().then(()=>{
+        console.log("New cart created")
+    }).catch((error)=>{
+        res.status(400).send(error)
+    })
+    
+    console.log("cart1",cart)
+    }catch(err){
+        console.log(err)
+    }
     await order.save().then(() =>{
-   
      
         res.send(order)
-
 
     }).catch((error)=>{
         res.status(400).send(error)
