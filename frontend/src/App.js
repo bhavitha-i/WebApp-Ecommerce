@@ -15,6 +15,7 @@ import CreateProduct from './components/CreateProduct';
 import VendorHome from './views/VendorHome';
 import CustomerUpdate from './views/CustomerUpdate';
 import VendorUpdate from './views/VendorUpdate';
+import ProductUpdate from './views/ProductUpdate';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/vendor/home" component={VendorHome} />
         <Route path="/customer/update" component={CustomerUpdate} />
         <Route path="/vendor/update" component={VendorUpdate} />
+        <Route path="/product/update/:id" component={ProductUpdate} />
 
     </Router>
   );
