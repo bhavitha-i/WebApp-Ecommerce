@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import RecipeReviewCard from "./RecipeReviewCard";
+import RecipeReviewCard from "../components/RecipeReviewCard";
 
 
 export default class CustomerHome extends Component {

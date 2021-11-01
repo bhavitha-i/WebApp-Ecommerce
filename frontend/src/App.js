@@ -6,11 +6,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Importing components
 import Home from "./views/Home";
-import VendorLogin from "./components/VendorLogin";
-import VendorSignup from "./components/VendorSignup";
-import CustomerHome from './components/CustomerHome';
+import VendorLogin from "./views/VendorLogin";
+import VendorSignup from "./views/VendorSignup";
+import CustomerSignup from "./views/CustomerSignup";
+import CustomerLogin from "./views/CustomerLogin";
+import CustomerHome from './views/CustomerHome';
 import CreateProduct from './components/CreateProduct';
-import VendorHome from './components/VendorHome';
+import VendorHome from './views/VendorHome';
 
 
 function App() {
