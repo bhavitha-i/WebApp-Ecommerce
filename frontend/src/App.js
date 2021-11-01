@@ -13,6 +13,9 @@ import CustomerLogin from "./views/CustomerLogin";
 import CustomerHome from './views/CustomerHome';
 import CreateProduct from './components/CreateProduct';
 import VendorHome from './views/VendorHome';
+import CustomerUpdate from './views/CustomerUpdate';
+import VendorUpdate from './views/VendorUpdate';
+import ProductUpdate from './views/ProductUpdate';
 import CustomerProfile from './views/CustomerProfile';
 import CustomerCart from './views/CustomerCart';
 
@@ -31,9 +34,12 @@ function App() {
         <Route path="/customer/login" component={CustomerLogin} />
         <Route path="/customer/signup"  component={CustomerSignup} />
         <Route path="/customer/home"  component={CustomerHome} />
+        <Route path="/product/create"  component={CreateProduct} />
+        <Route path="/customer/update" component={CustomerUpdate} />
+        <Route path="/vendor/update" component={VendorUpdate} />
+        <Route path="/product/update/:id" component={ProductUpdate} />
         <Route path="/customer/profile"  component={CustomerProfile} />
         <Route path="/customer/cart"  component={CustomerCart} />
-
 
 
 
