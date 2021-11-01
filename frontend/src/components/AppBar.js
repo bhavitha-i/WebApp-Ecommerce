@@ -9,6 +9,8 @@ import theme from './theme'
 import { ThemeProvider } from '@material-ui/core/styles';
 import styles from '../assets/styles';
 import Link from '@mui/material/Link';
+import { Button } from '@mui/material';
+
 
 
 export default function ButtonAppBar() {
@@ -16,12 +18,12 @@ export default function ButtonAppBar() {
     <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={styles.Header} color='primary'>
-        <Toolbar>
+        <Toolbar style={styles.Toolbar}>
             
           <Typography  component="div" sx={{ flexGrow: 1 , fontSize:24}}>
             <Link 
               underline="none" 
-              variant="h6" 
+              variant="h5" 
               color="inherit" 
               href="/"
               sx={{ fontSize: 24 }}>
@@ -29,9 +31,19 @@ export default function ButtonAppBar() {
             </Link>
           </Typography>
 
-            <Link 
-              color="secondary"
+            {/* <Button 
+              color="inherit"
+              variant="outlined"
+              href="/vendor/signup"
+              style = {styles.HeaderIcons}
+            >
+               {strings.Common.signup} 
+            </Button> */}
+
+            <Link
+              color="inherit"
               underline="none"
+              variant="h6"
               href="/vendor/signup"
               style = {styles.HeaderIcons}
             >
@@ -39,9 +51,10 @@ export default function ButtonAppBar() {
             </Link>
 
             <Link
-              color="secondary"
+              color="inherit"
               underline="none"
               href="/vendor/login"
+              variant="h6"
               style = {styles.HeaderIcons}
             >
                {strings.Common.login} 
