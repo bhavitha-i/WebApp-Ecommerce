@@ -12,7 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import PersonAddAltIcon from '@mui/icons-material/LockOutlined';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -88,7 +88,7 @@ const CustomerSignUp = (callback) => {
           }}
         >
           <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <PersonAddAltIcon fontSize="large" />
+            <PersonAddAltIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
