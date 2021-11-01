@@ -27,7 +27,6 @@ import styles from '../assets/styles';
 
 
 
-
 function CustomerSignin() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");

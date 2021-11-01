@@ -6,10 +6,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Importing components
 import Home from "./views/Home";
-import VendorLogin from "./views/VendorLogin";
-import VendorSignup from "./views/VendorSignup";
-import CustomerLogin from "./views/CustomerLogin";
-import CustomerSignup from "./views/CustomerSignup";
+import VendorLogin from "./components/VendorLogin";
+import VendorSignup from "./components/VendorSignup";
+import CustomerHome from './components/CustomerHome';
+import CreateProduct from './components/CreateProduct';
+import VendorHome from './components/VendorHome';
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
         <Route path="/customer/login" component={CustomerLogin} />
         <Route path="/customer/signup"  component={CustomerSignup} />
 
+        <Route path="/customer/home"  component={CustomerHome} />
+        <Route path="/product/create"  component={CreateProduct} />
+        <Route path="/vendor/home" component={VendorHome} />
 
     </Router>
   );
