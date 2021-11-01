@@ -11,9 +11,7 @@ import styles from '../assets/styles';
 import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import MailIcon from '@mui/icons-material/Mail';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
@@ -40,7 +38,11 @@ export default function ButtonAppBar() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show number of products in cart" color="inherit">
+            <IconButton 
+              size="large" 
+              aria-label="show number of products in cart" 
+              color="inherit"
+              href="/customer/cart">
               <Badge badgeContent={4} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
@@ -50,30 +52,12 @@ export default function ButtonAppBar() {
               size="large"
               edge="end"
               aria-label="account of current user"
-              // aria-controls={menuId}
-              aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
+              href="/customer/profile"
               color="inherit"
             >
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              // aria-controls={mobileMenuId}
-              // aria-haspopup="true"
-              // onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-
-
-          {/* <Button color="secondary">{strings.Common.signup}</Button>
-         <Button color="secondary">{strings.Common.signup}</Button> */}
         </Toolbar>
       </AppBar>
     </Box>
