@@ -23,6 +23,8 @@ import withRoot from '../components/WithRoot';
 import theme from '../components/theme'
 import strings from '../assets/strings';
 import styles from '../assets/styles';
+import { useHistory } from "react-router-dom";
+
 
 
 
@@ -35,6 +37,8 @@ function CustomerSignin() {
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
 
+
+  const history = useHistory();
 
   async function login(e){
     e.preventDefault();
@@ -57,6 +61,7 @@ function CustomerSignin() {
               setErrAlert("success")
               setMessage("Welcome")
               setUser(hitback.data.customer.firstName)
+              window.href("/customer/home")
             }
             
     }

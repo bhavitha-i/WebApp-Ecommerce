@@ -33,7 +33,7 @@ const strings = {
       }
     },
     Common: {
-      websiteName: "Eshop spot",
+      websiteName: "Eshop Spot",
       signup: "Sign up",
       login: "Sign in",
       vendor: "Vendor",
@@ -45,6 +45,9 @@ const strings = {
         desc: "Enjoy your shopping with us",
         offer: "Best ever gifts for all kind of occasions",
       }
+    },
+    product:{
+      price: "Price"
     }
   }
   

@@ -6,6 +6,11 @@ import bgimage from "./images/bg7.jpg";
 const Header = {
     padding: "10px 20px",
     textAlign: "left",
+    height: "60px",
+  }
+
+  const Toolbar = {
+    minHeight:"45px",
   }
 
   const HeaderIcons = {
@@ -13,6 +18,7 @@ const Header = {
     textAlign: "center",
     ml: 3,
     fontSize: 16,
+    textTransform: "none",
   }
   
   const ErrorMessage = {
@@ -44,15 +50,27 @@ const HomeContainer = {
   alignItems: 'center',
 }
 
-
+const ProductPrice = {
+  // fontSize: '22px',
+  fontFamily: "Trirong",
+  fontWeight: "Bold",
+}
   
+const CardButton = {
+    flex: 1,
+    justifyContent: 'center'
+}
+
   const styles = {
     Header: Header,
     ErrorMessage: ErrorMessage,
     HeaderIcons: HeaderIcons,
     HomeBackground:HomeBackground,
     HomeContainer:HomeContainer,
-    Avatar:Avatar
+    Avatar:Avatar,
+    ProductPrice:ProductPrice,
+    CardButton:CardButton,
+    Toolbar:Toolbar
   }
 
   export default styles
