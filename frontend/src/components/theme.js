@@ -29,6 +29,10 @@ const rawTheme = createTheme({
       dark: green[700],
     },
   },
+  background: {
+    paper: 'black',
+    default: "#ff0000"
+  },
   typography: {
     fontFamily: "'Work Sans', sans-serif",
     fontSize: 14,

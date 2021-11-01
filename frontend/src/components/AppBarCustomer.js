@@ -9,7 +9,12 @@ import theme from './theme'
 import { ThemeProvider } from '@material-ui/core/styles';
 import styles from '../assets/styles';
 import Link from '@mui/material/Link';
-import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 
 
@@ -18,51 +23,41 @@ export default function ButtonAppBar() {
     <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={styles.Header} color='primary'>
-        <Toolbar style={styles.Toolbar}>
+      <Toolbar style={styles.Toolbar}>
             
           <Typography  component="div" sx={{ flexGrow: 1 , fontSize:24}}>
             <Link 
               underline="none" 
               variant="h5" 
               color="inherit" 
-              href="/"
+              href="/customer/home"
               sx={{ fontSize: 24 }}>
             {strings.Common.websiteName}
             </Link>
           </Typography>
 
-            {/* <Button 
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <IconButton 
+              size="large" 
+              aria-label="show number of products in cart" 
               color="inherit"
-              variant="outlined"
-              href="/vendor/signup"
-              style = {styles.HeaderIcons}
-            >
-               {strings.Common.signup} 
-            </Button> */}
+              href="/customer/cart">
+              <Badge badgeContent={4} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
 
-            <Link
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              href="/customer/profile"
               color="inherit"
-              underline="none"
-              variant="h6"
-              href="/vendor/signup"
-              style = {styles.HeaderIcons}
             >
-               {strings.Common.signup} 
-            </Link>
-
-            <Link
-              color="inherit"
-              underline="none"
-              href="/vendor/login"
-              variant="h6"
-              style = {styles.HeaderIcons}
-            >
-               {strings.Common.login} 
-            </Link>
-
-
-          {/* <Button color="secondary">{strings.Common.signup}</Button>
-         <Button color="secondary">{strings.Common.signup}</Button> */}
+              <AccountCircle />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

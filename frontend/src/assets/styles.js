@@ -6,6 +6,11 @@ import bgimage from "./images/bg7.jpg";
 const Header = {
     padding: "10px 20px",
     textAlign: "left",
+    height: "60px",
+  }
+
+  const Toolbar = {
+    minHeight:"45px",
   }
 
   const HeaderIcons = {
@@ -13,6 +18,7 @@ const Header = {
     textAlign: "center",
     ml: 3,
     fontSize: 16,
+    textTransform: "none",
   }
   
   const ErrorMessage = {
@@ -26,7 +32,18 @@ const Header = {
     m: 2
   }
 
+  const MyProfileTabsBox ={
+    height: "100vh",
+    width: "200px",
+    borderRight: 1,
+    borderColor: 'divider',
+  }
 
+  const MyProfileTab = {
+    textTransform: "none",
+    padding: "15px",
+    fontSize: "16px"
+  }
   const HomeBackground = {
     backgroundImage: `url(${bgimage})`,
     backgroundPosition: 'center',
@@ -44,15 +61,29 @@ const HomeContainer = {
   alignItems: 'center',
 }
 
-
+const ProductPrice = {
+  // fontSize: '22px',
+  fontFamily: "Trirong",
+  fontWeight: "Bold",
+}
   
+const CardButton = {
+    flex: 1,
+    justifyContent: 'center'
+}
+
   const styles = {
     Header: Header,
     ErrorMessage: ErrorMessage,
     HeaderIcons: HeaderIcons,
     HomeBackground:HomeBackground,
     HomeContainer:HomeContainer,
-    Avatar:Avatar
+    Avatar:Avatar,
+    ProductPrice:ProductPrice,
+    CardButton:CardButton,
+    Toolbar:Toolbar,
+    MyProfileTabsBox:MyProfileTabsBox,
+    MyProfileTab:MyProfileTab,
   }
 
   export default styles
