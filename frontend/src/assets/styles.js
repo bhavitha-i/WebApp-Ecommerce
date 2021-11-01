@@ -6,7 +6,6 @@ import bgimage from "./images/bg7.jpg";
 const Header = {
     padding: "10px 20px",
     textAlign: "left",
-
   }
 
   const HeaderIcons = {

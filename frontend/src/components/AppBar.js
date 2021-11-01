@@ -18,8 +18,15 @@ export default function ButtonAppBar() {
       <AppBar position="static" style={styles.Header} color='primary'>
         <Toolbar>
             
-          <Typography variant="h3"  component="div" sx={{ flexGrow: 1 }}>
+          <Typography  component="div" sx={{ flexGrow: 1 , fontSize:24}}>
+            <Link 
+              underline="none" 
+              variant="h6" 
+              color="inherit" 
+              href="/"
+              sx={{ fontSize: 24 }}>
             {strings.Common.websiteName}
+            </Link>
           </Typography>
 
             <Link 

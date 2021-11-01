@@ -21,6 +21,7 @@ import CustomizedSnackbars from '../components/CustomizedSnackbars';
 import AppBar from '../components/AppBar';
 import withRoot from '../components/WithRoot';
 import theme from '../components/theme'
+import strings from '../assets/strings';
 
 
 
@@ -36,11 +37,10 @@ function VendorSignIn() {
 
   async function login(e){
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    // const data = new FormData(e.currentTarget);
     const loginData={
-      email: data.get('email'),
-      password: data.get('password'),
-
+       email,
+      password
     };
     
     try{
@@ -72,7 +72,7 @@ function VendorSignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} user={user} /> }
+      { loggedin && <CustomizedSnackbars errAlert={errAlert} message={message} user={user} /> }
       <AppBar/>
 
       
@@ -90,15 +90,15 @@ function VendorSignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-           Vendor Log in
+           {strings.SignUp.Labels.vendorLogin}
           </Typography>
-          <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={login}  sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={strings.SignUp.Labels.email}
               name="email"
               autoComplete="email"
               autoFocus
@@ -109,23 +109,20 @@ function VendorSignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={strings.SignUp.Labels.password}
               type="password"
               id="password"
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)} value={password}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              {strings.Common.login}
             </Button>
             <Grid container>
               <Grid item xs>
@@ -133,7 +130,7 @@ function VendorSignIn() {
               </Grid>
               <Grid item>
                 <Link href="/vendor/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {strings.SignUp.Labels.noAccount}
                 </Link>
               </Grid>
             </Grid>
@@ -142,7 +139,7 @@ function VendorSignIn() {
         
       </Container>
       <Link href="/customer/login" variant="body2">
-      <FloatingActionButtons text="Login as Customer"/>
+      <FloatingActionButtons text={strings.SignUp.Labels.asCustomerLogin}/>
       </Link>
     </ThemeProvider>
   );

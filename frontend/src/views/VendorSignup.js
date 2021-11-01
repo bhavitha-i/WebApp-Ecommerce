@@ -21,19 +21,55 @@ import CustomizedSnackbars from '../components/CustomizedSnackbars';
 import AppBar from '../components/AppBar';
 import withRoot from '../components/WithRoot';
 import theme from '../components/theme'
+import strings from '../assets/strings';
 
 
 
 function VendorSignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const [firstname,setFirstname] = useState("");
+  const [lastname,setLastname] = useState("");
+  const [age,setAge] = useState("");
+  const [contact,setContact] = useState("");
+
+  const [loggedin,setLoggedin] = useState(false);
+  const [user,setUser] = useState("");
+  const [errAlert,setErrAlert] = useState("");
+  const [message,setMessage] = useState("");
+
+
+
+  async function signup(e){
+    e.preventDefault();
+    // const data = new FormData(e.currentTarget);
+    const signupData={firstname,lastname,email,age,password,contact};
+    
+    try{
+      setLoggedin(false)
+      const hitback = await axios.post("http://localhost:5000/vendor/signup",signupData,{
+                withCredentials: true
+            });
+            console.log(hitback)
+            if(hitback){
+              
+              setLoggedin(true)
+              setErrAlert("success")
+              setMessage("Welcome")
+              setUser(hitback.data.vendor.firstName)
+            }
+            
+    }
+    catch(err){
+      setUser("")
+      setErrAlert("error")
+      setLoggedin(true)
+      setMessage("Invalid Data")
+      console.log("in error")
+      console.log(err)
+  }
+   
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -52,9 +88,9 @@ function VendorSignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            {strings.SignUp.Labels.vendorSignup}
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={signup} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -63,8 +99,9 @@ function VendorSignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label={strings.SignUp.Labels.firstName}
                   autoFocus
+                  onChange={(e) => setFirstname(e.target.value)} value={firstname}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -72,9 +109,10 @@ function VendorSignUp() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label={strings.SignUp.Labels.lastName}
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={(e) => setLastname(e.target.value)} value={lastname}
                 />
               </Grid>
         
@@ -83,9 +121,10 @@ function VendorSignUp() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label={strings.SignUp.Labels.email}
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)} value={email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -93,20 +132,20 @@ function VendorSignUp() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={strings.SignUp.Labels.password}
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e) => setPassword(e.target.value)} value={password}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   fullWidth
                   id="age"
-                  label="Age"
+                  label={strings.SignUp.Labels.age}
                   name="age"
-                  autoComplete="family-name"
+                  onChange={(e) => setAge(e.target.value)} value={age}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -114,9 +153,10 @@ function VendorSignUp() {
                   required
                   fullWidth
                   id="contact"
-                  label="Contact"
+                  label={strings.SignUp.Labels.contact}
                   name="contact"
-                  autoComplete="family-name"
+                  autoComplete="contact"
+                  onChange={(e) => setContact(e.target.value)} value={contact}
                 />
               </Grid>
             
@@ -127,12 +167,12 @@ function VendorSignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              {strings.Common.signup}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/vendor/login" variant="body2">
-                  Already have an account? Sign in
+                  {strings.SignUp.Labels.hasAccount}
                 </Link>
               </Grid>
             </Grid>
@@ -140,8 +180,8 @@ function VendorSignUp() {
         </Box>
         
       </Container>
-      <Link href="/customer/login" variant="body2">
-      <FloatingActionButtons text="Register as Customer"/>
+      <Link href="/customer/signup" variant="body2">
+      <FloatingActionButtons text={strings.SignUp.Labels.asCustomeSignup}/>
       </Link>
     </ThemeProvider>
   );
