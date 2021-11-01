@@ -13,6 +13,8 @@ import CustomerLogin from "./views/CustomerLogin";
 import CustomerHome from './views/CustomerHome';
 import CreateProduct from './components/CreateProduct';
 import VendorHome from './views/VendorHome';
+import CustomerUpdate from './views/CustomerUpdate';
+import VendorUpdate from './views/VendorUpdate';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route path="/customer/home"  component={CustomerHome} />
         <Route path="/product/create"  component={CreateProduct} />
         <Route path="/vendor/home" component={VendorHome} />
+        <Route path="/customer/update" component={CustomerUpdate} />
+        <Route path="/vendor/update" component={VendorUpdate} />
 
     </Router>
   );

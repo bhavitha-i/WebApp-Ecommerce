@@ -22,6 +22,8 @@ const strings = {
         asCustomerLogin: 'Sign as Customer',
         asVendorSignup: 'Sign up as Vendor',
         asCustomeSignup: 'Sign up Customer',
+        asCustomerUpdate: 'Update Customer',
+        asVendorUpdate: 'Update Vendor'
       },
       warnings:{
         passwordMatch: "Both Passwords match",
@@ -38,6 +40,7 @@ const strings = {
       login: "Sign in",
       vendor: "Vendor",
       customer: "Customer",
+      update: "Update"
     },
     Home: {
       labels:{
