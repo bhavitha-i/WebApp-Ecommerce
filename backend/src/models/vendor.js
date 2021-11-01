@@ -60,7 +60,6 @@ const vendorSchema = new mongoose.Schema({
     },
     address:{
         type: String,
-        required: true
     },
     tokens:[{
         token:{

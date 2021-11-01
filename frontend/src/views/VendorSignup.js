@@ -5,38 +5,77 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import FloatingActionButtons from '../components/FloatingButton';
 import CustomizedSnackbars from '../components/CustomizedSnackbars';
+import AppBar from '../components/AppBar';
+import withRoot from '../components/WithRoot';
+import theme from '../components/theme'
+import strings from '../assets/strings';
+import styles from '../assets/styles';
 
 
-const theme = createTheme();
 
-export default function VendorSignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+function VendorSignUp() {
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const [firstName,setFirstname] = useState("");
+  const [lastName,setLastname] = useState("");
+  const [age,setAge] = useState("");
+  const [contact,setContact] = useState("");
+  const [address,setAddress] = useState("");
+
+  const [loggedin,setLoggedin] = useState(false);
+  const [user,setUser] = useState("");
+  const [errAlert,setErrAlert] = useState("");
+  const [message,setMessage] = useState("");
+
+
+
+  async function signup(e){
+    e.preventDefault();
+    // const data = new FormData(e.currentTarget);
+    const signupData={firstName,lastName,email,age,password,contact};
+    
+    try{
+      setLoggedin(false)
+      const hitback = await axios.post("http://localhost:5000/vendor/signup",signupData,{
+                withCredentials: true
+            });
+            console.log(hitback)
+            if(hitback){
+              
+              setLoggedin(true)
+              setErrAlert("success")
+              setMessage("Welcome")
+              setUser(hitback.data.vendor.firstName)
+            }
+            
+    }
+    catch(err){
+      setUser("")
+      setErrAlert("error")
+      setLoggedin(true)
+      setMessage("Invalid Data")
+      console.log("in error")
+      console.log(err)
+  }
+   
+  }
 
   return (
     <ThemeProvider theme={theme}>
+      { loggedin && <CustomizedSnackbars errAlert={errAlert} message={message} user={user} /> }
+    <AppBar/>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -45,13 +84,13 @@ export default function VendorSignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <PersonAddAltIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            {strings.SignUp.Labels.vendorSignup}
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={signup} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -60,8 +99,9 @@ export default function VendorSignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label={strings.SignUp.Labels.firstName}
                   autoFocus
+                  onChange={(e) => setFirstname(e.target.value)} value={firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -69,9 +109,10 @@ export default function VendorSignUp() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label={strings.SignUp.Labels.lastName}
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={(e) => setLastname(e.target.value)} value={lastName}
                 />
               </Grid>
         
@@ -80,9 +121,10 @@ export default function VendorSignUp() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label={strings.SignUp.Labels.email}
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)} value={email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -90,20 +132,20 @@ export default function VendorSignUp() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={strings.SignUp.Labels.password}
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e) => setPassword(e.target.value)} value={password}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   fullWidth
                   id="age"
-                  label="Age"
+                  label={strings.SignUp.Labels.age}
                   name="age"
-                  autoComplete="family-name"
+                  onChange={(e) => setAge(e.target.value)} value={age}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -111,12 +153,12 @@ export default function VendorSignUp() {
                   required
                   fullWidth
                   id="contact"
-                  label="Contact"
+                  label={strings.SignUp.Labels.contact}
                   name="contact"
-                  autoComplete="family-name"
+                  autoComplete="contact"
+                  onChange={(e) => setContact(e.target.value)} value={contact}
                 />
               </Grid>
-            
             </Grid>
             <Button
               type="submit"
@@ -124,12 +166,12 @@ export default function VendorSignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              {strings.Common.signup}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/vendor/login" variant="body2">
-                  Already have an account? Sign in
+                  {strings.SignUp.Labels.hasAccount}
                 </Link>
               </Grid>
             </Grid>
@@ -137,9 +179,11 @@ export default function VendorSignUp() {
         </Box>
         
       </Container>
-      <Link href="/customer/login" variant="body2">
-      <FloatingActionButtons text="Register as Customer"/>
+      <Link href="/customer/signup" variant="body2">
+      <FloatingActionButtons text={strings.SignUp.Labels.asCustomeSignup}/>
       </Link>
     </ThemeProvider>
   );
 }
+
+export default withRoot(VendorSignUp);

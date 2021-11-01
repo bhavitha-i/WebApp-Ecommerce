@@ -27,7 +27,8 @@ import styles from '../assets/styles';
 
 
 
-function VendorSignIn() {
+
+function CustomerSignin() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [loggedin,setLoggedin] = useState(false);
@@ -38,15 +39,16 @@ function VendorSignIn() {
 
   async function login(e){
     e.preventDefault();
-    // const data = new FormData(e.currentTarget);
+    const data = new FormData(e.currentTarget);
     const loginData={
-       email,
-      password
+      email: data.get('email'),
+      password: data.get('password'),
+
     };
     
     try{
       setLoggedin(false)
-      const hitback = await axios.post("http://localhost:5000/vendor/login",loginData,{
+      const hitback = await axios.post("http://localhost:5000/customer/login",loginData,{
                 withCredentials: true
             });
             console.log(hitback)
@@ -55,7 +57,7 @@ function VendorSignIn() {
               setLoggedin(true)
               setErrAlert("success")
               setMessage("Welcome")
-              setUser(hitback.data.vendor.firstName)
+              setUser(hitback.data.customer.firstName)
             }
             
     }
@@ -73,7 +75,7 @@ function VendorSignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      { loggedin && <CustomizedSnackbars errAlert={errAlert} message={message} user={user} /> }
+      { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} user={user} /> }
       <AppBar/>
 
       
@@ -91,9 +93,9 @@ function VendorSignIn() {
             <LoginIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-           {strings.SignUp.Labels.vendorLogin}
+           {strings.SignUp.Labels.customerLogin}
           </Typography>
-          <Box component="form" onSubmit={login}  sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -130,7 +132,7 @@ function VendorSignIn() {
               
               </Grid>
               <Grid item>
-                <Link href="/vendor/signup" variant="body2">
+                <Link href="/customer/signup" variant="body2">
                   {strings.SignUp.Labels.noAccount}
                 </Link>
               </Grid>
@@ -139,11 +141,11 @@ function VendorSignIn() {
         </Box>
         
       </Container>
-      <Link href="/customer/login" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asCustomerLogin}/>
+      <Link href="/vendor/login" variant="body2">
+      <FloatingActionButtons text={strings.SignUp.Labels.asVendorLogin}/>
       </Link>
     </ThemeProvider>
   );
 }
 
-export default withRoot(VendorSignIn);
+export default withRoot(CustomerSignin);
