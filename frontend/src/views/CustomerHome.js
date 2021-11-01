@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import theme from "../components/theme";
 import { ThemeProvider } from '@material-ui/core/styles';
 import withRoot from '../components/WithRoot';
+import { CssBaseline } from "@mui/material";
 
 
 
@@ -44,6 +45,7 @@ class CustomerHome extends Component {
   // </div>
 
     <ThemeProvider theme={theme}>
+      <CssBaseline/>
       <AppBarCus/>
       <Container sx={{ py: 6 }} >
           <Grid container spacing={4} >

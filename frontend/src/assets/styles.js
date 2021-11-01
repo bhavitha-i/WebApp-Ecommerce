@@ -32,7 +32,18 @@ const Header = {
     m: 2
   }
 
+  const MyProfileTabsBox ={
+    height: "100vh",
+    width: "200px",
+    borderRight: 1,
+    borderColor: 'divider',
+  }
 
+  const MyProfileTab = {
+    textTransform: "none",
+    padding: "15px",
+    fontSize: "16px"
+  }
   const HomeBackground = {
     backgroundImage: `url(${bgimage})`,
     backgroundPosition: 'center',
@@ -70,7 +81,9 @@ const CardButton = {
     Avatar:Avatar,
     ProductPrice:ProductPrice,
     CardButton:CardButton,
-    Toolbar:Toolbar
+    Toolbar:Toolbar,
+    MyProfileTabsBox:MyProfileTabsBox,
+    MyProfileTab:MyProfileTab,
   }
 
   export default styles
