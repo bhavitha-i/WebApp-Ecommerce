@@ -1,8 +1,17 @@
 import * as React from 'react';
 import AppBar from '../components/AppBar';
+import withRoot from '../components/WithRoot';
+import HomeLayout from '../components/HomeLayout';
 
-export default function Home(){
+
+function Home(){
     return (
-        <AppBar/>
+        <React.Fragment>
+            <AppBar/>
+            <HomeLayout/>
+        </React.Fragment>
+
     );
 }
+
+export default withRoot(Home);

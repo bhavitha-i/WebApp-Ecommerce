@@ -9,7 +9,7 @@ const multer = require('multer')
 
 
 
-// vendor singup
+// Customer singup
 router.post('/customer/signup', async (req,res) =>{
 
     const customer  = new Customer(req.body)

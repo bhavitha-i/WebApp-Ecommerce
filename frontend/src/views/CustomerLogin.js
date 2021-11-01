@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import  { useState } from "react"
 import Cookies from 'js-cookie';
@@ -11,17 +12,21 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LoginIcon from '@mui/icons-material/Login';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import FloatingActionButtons from './FloatingButton';
-import CustomizedSnackbars from './CustomizedSnackbars';
+import { ThemeProvider } from '@mui/material/styles';
+import FloatingActionButtons from '../components/FloatingButton';
+import CustomizedSnackbars from '../components/CustomizedSnackbars';
+import AppBar from '../components/AppBar';
+import withRoot from '../components/WithRoot';
+import theme from '../components/theme'
+import strings from '../assets/strings';
+import styles from '../assets/styles';
 
 
-const theme = createTheme();
 
-export default function VendorSignIn() {
+function CustomerSignin() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [loggedin,setLoggedin] = useState(false);
@@ -41,7 +46,7 @@ export default function VendorSignIn() {
     
     try{
       setLoggedin(false)
-      const hitback = await axios.post("http://localhost:5000/vendor/login",loginData,{
+      const hitback = await axios.post("http://localhost:5000/customer/login",loginData,{
                 withCredentials: true
             });
             console.log(hitback)
@@ -50,7 +55,7 @@ export default function VendorSignIn() {
               setLoggedin(true)
               setErrAlert("success")
               setMessage("Welcome")
-              setUser(hitback.data.vendor.firstName)
+              setUser(hitback.data.customer.firstName)
             }
             
     }
@@ -63,19 +68,14 @@ export default function VendorSignIn() {
       console.log(err)
   }
    
-
   }
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   // eslint-disable-next-line no-console
-   
-  // };
+
 
   return (
     <ThemeProvider theme={theme}>
       { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} user={user} /> }
-      
+      <AppBar/>
+
       
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -87,11 +87,11 @@ export default function VendorSignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LoginIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-           Vendor Log in
+           {strings.SignUp.Labels.customerLogin}
           </Typography>
           <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -99,7 +99,7 @@ export default function VendorSignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={strings.SignUp.Labels.email}
               name="email"
               autoComplete="email"
               autoFocus
@@ -110,31 +110,28 @@ export default function VendorSignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={strings.SignUp.Labels.password}
               type="password"
               id="password"
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)} value={password}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              {strings.Common.login}
             </Button>
             <Grid container>
               <Grid item xs>
               
               </Grid>
               <Grid item>
-                <Link href="/vendor/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/customer/signup" variant="body2">
+                  {strings.SignUp.Labels.noAccount}
                 </Link>
               </Grid>
             </Grid>
@@ -142,9 +139,11 @@ export default function VendorSignIn() {
         </Box>
         
       </Container>
-      <Link href="/customer/login" variant="body2">
-      <FloatingActionButtons text="Login as Customer"/>
+      <Link href="/vendor/login" variant="body2">
+      <FloatingActionButtons text={strings.SignUp.Labels.asVendorLogin}/>
       </Link>
     </ThemeProvider>
   );
 }
+
+export default withRoot(CustomerSignin);
