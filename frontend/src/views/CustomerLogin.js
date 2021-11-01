@@ -22,6 +22,8 @@ import AppBar from '../components/AppBar';
 import withRoot from '../components/WithRoot';
 import theme from '../components/theme'
 import strings from '../assets/strings';
+import styles from '../assets/styles';
+
 
 
 
@@ -87,7 +89,7 @@ function CustomerSignin() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

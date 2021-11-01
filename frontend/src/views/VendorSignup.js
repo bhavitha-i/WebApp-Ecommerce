@@ -5,33 +5,33 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import FloatingActionButtons from '../components/FloatingButton';
 import CustomizedSnackbars from '../components/CustomizedSnackbars';
 import AppBar from '../components/AppBar';
 import withRoot from '../components/WithRoot';
 import theme from '../components/theme'
 import strings from '../assets/strings';
+import styles from '../assets/styles';
+
 
 
 
 function VendorSignUp() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-  const [firstname,setFirstname] = useState("");
-  const [lastname,setLastname] = useState("");
+  const [firstName,setFirstname] = useState("");
+  const [lastName,setLastname] = useState("");
   const [age,setAge] = useState("");
   const [contact,setContact] = useState("");
+  const [address,setAddress] = useState("");
 
   const [loggedin,setLoggedin] = useState(false);
   const [user,setUser] = useState("");
@@ -43,7 +43,7 @@ function VendorSignUp() {
   async function signup(e){
     e.preventDefault();
     // const data = new FormData(e.currentTarget);
-    const signupData={firstname,lastname,email,age,password,contact};
+    const signupData={firstName,lastName,email,age,password,contact};
     
     try{
       setLoggedin(false)
@@ -73,7 +73,7 @@ function VendorSignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-
+      { loggedin && <CustomizedSnackbars errAlert={errAlert} message={message} user={user} /> }
     <AppBar/>
       <Container component="main" maxWidth="xs">
         <Box
@@ -84,8 +84,8 @@ function VendorSignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <PersonAddAltIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             {strings.SignUp.Labels.vendorSignup}
@@ -101,7 +101,7 @@ function VendorSignUp() {
                   id="firstName"
                   label={strings.SignUp.Labels.firstName}
                   autoFocus
-                  onChange={(e) => setFirstname(e.target.value)} value={firstname}
+                  onChange={(e) => setFirstname(e.target.value)} value={firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -112,7 +112,7 @@ function VendorSignUp() {
                   label={strings.SignUp.Labels.lastName}
                   name="lastName"
                   autoComplete="family-name"
-                  onChange={(e) => setLastname(e.target.value)} value={lastname}
+                  onChange={(e) => setLastname(e.target.value)} value={lastName}
                 />
               </Grid>
         
@@ -159,7 +159,6 @@ function VendorSignUp() {
                   onChange={(e) => setContact(e.target.value)} value={contact}
                 />
               </Grid>
-            
             </Grid>
             <Button
               type="submit"

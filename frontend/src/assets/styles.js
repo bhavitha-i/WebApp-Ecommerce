@@ -20,6 +20,12 @@ const Header = {
     fontSize: "13px"
   }
 
+  const Avatar ={
+    height: "40px",
+    width: "40px",
+    m: 2
+  }
+
 
   const HomeBackground = {
     backgroundImage: `url(${bgimage})`,
@@ -45,7 +51,8 @@ const HomeContainer = {
     ErrorMessage: ErrorMessage,
     HeaderIcons: HeaderIcons,
     HomeBackground:HomeBackground,
-    HomeContainer:HomeContainer
+    HomeContainer:HomeContainer,
+    Avatar:Avatar
   }
 
   export default styles

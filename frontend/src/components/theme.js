@@ -35,7 +35,7 @@ const rawTheme = createTheme({
     fontWeightLight: 300, // Work Sans
     fontWeightRegular: 400, // Work Sans
     fontWeightMedium: 700, // Roboto Condensed
-  },
+  }
 });
 
 const fontHeader = {
@@ -94,7 +94,7 @@ const theme = {
     },
     h5: {
       ...rawTheme.typography.h5,
-      fontSize: 20,
+      fontSize: 24,
       fontWeight: rawTheme.typography.fontWeightLight,
     },
     h6: {
@@ -115,6 +115,7 @@ const theme = {
       ...rawTheme.typography.body1,
       fontSize: 14,
     },
+    
   },
 };
 
