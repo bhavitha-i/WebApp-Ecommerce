@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from "react";
 import axios from "axios";
-import RecipeReviewCard from "./RecipeReviewCard";
+import RecipeReviewCard from "../components/RecipeReviewCard";
 import Cookies from 'js-cookie';
-import FloatingActionButtons from './FloatingButton';
-import CustomizedSnackbars from './CustomizedSnackbars';
-import BasicTable from "./BasicTable";
+import FloatingActionButtons from '../components/FloatingButton';
+import CustomizedSnackbars from '../components/CustomizedSnackbars';
+import BasicTable from "../components/BasicTable";
 
 
 export default class VendorHome extends Component {
