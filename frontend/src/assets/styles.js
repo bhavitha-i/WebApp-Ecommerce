@@ -44,6 +44,22 @@ const Header = {
     padding: "15px",
     fontSize: "16px"
   }
+
+  const ProductListBox ={
+    display: "inline-block" ,
+    position:"relative",
+    top:"30px",
+    left:"5%",
+    width: "90%",
+  }
+
+  const ProductTableCell = {
+    textAlign: "center",
+  }
+
+  const ProductTableCell_First = {
+    textAlign: "left",
+  }
   const HomeBackground = {
     backgroundImage: `url(${bgimage})`,
     backgroundPosition: 'center',
@@ -84,6 +100,9 @@ const CardButton = {
     Toolbar:Toolbar,
     MyProfileTabsBox:MyProfileTabsBox,
     MyProfileTab:MyProfileTab,
+    ProductListBox:ProductListBox,
+    ProductTableCell:ProductTableCell,
+    ProductTableCell_First:ProductTableCell_First
   }
 
   export default styles

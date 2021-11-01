@@ -47,7 +47,13 @@ const strings = {
       }
     },
     product:{
-      price: "Price"
+      price: "Price",
+      name: "Product Name",
+      desc: "Description",
+      quantity: "Quantity"
+    },
+    vendor: {
+      sales: "My Sales",
     }
   }
   

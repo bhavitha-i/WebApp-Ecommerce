@@ -61,7 +61,11 @@ function CustomerSignin() {
               setErrAlert("success")
               setMessage("Welcome")
               setUser(hitback.data.customer.firstName)
-              window.href("/customer/home")
+              history.push({
+                pathname: '/customer/home',
+                openSnackbar: true
+              });            
+            
             }
             
     }
@@ -146,7 +150,7 @@ function CustomerSignin() {
         
       </Container>
       <Link href="/vendor/login" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asVendorLogin}/>
+      <FloatingActionButtons personIcon={true} text={strings.SignUp.Labels.asVendorLogin}/>
       </Link>
     </ThemeProvider>
   );

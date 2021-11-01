@@ -8,13 +8,17 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./views/Home";
 import VendorLogin from "./views/VendorLogin";
 import VendorSignup from "./views/VendorSignup";
+import CreateProduct from './components/CreateProduct';
+import VendorSales from "./components/VendorSales"
+import VendorHome from './views/VendorHome';
+import VendorProfile from './views/VendorProfile';
+
+
+import CustomerProfile from './views/CustomerProfile';
+import CustomerCart from './views/CustomerCart';
 import CustomerSignup from "./views/CustomerSignup";
 import CustomerLogin from "./views/CustomerLogin";
 import CustomerHome from './views/CustomerHome';
-import CreateProduct from './components/CreateProduct';
-import VendorHome from './views/VendorHome';
-import CustomerProfile from './views/CustomerProfile';
-import CustomerCart from './views/CustomerCart';
 
 
 function App() {
@@ -25,6 +29,8 @@ function App() {
         <Route path="/vendor/signup"  component={VendorSignup} />
         <Route path="/vendor/home" component={VendorHome} />
         <Route path="/product/create"  component={CreateProduct} />
+        <Route path="/vendor/sales"  component={VendorSales} />
+        <Route path="/vendor/profile"  component={VendorProfile} />
 
 
 
