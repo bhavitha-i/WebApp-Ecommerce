@@ -31,15 +31,6 @@ export default function ButtonAppBar() {
             </Link>
           </Typography>
 
-            {/* <Button 
-              color="inherit"
-              variant="outlined"
-              href="/vendor/signup"
-              style = {styles.HeaderIcons}
-            >
-               {strings.Common.signup} 
-            </Button> */}
-
             <Link
               color="inherit"
               underline="none"
@@ -59,10 +50,6 @@ export default function ButtonAppBar() {
             >
                {strings.Common.login} 
             </Link>
-
-
-          {/* <Button color="secondary">{strings.Common.signup}</Button>
-         <Button color="secondary">{strings.Common.signup}</Button> */}
         </Toolbar>
       </AppBar>
     </Box>

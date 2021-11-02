@@ -138,11 +138,11 @@ function ManageAddress() {
          
         <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <div> { callFlag && <CustomizedSnackbars errAlert={errAlert}message={message} /> } </div>
-        <Container sx={{ py: 6 }} style={styles.ManageAddressContainer}>
-          <Grid container spacing={4} >
+        { callFlag && <CustomizedSnackbars errAlert={errAlert}message={message} /> } 
+        <Container sx={{ py: 6 }} >
+          <Grid container spacing={3} >
             {address.map(currentaddress => (
-              <Grid item key={currentaddress} xs={3} >
+              <Grid item key={currentaddress} xs={3} style={styles.CardGridAddress}>
                   <AddressCard address={currentaddress}
                                 delAddress={delAddress} 
                                 openInPopup={openInPopup}/>
@@ -162,7 +162,6 @@ function ManageAddress() {
                 <AddAddressForm 
                     recordForEdit={recordForEdit} 
                     setOpenPopup={setOpenPopup}
-                    // isEdit={isEdit}
                     />
                 
             </Popup>

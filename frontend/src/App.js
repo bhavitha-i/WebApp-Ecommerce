@@ -59,7 +59,7 @@ function App() {
         <Route path="/vendor/update" component={VendorUpdate} />
         <Route path="/products/update/:id" component={ProductUpdate} /> 
         <Route path="/products/:id" component={ProductDetails} /> 
-        <Route path="/customer/profile"  component={CustomerProfile} />
+        <Route path="/customer/profile/:index?"  component={CustomerProfile} />
         <Route path="/customer/cart"  component={CustomerCart} />
         <Route path="/customer/checkout" component={CustomerCheckout} />
         <Route path="/address/add" component={AddressAdd} />

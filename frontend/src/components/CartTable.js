@@ -15,6 +15,12 @@ import axios from "axios";
 import CustomizedSnackbars from './CustomizedSnackbars';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
+import { Avatar, Container, Stack, Toolbar, Typography } from '@mui/material';
+import styles from '../assets/styles';
+import { Box } from '@mui/system';
+import { Grid } from '@mui/material';
+import { useHistory } from "react-router-dom";
+
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
 // }
@@ -38,6 +44,7 @@ export default function CartTable(props) {
     console.log('page to reload')
 }
 
+const history = useHistory();
 
 
   const [prod,setProd] = useState("");
@@ -95,6 +102,12 @@ console.log(cartItems,'begin')
     }
   };
 
+  function goToCheckout(){
+    history.push({
+      pathname: '/customer/checkout',
+      openSnackbar: true
+    });
+  }
 
   async function updateCart(cartItems){
     console.log(cartItems,"place order")
@@ -194,16 +207,15 @@ console.log(cartItems,'begin')
   return (
     <div> { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} user={prod}/> }
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} aria-label="simple table" >
         <TableHead>
           <TableRow>
 
             
-            <TableCell align="right">Image</TableCell>
-            <TableCell align="right">Product&nbsp;</TableCell>
-            <TableCell align="right">Price&nbsp;</TableCell>
-            <TableCell align="right">Action&nbsp;</TableCell>
-            <TableCell align="right">quantity&nbsp;</TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="center">Product</TableCell>
+            <TableCell align="center">Price</TableCell>
+            <TableCell align="center">quantity</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -215,33 +227,50 @@ console.log(cartItems,'begin')
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
             
-              <TableCell align="right">Image </TableCell>
-              <TableCell align="right">{product.name}</TableCell>
-              <TableCell align="right">{product.price}</TableCell>
-              <TableCell align="right">
-              <div className="col-2">
-              <button onClick={() => onRemove(product)} className="remove">
+              <TableCell align="center" sx={{justifyContent: "center"}}>
+                <Box>
+                    <Avatar variant="rounded" src={product.photo} ></Avatar>
+                    </Box>
+                 </TableCell>
+              <TableCell align="center">{product.name}</TableCell>
+              <TableCell align="center">{product.price}</TableCell>
+              <TableCell align="center">
+              <Stack spacing={2} direction="row" sx={{justifyContent: "center"}}>
+              <Button style= {styles.CartButton} onClick={() => onRemove(product)} className="remove" variant="outlined" component="h2">
                 -
-              </button>{' '}
-              <button onClick={() => onAdd(product)} className="add">
+              </Button>
+                <Typography variant="h6"> 
+                      {product.quantity}  
+                </Typography>
+              <Button style= {styles.CartButton} onClick={() => onAdd(product)} className="add"variant="outlined">
                 +
-              </button>
-            </div>
-            </TableCell>
-
-              <TableCell align="right"> {product.quantity}</TableCell>
-              
-              
-              
+              </Button>
+              </Stack>
+            </TableCell>              
             
-           
-              
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-    <div>
+    <Grid container direction="row" sx={{padding:"30px"}}>
+              <Grid item xs={8} 
+                  style={{ display: "flex", alignItems: "center" }}
+                >        
+                <Typography variant="h6" style={styles.CartPrice} sx={{ml:2, pb:3}}> Total price : ${itemsPrice} </Typography>
+                </Grid>
+
+                <Grid item xs={4} 
+                  alignItems="right"
+                  justify="flex-end"
+                >
+                <Button  sx={{ml:2}} onClick={() => updateCart(cartItems)} variant="outlined">Save Cart</Button>
+                <Button  sx={{ml:2}} onClick={() => goToCheckout()} variant="contained">Checkout</Button>
+                </Grid>
+
+
+    </Grid>
+    {/* <div>
         
         Total price:${itemsPrice}
 
@@ -254,7 +283,7 @@ console.log(cartItems,'begin')
               </button>
               </Link>
         
-    </div>
+    </div> */}
     </div>
   );
 }
