@@ -20,7 +20,9 @@ import ProductUpdate from './views/ProductUpdate';
 import CustomerProfile from './views/CustomerProfile';
 import CustomerCart from './views/CustomerCart';
 import ProductDetails from './views/ProductDetails';
-import NewCustomerCart from './views/NewCustomCart';
+import CustomerCheckout from './views/CustomerCheckout';
+
+
 
  
 
@@ -47,7 +49,7 @@ function App() {
         <Route path="/products/:id" component={ProductDetails} /> 
         <Route path="/customer/profile"  component={CustomerProfile} />
         <Route path="/customer/cart"  component={CustomerCart} />
-        <Route path="/customer/mycart"  component={NewCustomerCart} />
+        <Route path="/customer/checkout" component={CustomerCheckout} />
         
 
 

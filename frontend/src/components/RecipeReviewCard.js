@@ -55,9 +55,61 @@ export default function RecipeReviewCard(props) {
       console.log("not exist")
       const p_id = product._id
       setCartItems([...cartItems, {product:p_id, quantity: 1 }]);
+      var trail =[]
+      
+      console.log(product._id,"in not exist")
+      for(var j=0;j<cartItems.length;j++){
+        console.log("EHHEHEHE");
+                  
+        
+            var tempJson = {
+                "product":cartItems[j].product,
+                "quantity": cartItems[j].quantity
+        
+  
+            }
+            trail.push(tempJson)
+            
+  
+        
+        
+      }
+      var selectedProd = {
+        "product":product._id,
+        "quantity": 1
+
+      }
+      trail.push(selectedProd)
+
+      var patchData = {
+        "productlist":trail
+      }
+
+      console.log(patchData,"trails")
+
+    const Bearer = "Bearer "+ Cookies.get('token')
+    console.log(Bearer)
+    let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Authorization" : Bearer
+      }
+    };
+
+      axios.patch(`http://localhost:5000/cart/mine`,patchData,axiosConfig,{
+     withCredentials: true }).then(response =>{ console.log(response.data.productlist,"from api")}).catch(error => {console.log(error)})
+      
+
+
+
+
     }
 
     
+
+    
+
+
 
     // for(var i=0;i<cartItems.length;i++){
     //   console.log(cartItems[i],"inloop")
@@ -67,14 +119,6 @@ export default function RecipeReviewCard(props) {
 
 
 
-  //   const Bearer = "Bearer "+ Cookies.get('token')
-  //   console.log(Bearer)
-  //   let axiosConfig = {
-  //     headers: {
-  //         'Content-Type': 'application/json;charset=UTF-8',
-  //         "Authorization" : Bearer
-  //     }
-  //   };
 
   //   if(!Cookies.get('token')){
   //     setErrAlert("error")

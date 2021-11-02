@@ -9,27 +9,31 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import withRoot from '../components/WithRoot';
 import { CssBaseline } from "@mui/material";
 import Cookies from 'js-cookie';
+import Checkout from "../components/Checkout";
+import AddressForm from "../components/AddressForm";
 
 
 
 
 
-class CustomerHome extends Component {
+class CustomerCheckout extends Component {
   constructor(props) {
     super(props);
     this.state = {
       products: [],
+      address:[],
       oldCart:{},
       productsAll: [],
-      tableProd:[],
+      updateProd:[],
       loggedin:false,
       errAlert:'',
-      notify:0
+      selectedAddress:{}
     };
   }
 
   componentDidMount () {
     const Bearer = "Bearer "+ Cookies.get('token')
+    console.log(Bearer)
     let axiosConfig = {
      headers: {
          'Content-Type': 'application/json;charset=UTF-8',
@@ -58,21 +62,19 @@ class CustomerHome extends Component {
           for(var j=0;j<this.state.oldCart[0].productlist.length;j++){
               
             if(this.state.productsAll[i]._id == this.state.oldCart[0].productlist[j].product){
+                
                 var tempJson = {
                     "id":this.state.productsAll[i]._id,
-                    "name": this.state.productsAll[i].name,
-                    "photo": this.state.productsAll[i].photo,
-                    "price": this.state.productsAll[i].price,
-                    "quantity": this.state.oldCart[0].productlist[j].quantity,
-                    "backQuantity":this.state.productsAll.quantity
+                    "quantity": this.state.productsAll[i].quantity - this.state.oldCart[0].productlist[j].quantity,
+                   
 
                 }
-                this.setState({ tableProd: [...this.state.tableProd, tempJson] })
+                this.setState({ updateProd: [...this.state.updateProd, tempJson] })
 
             }
             
           }
-          console.log(this.state.tableProd,"tab")
+          console.log(this.state.updateProd,"tab")
       }
       })
       .catch(error => {
@@ -93,7 +95,7 @@ class CustomerHome extends Component {
       this.setState({ oldCart: resposne.data });
       this.setState({notify: this.state.oldCart[0].productlist.length})
 
-      console.log(this.state.oldCart[0].productlist)
+      console.log(this.state.oldCart[0],"oldcart")
     })
   
       
@@ -110,6 +112,25 @@ class CustomerHome extends Component {
       console.log("in error")
       console.log(e)
   }
+
+
+
+  axios.get("http://localhost:5000/addresses/mine",axiosConfig,{
+    withCredentials: true
+}).then(response =>{
+console.log(response.data,"addres")
+this.setState({address:response.data})
+console.log(this.state.address,"set")
+}).catch(error => {
+    this.setState({loggedin:true})
+    this.setState({errAlert:"error"})
+    this.setState({message:"Something went wrong"})
+    console.log(error);
+  });;
+
+
+
+ 
   }
 
 
@@ -123,19 +144,11 @@ class CustomerHome extends Component {
   //   ))}
   // </div>
 
-    <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <AppBarCus/>
-      <Container sx={{ py: 6 }} >
-          <Grid container spacing={4} >
-            {this.state.products.map(currentproduct => (
-              <Grid item key={currentproduct} xs={3} >
-                  <RecipeReviewCard oldCart={this.state.oldCart} product={currentproduct} />
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-    </ThemeProvider>
+  <div>
+<Checkout add={this.state.address} cart={this.state.oldCart} />
+{/* <AddressForm add={this.state.address} cart={this.state.oldCart} /> */}
+
+  </div>
       
 
 
@@ -145,4 +158,4 @@ class CustomerHome extends Component {
   }
 }
 
-export default withRoot(CustomerHome);
+export default withRoot(CustomerCheckout);

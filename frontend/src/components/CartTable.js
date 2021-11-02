@@ -14,6 +14,7 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 import CustomizedSnackbars from './CustomizedSnackbars';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button'
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
 // }
@@ -82,18 +83,62 @@ console.log(cartItems,'begin')
   };
   const onRemove = (product) => {
     console.log("on remove")
-    // const exist = cartItems.find((x) => x.id === product.id);
-    // if (exist.qty === 1) {
-    //   setCartItems(cartItems.filter((x) => x.id !== product.id));
-    // } else {
-    //   setCartItems(
-    //     cartItems.map((x) =>
-    //       x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-    //     )
-    //   );
-    // }
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist.quantity === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, quantity: exist.quantity - 1 } : x
+        )
+      );
+    }
   };
 
+
+  async function updateCart(cartItems){
+    console.log(cartItems,"place order")
+    var trail=[]
+    for(var j=0;j<cartItems.length;j++){
+      console.log("EHHEHEHE");
+                
+      
+          var tempJson = {
+              "product":cartItems[j].id,
+              "quantity": cartItems[j].quantity
+      
+
+          }
+          trail.push(tempJson)
+          
+
+      
+      
+    }
+
+  
+
+    var patchData = {
+      "price":itemsPrice,
+      "productlist":trail
+    }
+    console.log(patchData,'prodlist from ct')
+    const Bearer = "Bearer "+ Cookies.get('token')
+    console.log(Bearer)
+    let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Authorization" : Bearer
+      }
+    };
+
+      axios.patch(`http://localhost:5000/cart/mine`,patchData,axiosConfig,{
+     withCredentials: true }).then(response =>{ console.log(response.data.price,"from api")}).catch(error => {console.log(error)})
+      
+
+
+    
+  }
 
 
  
@@ -200,7 +245,15 @@ console.log(cartItems,'begin')
         
         Total price:${itemsPrice}
 
-
+        <button onClick={() => updateCart(cartItems)} className="remove">
+                Save Cart
+              </button>
+              <Link href="/customer/checkout" variant="body2">
+              <button className="remove">
+               Checkout
+              </button>
+              </Link>
+        
     </div>
     </div>
   );
