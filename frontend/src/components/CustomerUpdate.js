@@ -14,11 +14,11 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import FloatingActionButtons from '../components/FloatingButton';
-import CustomizedSnackbars from '../components/CustomizedSnackbars';
-import AppBar from '../components/AppBar';
-import withRoot from '../components/WithRoot';
-import theme from '../components/theme'
+import FloatingActionButtons from './FloatingButton';
+import CustomizedSnackbars from './CustomizedSnackbars';
+import AppBar from './AppBar';
+import withRoot from './WithRoot';
+import theme from './theme'
 import strings from '../assets/strings';
 import styles from '../assets/styles';
 
@@ -26,7 +26,7 @@ import styles from '../assets/styles';
 
 
 
- class VendorUpdate extends Component {
+ class CustomerUpdate extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -76,7 +76,7 @@ import styles from '../assets/styles';
      }
    };
 
-   axios.patch("http://localhost:5000/vendors/me",jusJson,axiosConfig,{
+   axios.patch("http://localhost:5000/customers/me",jusJson,axiosConfig,{
     withCredentials: true
 }).then(response =>{
 
@@ -102,34 +102,7 @@ console.log("customer updated")
       }
       
   
-//   const [password,setPassword] = useState("");
-//   const [firstName,setFirstname] = useState("");
-//   const [lastName,setLastname] = useState("");
-//   const [age,setAge] = useState("");
-//   const [contact,setContact] = useState(0);
-  
-//   const [count, setCount] = useState(1)
-//   const [loggedin,setLoggedin] = useState(false);
-//   const [user,setUser] = useState("");
-//   const [errAlert,setErrAlert] = useState("");
-//   const [message,setMessage] = useState("");
-//   const [me,setMe]=useState("")
 
-//   useEffect( () => {
-//     if(!Cookies.get('token')){
-//         setLoggedin(true)
-//         setErrAlert("error")
-//         setMessage("please login to access this page")
-//     }
-//     pop()
-
-    
-  
-
-
-
-
-// });
  componentDidMount (){
     const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
@@ -145,7 +118,7 @@ console.log("customer updated")
           this.state.message ="Only vendors can add products"
          
       }
-      axios.get("http://localhost:5000/vendors/me",axiosConfig,{
+      axios.get("http://localhost:5000/customers/me",axiosConfig,{
         withCredentials: true
     }).then(response =>{
         this.setState({age : response.data.age})
@@ -155,62 +128,22 @@ console.log("customer updated")
 
 
 
-
         this.setState({user:response.data})
     }).catch(error => {
         console.log(error);
       });;
     // this.setState.user = hitback
    
-    
-    console.log(this.state.firstName)
-    
- 
-
-
 }
 
 
-
-
-//    function update(e){
-//     e.preventDefault();
-//     // const data = new FormData(e.currentTarget);
-//     const updatedData={firstName,lastName,age,password,contact};
-    
-//     try{
-//       setLoggedin(false)
-//       const hitback = await axios.patch("http://localhost:5000/customers/me",updatedData,{
-//                 withCredentials: true
-//             });
-//             console.log(hitback)
-//             if(hitback){
-              
-//               setLoggedin(true)
-//               setErrAlert("success")
-//               setMessage("Welcome")
-//               setUser(hitback.data.vendor.firstName)
-//             }
-            
-//     }
-//     catch(err){
-//       setUser("")
-//       setErrAlert("error")
-//       setLoggedin(true)
-//       setMessage("Invalid Data")
-//       console.log("in error")
-//       console.log(err)
-//   }
-   
-//   }
 render(){
 
   return (
       <>
     <ThemeProvider theme={theme}>
       { this.state.loggedin && <CustomizedSnackbars errAlert={this.state.errAlert} message={this.state.message} user={this.state.firstName} /> }
-    <AppBar/>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" style={styles.TabContainer}>
         <Box
           sx={{
             marginTop: 8,
@@ -219,21 +152,13 @@ render(){
             alignItems: 'center',
           }}
         >
-          <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <PersonAddAltIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            {strings.SignUp.Labels.asVendorUpdate}
+
+          <Typography component="h1" variant="h6">
+            {strings.SignUp.Labels.asCustomerUpdate}
           </Typography>
           <Box component="form" onSubmit={this.update.bind(this)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
-              <TextField
-          hintText="Type here"
-          value={this.state.firstName}
-          onChange={(e) => this.setState({firstName:e.target.value})}
-        />
-              </Grid> */}
+  
                 <Grid item xs={12} sm={6}>
                 <TextField
                   
@@ -259,20 +184,6 @@ render(){
                 />
               </Grid>
         
-          
-              <Grid item xs={12}>
-                <TextField
-                  
-                  fullWidth
-                  name="password"
-                  label={strings.SignUp.Labels.password}
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  value={this.state.password}
-                  onChange={(e) => this.setState({password:e.target.value})}
-                />
-              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   
@@ -310,12 +221,9 @@ render(){
         </Box>
         
       </Container>
-      <Link href="/customer/signup" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asCustomeSignup}/>
-      </Link>
     </ThemeProvider>
     </>
   );
 
 }}
-export default withRoot(VendorUpdate);
+export default withRoot(CustomerUpdate);

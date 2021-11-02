@@ -14,11 +14,11 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import FloatingActionButtons from '../components/FloatingButton';
-import CustomizedSnackbars from '../components/CustomizedSnackbars';
-import AppBar from '../components/AppBar';
-import withRoot from '../components/WithRoot';
-import theme from '../components/theme'
+import FloatingActionButtons from './FloatingButton';
+import CustomizedSnackbars from './CustomizedSnackbars';
+import AppBar from './AppBar';
+import withRoot from './WithRoot';
+import theme from './theme'
 import strings from '../assets/strings';
 import styles from '../assets/styles';
 
@@ -26,7 +26,7 @@ import styles from '../assets/styles';
 
 
 
- class CustomerUpdate extends Component {
+ class VendorUpdate extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -76,7 +76,7 @@ import styles from '../assets/styles';
      }
    };
 
-   axios.patch("http://localhost:5000/customers/me",jusJson,axiosConfig,{
+   axios.patch("http://localhost:5000/vendors/me",jusJson,axiosConfig,{
     withCredentials: true
 }).then(response =>{
 
@@ -145,13 +145,14 @@ console.log("customer updated")
           this.state.message ="Only vendors can add products"
          
       }
-      axios.get("http://localhost:5000/customers/me",axiosConfig,{
+      axios.get("http://localhost:5000/vendors/me",axiosConfig,{
         withCredentials: true
     }).then(response =>{
         this.setState({age : response.data.age})
     this.setState({firstName : response.data.firstName})
     this.setState({lastName : response.data.lastName})
     this.setState({contact : response.data.contact})
+
 
 
 
@@ -208,8 +209,7 @@ render(){
       <>
     <ThemeProvider theme={theme}>
       { this.state.loggedin && <CustomizedSnackbars errAlert={this.state.errAlert} message={this.state.message} user={this.state.firstName} /> }
-    <AppBar/>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" style={styles.TabContainer}>
         <Box
           sx={{
             marginTop: 8,
@@ -218,21 +218,12 @@ render(){
             alignItems: 'center',
           }}
         >
-          <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <PersonAddAltIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
-            {strings.SignUp.Labels.asCustomerUpdate}
+            {strings.SignUp.Labels.asVendorUpdate}
           </Typography>
           <Box component="form" onSubmit={this.update.bind(this)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
-              <TextField
-          hintText="Type here"
-          value={this.state.firstName}
-          onChange={(e) => this.setState({firstName:e.target.value})}
-        />
-              </Grid> */}
+
                 <Grid item xs={12} sm={6}>
                 <TextField
                   
@@ -309,12 +300,10 @@ render(){
         </Box>
         
       </Container>
-      <Link href="/customer/signup" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asCustomeSignup}/>
-      </Link>
+
     </ThemeProvider>
     </>
   );
 
 }}
-export default withRoot(CustomerUpdate);
+export default withRoot(VendorUpdate);

@@ -13,19 +13,16 @@ import  { useState } from "react"
 import Cookies from 'js-cookie';
 import axios from "axios";
 import CustomizedSnackbars from './CustomizedSnackbars';
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
+import strings from '../assets/strings'
+import styles from '../assets/styles';
+import trimWords from 'trim-words';
+import { Avatar } from '@mui/material';
 
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData('Eclair', 262, 16.0, 24, 6.0),
-//   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
 
-export default function BasicTable(props) {
+
+export default function ProductListTable(props) {
+
+  // var base64Icon = props.product.photo;
 
   function refreshPage() {
     setTimeout(()=>{
@@ -91,15 +88,16 @@ export default function BasicTable(props) {
   return (
     <div> { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} user={prod}/> }
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} aria-label="Product table">
         <TableHead>
           <TableRow>
-
-            
-            <TableCell align="right">Product Name</TableCell>
-            <TableCell align="right">Description&nbsp;</TableCell>
-            <TableCell align="right">Price&nbsp;</TableCell>
-            <TableCell align="right">quantity&nbsp;</TableCell>
+            <TableCell style={styles.ProductTableCell_First}></TableCell>
+            <TableCell align="center">{strings.product.name}</TableCell>
+            <TableCell align="center">{strings.product.desc}&nbsp;</TableCell>
+            <TableCell align="center">{strings.product.price}&nbsp;</TableCell>
+            <TableCell align="center">{strings.product.quantity}&nbsp;</TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -108,6 +106,7 @@ export default function BasicTable(props) {
               key={product._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
+
             
               <TableCell align="right">{product.name}</TableCell>
               <TableCell align="right">{product.description}</TableCell>
@@ -118,7 +117,25 @@ export default function BasicTable(props) {
               </Link>
             <Link underline="none" href="#" variant="body2">
               <TableCell align="right"><DeleteIcon onClick={() => delProd(product)}/></TableCell>
+
+              <TableCell>
+                    <Avatar variant="rounded" src={product.photo} ></Avatar>
+              </TableCell>
+              <TableCell style={styles.ProductTableCell}>{product.name}</TableCell>
+              <TableCell style={styles.ProductTableCell}>{trimWords(product.description, 3, '...')}</TableCell>
+              <TableCell style={styles.ProductTableCell}>{product.price}</TableCell>
+              <TableCell style={styles.ProductTableCell}>{product.quantity}</TableCell>
+              <TableCell variant="body2">
+              <Link underline="none" href={`/product/update/${product._id}`} >
+                  <EditIcon />
+
               </Link>
+              </TableCell>
+              <TableCell>
+                <Link underline="none" href="#" variant="body2">
+                    <DeleteIcon onClick={() => delProd(product)}/>
+                </Link>
+              </TableCell>
               
             </TableRow>
           ))}

@@ -21,7 +21,8 @@ export default function FloatingActionButtons(props) {
     <Box style={style} sx={{ '& > :not(style)': { m: 1 } }}>
     
       <Fab color="primary" variant="extended">
-        <PersonIcon sx={{ mr: 1 }} />
+       {props.personIcon && <PersonIcon sx={{ mr: 1 }} />}
+       {props.addIcon && <AddIcon sx={{mr:1}}/>}
         {props.text}
       </Fab>
    
