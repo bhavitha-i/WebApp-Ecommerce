@@ -60,7 +60,7 @@ function CustomerSignin() {
               setErrAlert("success")
               setMessage("Welcome")
               setUser(hitback.data.customer.firstName)
-              window.href("/customer/home")
+              
             }
             
     }

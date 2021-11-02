@@ -9,10 +9,11 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Link from '@mui/material/Link';
-import  { useState } from "react"
+import  { useState , useEffect} from "react"
 import Cookies from 'js-cookie';
 import axios from "axios";
 import CustomizedSnackbars from './CustomizedSnackbars';
+import TextField from '@mui/material/TextField';
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
 // }
@@ -25,7 +26,9 @@ import CustomizedSnackbars from './CustomizedSnackbars';
 //   createData('Gingerbread', 356, 16.0, 49, 3.9),
 // ];
 
-export default function BasicTable(props) {
+
+
+export default function CartTable(props) {
 
   function refreshPage() {
     setTimeout(()=>{
@@ -33,10 +36,64 @@ export default function BasicTable(props) {
     }, 1000);
     console.log('page to reload')
 }
+
+
+
   const [prod,setProd] = useState("");
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
   const [loggedin,setLoggedin] = useState(false);
+  const [cartItems, setCartItems] = useState(props.products);
+  const itemsPrice = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
+ 
+    
+//   React.useEffect(() => {
+//       setCartItems(props.products);
+//   }, [props.products])
+
+useEffect(() => {
+    const fetchPlanetas = async () => {
+        
+        setCartItems(props.products) // remove curly braces here
+    };    
+    fetchPlanetas()
+}, [props.products]);
+  
+console.log(cartItems,'begin')
+
+  const onAdd = (product) => {
+   
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist) {
+        if(exist.quantity + 1 > product.backQuantity){
+            alert('reached the maximum order limit')
+            return
+        }
+        
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, quantity: exist.quantity + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+    console.log(product.quantity)
+  };
+  const onRemove = (product) => {
+    console.log("on remove")
+    // const exist = cartItems.find((x) => x.id === product.id);
+    // if (exist.qty === 1) {
+    //   setCartItems(cartItems.filter((x) => x.id !== product.id));
+    // } else {
+    //   setCartItems(
+    //     cartItems.map((x) =>
+    //       x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+    //     )
+    //   );
+    // }
+  };
+
 
 
  
@@ -88,6 +145,7 @@ export default function BasicTable(props) {
 
 
   }
+ 
   return (
     <div> { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} user={prod}/> }
     <TableContainer component={Paper}>
@@ -96,35 +154,54 @@ export default function BasicTable(props) {
           <TableRow>
 
             
-            <TableCell align="right">Product Name</TableCell>
-            <TableCell align="right">Description&nbsp;</TableCell>
+            <TableCell align="right">Image</TableCell>
+            <TableCell align="right">Product&nbsp;</TableCell>
             <TableCell align="right">Price&nbsp;</TableCell>
+            <TableCell align="right">Action&nbsp;</TableCell>
             <TableCell align="right">quantity&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.products.map((product) => (
+            {console.log(cartItems,"in end")}
+          {cartItems.map((product) => (
+          
             <TableRow
               key={product._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
             
+              <TableCell align="right">Image </TableCell>
               <TableCell align="right">{product.name}</TableCell>
-              <TableCell align="right">{product.description}</TableCell>
               <TableCell align="right">{product.price}</TableCell>
-              <TableCell align="right">{product.quantity}</TableCell>
-              <Link underline="none" href={`/products/update/${product._id}`} variant="body2">
-              <TableCell align="right"><EditIcon /></TableCell>
-              </Link>
-            <Link underline="none" href="#" variant="body2">
-              <TableCell align="right"><DeleteIcon onClick={() => delProd(product)}/></TableCell>
-              </Link>
+              <TableCell align="right">
+              <div className="col-2">
+              <button onClick={() => onRemove(product)} className="remove">
+                -
+              </button>{' '}
+              <button onClick={() => onAdd(product)} className="add">
+                +
+              </button>
+            </div>
+            </TableCell>
+
+              <TableCell align="right"> {product.quantity}</TableCell>
+              
+              
+              
+            
+           
               
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+    <div>
+        
+        Total price:${itemsPrice}
+
+
+    </div>
     </div>
   );
 }

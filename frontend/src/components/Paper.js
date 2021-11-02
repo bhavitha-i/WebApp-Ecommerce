@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import Magnifier from "react-magnifier";
+
 
 export default function Variants(props) {
   return (
@@ -14,7 +16,8 @@ export default function Variants(props) {
         },
       }}
     >
-     <img src={props.src} />
+        <Magnifier src={props.src} width={250} />
+     {/* <img src={props.src} /> */}
       
     </Box>
   );

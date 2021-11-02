@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
+
 // Importing components
 import Home from "./views/Home";
 import VendorLogin from "./views/VendorLogin";
@@ -18,6 +19,11 @@ import VendorUpdate from './views/VendorUpdate';
 import ProductUpdate from './views/ProductUpdate';
 import CustomerProfile from './views/CustomerProfile';
 import CustomerCart from './views/CustomerCart';
+import ProductDetails from './views/ProductDetails';
+import NewCustomerCart from './views/NewCustomCart';
+
+ 
+
 
 
 function App() {
@@ -27,19 +33,22 @@ function App() {
         <Route path="/vendor/login" component={VendorLogin} />
         <Route path="/vendor/signup"  component={VendorSignup} />
         <Route path="/vendor/home" component={VendorHome} />
-        <Route path="/product/create"  component={CreateProduct} />
+        <Route exact path="/product/create"  component={CreateProduct} />
 
 
 
         <Route path="/customer/login" component={CustomerLogin} />
         <Route path="/customer/signup"  component={CustomerSignup} />
         <Route path="/customer/home"  component={CustomerHome} />
-        <Route path="/product/create"  component={CreateProduct} />
+        
         <Route path="/customer/update" component={CustomerUpdate} />
         <Route path="/vendor/update" component={VendorUpdate} />
-        <Route path="/product/update/:id" component={ProductUpdate} />
+        <Route path="/products/update/:id" component={ProductUpdate} /> 
+        <Route path="/products/:id" component={ProductDetails} /> 
         <Route path="/customer/profile"  component={CustomerProfile} />
         <Route path="/customer/cart"  component={CustomerCart} />
+        <Route path="/customer/mycart"  component={NewCustomerCart} />
+        
 
 
 
