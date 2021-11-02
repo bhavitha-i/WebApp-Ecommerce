@@ -11,12 +11,13 @@ import { CssBaseline } from "@mui/material";
 import Cookies from 'js-cookie';
 import Checkout from "../components/Checkout";
 import AddressForm from "../components/AddressForm";
+import PaymentForm from "../components/PaymentForm";
 
 
 
 
 
-class CustomerCheckout extends Component {
+class CustomerPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -147,9 +148,10 @@ console.log(this.state.address,"set")
   // </div>
 
   <div>
-<Checkout add={this.state.address} cart={this.state.oldCart} />
-{/* <AddressForm add={this.state.address} cart={this.state.oldCart} /> */}
 
+{/* <AddressForm add={this.state.address} cart={this.state.oldCart} /> */}
+{/* <Checkout add={this.state.address} cart={this.state.oldCart} /> */}
+<PaymentForm />
   </div>
       
 
@@ -160,4 +162,4 @@ console.log(this.state.address,"set")
   }
 }
 
-export default withRoot(CustomerCheckout);
+export default withRoot(CustomerPayment);

@@ -11,15 +11,17 @@ import { padding } from '@mui/system';
 export default function AddressForm(props) {
 
     const [address,setAddress]=useState(props.address)
+    const [oldCart,setOldCart]=useState(props.oldCart)
+    console.log(oldCart,"in AddressForm")
 
     console.log(address)
     useEffect(() => {
       const fetchPlanetas = async () => {
-          
+          setOldCart(props.oldCart)
           setAddress(props.address) // remove curly braces here
       };    
       fetchPlanetas()
-  }, [props.address]);
+  }, [props.address,props.oldCart]);
 
 
   return (
@@ -31,7 +33,7 @@ export default function AddressForm(props) {
       {address.map(currentAddress => (
                <Grid container spacing={7} >
               <Grid item key={currentAddress} xs={3} >
-                  <BasicCard address={currentAddress} />
+                  <BasicCard oldCart={oldCart} address={currentAddress} />
               </Grid>
               </Grid>
             ))}
