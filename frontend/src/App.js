@@ -14,7 +14,7 @@ import VendorSignup from "./views/VendorSignup";
 import CreateProduct from './components/CreateProduct';
 import VendorSales from "./components/VendorSales"
 import VendorHome from './views/VendorHome';
-import VendorUpdate from './views/VendorUpdate';
+import VendorUpdate from './components/VendorUpdate';
 import ProductUpdate from './views/ProductUpdate';
 import VendorProfile from './views/VendorProfile';
 
@@ -23,7 +23,6 @@ import CustomerSignup from "./views/CustomerSignup";
 import CustomerLogin from "./views/CustomerLogin";
 import CustomerHome from './views/CustomerHome';
 import NewCustomerCart from './views/NewCustomCart';
-import AddressAdd from './components/AddAddressForm'
 import CustomerUpdate from './views/CustomerUpdate';
 import CustomerProfile from './views/CustomerProfile';
 import CustomerCart from './views/CustomerCart';
