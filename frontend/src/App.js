@@ -14,29 +14,18 @@ import VendorSignup from "./views/VendorSignup";
 import CreateProduct from './components/CreateProduct';
 import VendorSales from "./components/VendorSales"
 import VendorHome from './views/VendorHome';
-import VendorUpdate from './views/VendorUpdate';
-
-import VendorProfile from './views/VendorProfile';
-
-
-import CustomerUpdate from './components/CustomerUpdate';
 import VendorUpdate from './components/VendorUpdate';
-
-import ProductUpdate from './views/ProductUpdate';
 import VendorProfile from './views/VendorProfile';
+import ProductUpdate from './views/ProductUpdate';
 
 //Customer
 import CustomerSignup from "./views/CustomerSignup";
 import CustomerLogin from "./views/CustomerLogin";
 import CustomerHome from './views/CustomerHome';
 import AddressAdd from './components/AddAddressForm'
-import CustomerUpdate from './views/CustomerUpdate';
+import CustomerUpdate from './components/CustomerUpdate';
 import CustomerProfile from './views/CustomerProfile';
 import CustomerCart from './views/CustomerCart';
-import CustomerSignup from "./views/CustomerSignup";
-import CustomerLogin from "./views/CustomerLogin";
-import CustomerHome from './views/CustomerHome';
-import AddressAdd from './components/AddAddressForm'
 
 
 //Common
@@ -73,7 +62,6 @@ function App() {
         <Route path="/customer/profile"  component={CustomerProfile} />
         <Route path="/customer/cart"  component={CustomerCart} />
         <Route path="/customer/checkout" component={CustomerCheckout} />
-        <Route path="/customer/mycart"  component={NewCustomerCart} />
         <Route path="/address/add" component={AddressAdd} />
         
 

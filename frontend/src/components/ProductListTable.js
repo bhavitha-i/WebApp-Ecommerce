@@ -107,17 +107,6 @@ export default function ProductListTable(props) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
 
-            
-              <TableCell align="right">{product.name}</TableCell>
-              <TableCell align="right">{product.description}</TableCell>
-              <TableCell align="right">{product.price}</TableCell>
-              <TableCell align="right">{product.quantity}</TableCell>
-              <Link underline="none" href={`/products/update/${product._id}`} variant="body2">
-              <TableCell align="right"><EditIcon /></TableCell>
-              </Link>
-            <Link underline="none" href="#" variant="body2">
-              <TableCell align="right"><DeleteIcon onClick={() => delProd(product)}/></TableCell>
-
               <TableCell>
                     <Avatar variant="rounded" src={product.photo} ></Avatar>
               </TableCell>
