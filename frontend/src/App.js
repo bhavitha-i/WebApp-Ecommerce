@@ -22,6 +22,7 @@ import CustomerCart from './views/CustomerCart';
 import CustomerSignup from "./views/CustomerSignup";
 import CustomerLogin from "./views/CustomerLogin";
 import CustomerHome from './views/CustomerHome';
+import AddressAdd from './components/AddAddressForm'
 
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
         <Route path="/product/update/:id" component={ProductUpdate} />
         <Route path="/customer/profile"  component={CustomerProfile} />
         <Route path="/customer/cart"  component={CustomerCart} />
+        <Route path="/address/add" component={AddressAdd} />
+
 
 
 

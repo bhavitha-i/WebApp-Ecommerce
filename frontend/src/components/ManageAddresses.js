@@ -17,6 +17,9 @@ import { Box } from "@mui/system";
 import styles from "../assets/styles";
 import { Link } from "@mui/material";
 import AddressCard from './AddressCard'
+import { Button } from "@mui/material";
+import Popup from "./popup";
+import AddAddressForm from "./AddAddressForm";
 
 
 
@@ -26,11 +29,23 @@ class ManageAddress extends Component {
     this.state = {
       addresses: [],
       callFlag:false,
-      errAlert:''
+      errAlert:'',
+      openPopup:false,
 
     };
   }
+
+  handleClick() {
+    this.setState({openPopup:true});
+  }
+
+  setPopState(){
+    this.setState({openPopup:false});
+  }
+
  
+
+
   async componentDidMount ()  {
 
     const Bearer = "Bearer "+ Cookies.get('token')
@@ -68,6 +83,8 @@ class ManageAddress extends Component {
     }
 
 
+
+
   render() {
   
       return(
@@ -84,9 +101,20 @@ class ManageAddress extends Component {
             ))}
           </Grid>
         </Container>
-            <Link href="/address/add" variant="body2">
+            {/* <Button onClick={() => this.handleClick()} variant="body2">
                 <FloatingActionButtons addIcon={true} text="Add Address" />
-            </Link>
+            </Button> */}
+            <Button href="/address/add" variant="body2">
+                <FloatingActionButtons addIcon={true} text="Add Address" />
+            </Button>
+
+            <Popup
+                title="Add Address"
+                openPopup={this.state.openPopup}
+                setOpenPopup={this.handleChange}
+            >
+                <AddAddressForm />
+            </Popup>
         </ThemeProvider>
   );
     

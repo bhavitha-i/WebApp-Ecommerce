@@ -12,7 +12,7 @@ import styles from '../assets/styles';
 export default function AddressCard(props) {
 
   return (
-    <Card sx={{ minWidth:250, maxWidth:275, maxHeight:300 }}>
+    <Card sx={{ minWidth:150, maxWidth:200, maxHeight:200 }}>
       {console.log(props, " -- pop")}
       <CardContent  sx={{ flexGrow: 1 }}>
         <Typography variant="h6" component="div" sx={{ mb: 1.5 }}>
