@@ -17,32 +17,25 @@ import Cookies from 'js-cookie';
 
 
 
-function AddAddress(props)  {
+
+
+const AddAddress = (callback) => {
     const [inputs, setInputs] = useState({});
     const [callFlag,setCallFlag] = useState(false);
     const [user,setUser] = useState("");
     const [errAlert,setErrAlert] = useState("");
     const [message,setMessage] = useState("");
-    const [isEdit,setIsEdit] = useState(false);
-
 
     useEffect(() => {
-      if(!Cookies.get('token')){
-        setCallFlag(true)
-        setErrAlert("error")
-        setMessage("Invalid authentication")
-      }
-
-        if (props.recordForEdit != null)
-            setInputs(props.recordForEdit)
-            setIsEdit(true)
-        }, []
-      )
-
-    
+        if(!Cookies.get('token')){
+            setCallFlag(true)
+            setErrAlert("error")
+            setMessage("Invalid authentication")
+        }
+    },[]);
 
 
-    async function handleSubmit(event){
+    async function addAddress(event){
         if (event) {
           event.preventDefault();
           const addressData=inputs;
@@ -54,39 +47,7 @@ function AddAddress(props)  {
                "Authorization" : Bearer
            }
         };
-        
-        if(isEdit){
-          try{
-            console.log(inputs,"  input")
-            setCallFlag(false)
-            const hitback = await axios.patch(`http://localhost:5000/address/${inputs._id}`,addressData,axiosConfig,{
-                      withCredentials: true
-                  });
-                  console.log(hitback)
-                  if(hitback){
-                    
-                    setCallFlag(true)
-                    setErrAlert("success")
-                    setMessage("Address Edited")
-                    console.log("Address Edited")
-
-                    // setInputs(null)
-                    props.setOpenPopup(false)
-
-                  }
-                  
-          }
-          catch(err){
-            setUser("")
-            setErrAlert("error")
-            setCallFlag(true)
-            setMessage("Invalid Data")
-            console.log("in error")
-            console.log(err)
-          }
-        }
-        else{
-
+    
           try{
             setCallFlag(false)
             const hitback = await axios.post("http://localhost:5000/address/add",addressData,axiosConfig,{
@@ -98,8 +59,6 @@ function AddAddress(props)  {
                     setCallFlag(true)
                     setErrAlert("success")
                     setMessage("Welcome")
-                    // setInputs(null)
-                    props.setOpenPopup(false)
                   }
                   
           }
@@ -110,11 +69,10 @@ function AddAddress(props)  {
             setMessage("Invalid Data")
             console.log("in error")
             console.log(err)
-          }
-          }
         }
-    }
     
+        }
+      }
 
       const handleInputChange = (event) => {
         event.persist();
@@ -123,7 +81,7 @@ function AddAddress(props)  {
 
   return (
     <ThemeProvider theme={theme}>
-          { callFlag && <CustomizedSnackbars errAlert={errAlert} message={message}  /> }
+          { callFlag && <CustomizedSnackbars errAlert={errAlert} message={message} user={user} /> }
     <Container component="main" maxWidth="xs" >
         <Box
           sx={{
@@ -132,7 +90,7 @@ function AddAddress(props)  {
             flexDirection: 'column',
             alignItems: 'center',
           }}
-          component="form"  onSubmit={handleSubmit}
+          component="form"  onSubmit={addAddress}
         >
     <Typography variant="h6" gutterBottom component="h1">
         Shipping address
@@ -148,7 +106,6 @@ function AddAddress(props)  {
             autoComplete="given-name"
             variant="standard"
             onChange={handleInputChange}
-            value={inputs.firstName}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -161,8 +118,6 @@ function AddAddress(props)  {
             autoComplete="family-name"
             variant="standard"
             onChange={handleInputChange}
-            value={inputs.lastName}
-
           />
         </Grid>
         <Grid item xs={12}>
@@ -175,8 +130,6 @@ function AddAddress(props)  {
             autoComplete="shipping address-line1"
             variant="standard"
             onChange={handleInputChange}
-            value={inputs.street1}
-
           />
         </Grid>
         <Grid item xs={12}>
@@ -188,8 +141,6 @@ function AddAddress(props)  {
             autoComplete="shipping address-line2"
             variant="standard"
             onChange={handleInputChange}
-            value={inputs.street2}
-
 
           />
         </Grid>
@@ -203,8 +154,6 @@ function AddAddress(props)  {
             autoComplete="shipping address-level2"
             variant="standard"
             onChange={handleInputChange}
-            value={inputs.city}
-
 
           />
         </Grid>
@@ -217,8 +166,6 @@ function AddAddress(props)  {
             fullWidth
             variant="standard"
             onChange={handleInputChange}
-            value={inputs.state}
-
 
           />
         </Grid>
@@ -232,8 +179,6 @@ function AddAddress(props)  {
             autoComplete="shipping postal-code"
             variant="standard"
             onChange={handleInputChange}
-            value={inputs.zipcode}
-
 
           />
         </Grid>
@@ -247,8 +192,6 @@ function AddAddress(props)  {
             autoComplete="shipping country"
             variant="standard"
             onChange={handleInputChange}
-            value={inputs.country}
-
 
           />
         </Grid>
@@ -259,7 +202,7 @@ function AddAddress(props)  {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Submit
+              {strings.Address.addAddress}
         </Button>
         </Grid>
       </Grid>

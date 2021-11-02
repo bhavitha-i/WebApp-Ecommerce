@@ -9,6 +9,7 @@ import styles from "../assets/styles";
 import CustomerUpdate from "./CustomerUpdate";
 import AddAddress from "./AddAddressForm"
 import ManageAddress from "./ManageAddresses"
+import CustomerUpdatePassword from "./CustomerUpdatePassword"
 
 
 class CustomerProfileTabs extends React.PureComponent {
@@ -35,7 +36,7 @@ class CustomerProfileTabs extends React.PureComponent {
           </Box>
   
           {activeIndex === 0 && <TabContainer > <CustomerUpdate /> </TabContainer>}
-          {activeIndex === 1 && <TabContainer>  </TabContainer>}
+          {activeIndex === 1 && <TabContainer> <CustomerUpdatePassword/> </TabContainer>}
           {activeIndex === 2 && <TabContainer>Item Three</TabContainer>}
           {activeIndex === 3 && <TabContainer ><ManageAddress/></TabContainer>}
 

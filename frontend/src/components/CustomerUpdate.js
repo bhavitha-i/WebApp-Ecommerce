@@ -102,34 +102,7 @@ console.log("customer updated")
       }
       
   
-//   const [password,setPassword] = useState("");
-//   const [firstName,setFirstname] = useState("");
-//   const [lastName,setLastname] = useState("");
-//   const [age,setAge] = useState("");
-//   const [contact,setContact] = useState(0);
-  
-//   const [count, setCount] = useState(1)
-//   const [loggedin,setLoggedin] = useState(false);
-//   const [user,setUser] = useState("");
-//   const [errAlert,setErrAlert] = useState("");
-//   const [message,setMessage] = useState("");
-//   const [me,setMe]=useState("")
 
-//   useEffect( () => {
-//     if(!Cookies.get('token')){
-//         setLoggedin(true)
-//         setErrAlert("error")
-//         setMessage("please login to access this page")
-//     }
-//     pop()
-
-    
-  
-
-
-
-
-// });
  componentDidMount (){
     const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
@@ -161,12 +134,6 @@ console.log("customer updated")
       });;
     // this.setState.user = hitback
    
-    
-    console.log(this.state.firstName)
-    
- 
-
-
 }
 
 
@@ -185,21 +152,13 @@ render(){
             alignItems: 'center',
           }}
         >
-          {/* <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <PersonAddAltIcon />
-          </Avatar> */}
+
           <Typography component="h1" variant="h6">
             {strings.SignUp.Labels.asCustomerUpdate}
           </Typography>
           <Box component="form" onSubmit={this.update.bind(this)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
-              <TextField
-          hintText="Type here"
-          value={this.state.firstName}
-          onChange={(e) => this.setState({firstName:e.target.value})}
-        />
-              </Grid> */}
+  
                 <Grid item xs={12} sm={6}>
                 <TextField
                   
@@ -225,20 +184,6 @@ render(){
                 />
               </Grid>
         
-          
-              <Grid item xs={12}>
-                <TextField
-                  
-                  fullWidth
-                  name="password"
-                  label={strings.SignUp.Labels.password}
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  value={this.state.password}
-                  onChange={(e) => this.setState({password:e.target.value})}
-                />
-              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   

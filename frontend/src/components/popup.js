@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dialog, DialogTitle, DialogContent, makeStyles, Typography } from '@material-ui/core';
 import { Button } from '@mui/material';
 import CloseIcon from '@material-ui/icons/Close';
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Popup(props) {
 
-    const { title, children, openPopup, setPopState } = props;
+    const { title, children, openPopup, setOpenPopup } = props;
     console.log(props, "-- prop")
     const classes = useStyles();
 
@@ -31,7 +31,7 @@ export default function Popup(props) {
                     </Typography>
                     <Button
                         color="secondary"
-                        onClick={()=>{props.setPopState()}}>
+                        onClick={()=>{props.setOpenPopup(false)}}>
                         <CloseIcon />
                     </Button>
                 </div>

@@ -20,33 +20,80 @@ import AddressCard from './AddressCard'
 import { Button } from "@mui/material";
 import Popup from "./popup";
 import AddAddressForm from "./AddAddressForm";
+import { useState, useEffect } from "react"
 
 
 
-class ManageAddress extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      addresses: [],
-      callFlag:false,
-      errAlert:'',
-      openPopup:false,
 
+function ManageAddress() {
+  const [openPopup, setOpenPopup] = useState(false);
+  const [address, setAddress] = useState([]);
+  const [callFlag,setCallFlag] = useState(false);
+  const [user,setUser] = useState("");
+  const [errAlert,setErrAlert] = useState("");
+  const [message,setMessage] = useState("");
+  const [deleteAddress,setDeleteAddress] = useState("");
+  const [recordForEdit, setRecordForEdit] = useState(null)
+  const [isEdit, setIsEdit] = useState(false)
+
+  
+
+  function refreshPage() {
+    setTimeout(()=>{
+        window.location.reload(true);
+    }, 1000);
+    console.log('page to reload')
+  }   
+
+  const openInPopup = item => {
+    setRecordForEdit(item)
+    setOpenPopup(true)
+}
+
+  async function delAddress(address){
+   
+    setCallFlag(false)
+    const Bearer = "Bearer "+ Cookies.get('token')
+    console.log(Bearer)
+    let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Authorization" : Bearer
+      }
     };
+
+    if(!Cookies.get('token')){
+      setErrAlert("error")
+      setMessage("Can not delete address")
+
+     
+  }
+    try{
+      const hitback =  await axios.delete(`http://localhost:5000/address/${address._id}`,axiosConfig, {
+        withCredentials: true
+        
+    });
+    console.log(hitback.data)
+    // this.setState({ products: hitback.data });
+    setErrAlert("success")
+    setMessage("Address deleted")
+    setDeleteAddress(address.name)
+    setCallFlag(true)
+    refreshPage()
+   
+    
+    
+
+    }catch(e){
+      setErrAlert("error")
+      setCallFlag(true)
+      setMessage("Something went wrong")
+      console.log("in error")
+      console.log(e)
+    }
   }
 
-  handleClick() {
-    this.setState({openPopup:true});
-  }
-
-  setPopState(){
-    this.setState({openPopup:false});
-  }
-
- 
-
-
-  async componentDidMount ()  {
+  const getAddresses = async () => {
 
     const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
@@ -54,71 +101,75 @@ class ManageAddress extends Component {
          'Content-Type': 'application/json;charset=UTF-8',
          "Authorization" : Bearer
      }
-   };
- 
-          if(!Cookies.get('token')){
-          this.setState.callFlag = true
-          this.state.errAlert = "error"
-          this.state.message ="Invalid Authentication"   
-      }
+    };
 
-      try{
-      
-      const hitback =  await axios.get("http://localhost:5000/addresses/mine",axiosConfig, {
-                  withCredentials: true
-        
-                });
-                
-                console.log(hitback)
-                this.setState({ addresses: hitback.data });
-      }catch(e){
+    try{
        
-     
-            this.setState.callFlag = true
-            this.state.errAlert = "error"
-            this.state.message ="Invalid Authentication"
-            console.log("in error")
-            console.log(e)
-        }
+       const hitback =  await axios.get("http://localhost:5000/addresses/mine",axiosConfig, {
+                 withCredentials: true
+               });
+               
+               console.log(hitback)
+               setAddress(hitback.data)
+               console.log(address)
+ 
+     }catch(e){
+    
+           this.setState.callFlag = true
+           this.state.errAlert = "error"
+           this.state.message ="Invalid Authentication"
+           console.log("in error")
+           console.log(e)
+       }
+     };
+
+  useEffect(() => {
+    if(!Cookies.get('token')){
+        setCallFlag(true)
+        setErrAlert("error")
+        setMessage("Invalid authentication")
     }
+    getAddresses();
+  },[]);
+ 
 
-
-
-
-  render() {
   
       return(
          
         <ThemeProvider theme={theme}>
         <CssBaseline/>
-
+        <div> { callFlag && <CustomizedSnackbars errAlert={errAlert}message={message} /> } </div>
         <Container sx={{ py: 6 }} style={styles.ManageAddressContainer}>
           <Grid container spacing={4} >
-            {this.state.addresses.map(currentaddress => (
+            {address.map(currentaddress => (
               <Grid item key={currentaddress} xs={3} >
-                  <AddressCard address={currentaddress} />
+                  <AddressCard address={currentaddress}
+                                delAddress={delAddress} 
+                                openInPopup={openInPopup}/>
               </Grid>
             ))}
           </Grid>
         </Container>
-            {/* <Button onClick={() => this.handleClick()} variant="body2">
-                <FloatingActionButtons addIcon={true} text="Add Address" />
-            </Button> */}
-            <Button href="/address/add" variant="body2">
+            <Button onClick={() => setOpenPopup(true)} variant="body2">
                 <FloatingActionButtons addIcon={true} text="Add Address" />
             </Button>
 
             <Popup
                 title="Add Address"
-                openPopup={this.state.openPopup}
-                setOpenPopup={this.handleChange}
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
             >
-                <AddAddressForm />
+                <AddAddressForm 
+                    recordForEdit={recordForEdit} 
+                    setOpenPopup={setOpenPopup}
+                    // isEdit={isEdit}
+                    />
+                
             </Popup>
         </ThemeProvider>
   );
     
-  }
+
 }
 
 export default withRoot(ManageAddress)

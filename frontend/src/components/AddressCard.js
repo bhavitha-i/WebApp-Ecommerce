@@ -11,6 +11,15 @@ import styles from '../assets/styles';
 
 export default function AddressCard(props) {
 
+  const handleDelete = (address) => {
+    props.delAddress(address);
+  }
+
+  const handleEditClick = (address) => {
+    props.openInPopup(address);
+  }
+
+
   return (
     <Card sx={{ minWidth:150, maxWidth:200, maxHeight:200 }}>
       {console.log(props, " -- pop")}
@@ -27,8 +36,8 @@ export default function AddressCard(props) {
 
       </CardContent>
       <CardActions>
-        <Button style={styles.CardButton} size ="small" variant="outlined" color="secondary">Edit </Button>
-        <Button style={styles.CardButton} size ="small" variant="outlined" color="secondary">Delete</Button>
+        <Button style={styles.CardButton} onClick={() => handleEditClick(props.address)} size ="small" variant="outlined" color="secondary">Edit </Button>
+        <Button style={styles.CardButton} onClick={() => handleDelete(props.address)} size ="small" variant="outlined" color="secondary">Delete</Button>
         
       </CardActions>
     </Card>

@@ -6,6 +6,7 @@ import theme from "./theme";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Box } from "@mui/system";
 import styles from "../assets/styles";
+import VendorUpdate from "./VendorUpdate";
 
 
 class VendorProfileTabs extends React.PureComponent {
@@ -30,7 +31,7 @@ class VendorProfileTabs extends React.PureComponent {
           </Tabs>
           </Box>
   
-          {activeIndex === 0 && <TabContainer>Item check </TabContainer>}
+          {activeIndex === 0 && <TabContainer> <VendorUpdate/> </TabContainer>}
           {activeIndex === 1 && <TabContainer>Item Two</TabContainer>}
           {activeIndex === 2 && <TabContainer>Item Three</TabContainer>}
 

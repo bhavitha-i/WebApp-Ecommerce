@@ -15,7 +15,7 @@ import VendorProfile from './views/VendorProfile';
 
 
 import CustomerUpdate from './components/CustomerUpdate';
-import VendorUpdate from './views/VendorUpdate';
+import VendorUpdate from './components/VendorUpdate';
 import ProductUpdate from './views/ProductUpdate';
 import CustomerProfile from './views/CustomerProfile';
 import CustomerCart from './views/CustomerCart';
