@@ -117,6 +117,7 @@ export default function ProductListTable(props) {
               <TableCell variant="body2">
               <Link underline="none" href={`/product/update/${product._id}`} >
                   <EditIcon />
+
               </Link>
               </TableCell>
               <TableCell>

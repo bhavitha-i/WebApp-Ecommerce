@@ -12,7 +12,7 @@ import Home from "./views/Home";
 import VendorLogin from "./views/VendorLogin";
 import VendorSignup from "./views/VendorSignup";
 import CreateProduct from './components/CreateProduct';
-import VendorSales from "./components/VendorSales"
+// import VendorSales from "./components/VendorSales"
 import VendorHome from './views/VendorHome';
 import VendorUpdate from './components/VendorUpdate';
 import VendorProfile from './views/VendorProfile';
@@ -26,7 +26,7 @@ import AddressAdd from './components/AddAddressForm'
 import CustomerUpdate from './components/CustomerUpdate';
 import CustomerProfile from './views/CustomerProfile';
 import CustomerCart from './views/CustomerCart';
-
+import CustomerPayment from './views/CustomerPayment';
 
 //Common
 import ProductDetails from './views/ProductDetails';
@@ -46,7 +46,7 @@ function App() {
         <Route path="/vendor/signup"  component={VendorSignup} />
         <Route path="/vendor/home" component={VendorHome} />
         <Route exact path="/product/create"  component={CreateProduct} />
-        <Route path="/vendor/sales"  component={VendorSales} />
+        {/* <Route path="/vendor/sales"  component={VendorSales} /> */}
         <Route path="/vendor/profile"  component={VendorProfile} />
 
 
@@ -61,8 +61,15 @@ function App() {
         <Route path="/products/:id" component={ProductDetails} /> 
         <Route path="/customer/profile"  component={CustomerProfile} />
         <Route path="/customer/cart"  component={CustomerCart} />
-        <Route path="/customer/checkout" component={CustomerCheckout} />
+        
         <Route path="/address/add" component={AddressAdd} />
+
+
+
+
+{/* app js new components by gopi */}
+        <Route path="/customer/checkout" component={CustomerCheckout} />
+        <Route path="/customer/payment" component={CustomerPayment} />
         
 
 
