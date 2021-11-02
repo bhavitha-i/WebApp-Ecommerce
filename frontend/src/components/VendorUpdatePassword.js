@@ -26,7 +26,7 @@ import styles from '../assets/styles';
 
 
 
- class CustomerUpdatePassword extends Component {
+ class VendorUpdatePassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +67,7 @@ import styles from '../assets/styles';
             }
           };
 
-              axios.patch("http://localhost:5000/customers/me",jusJson,axiosConfig,{
+              axios.patch("http://localhost:5000/vendors/me",jusJson,axiosConfig,{
                 withCredentials: true
               }).then(response =>{
 
@@ -95,6 +95,8 @@ import styles from '../assets/styles';
         console.log(jusJson)
       }
       
+
+
 
 render(){
 
@@ -165,4 +167,4 @@ render(){
   );
 
 }}
-export default withRoot(CustomerUpdatePassword);
+export default withRoot(VendorUpdatePassword);
