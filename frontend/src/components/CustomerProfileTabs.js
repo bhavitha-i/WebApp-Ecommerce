@@ -6,6 +6,9 @@ import theme from "./theme";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Box } from "@mui/system";
 import styles from "../assets/styles";
+import CustomerUpdate from "./CustomerUpdate";
+import AddAddress from "./AddAddress"
+import ManageAddress from "./ManageAddresses"
 
 
 class CustomerProfileTabs extends React.PureComponent {
@@ -31,10 +34,10 @@ class CustomerProfileTabs extends React.PureComponent {
           </Tabs>
           </Box>
   
-          {activeIndex === 0 && <TabContainer>Item check </TabContainer>}
-          {activeIndex === 1 && <TabContainer>Item Two</TabContainer>}
+          {activeIndex === 0 && <TabContainer > <CustomerUpdate /> </TabContainer>}
+          {activeIndex === 1 && <TabContainer>  </TabContainer>}
           {activeIndex === 2 && <TabContainer>Item Three</TabContainer>}
-          {activeIndex === 3 && <TabContainer>Item Four</TabContainer>}
+          {activeIndex === 3 && <TabContainer ><ManageAddress/></TabContainer>}
 
         </div>
 
@@ -47,7 +50,7 @@ class CustomerProfileTabs extends React.PureComponent {
   
   function TabContainer(props) {
     return (
-      <Typography component="div" style={{ padding: 24 }}>
+      <Typography component="div"  style={styles.TypographyTabContainer}>
         {props.children}
       </Typography>
     );
