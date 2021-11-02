@@ -23,6 +23,7 @@ import withRoot from '../components/WithRoot';
 import theme from '../components/theme'
 import strings from '../assets/strings';
 import styles from '../assets/styles';
+import { useHistory } from "react-router-dom";
 
 
 
@@ -35,6 +36,7 @@ function VendorSignIn() {
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
 
+  const history = useHistory();
 
   async function login(e){
     e.preventDefault();
@@ -56,6 +58,11 @@ function VendorSignIn() {
               setErrAlert("success")
               setMessage("Welcome")
               setUser(hitback.data.vendor.firstName)
+
+              history.push({
+                pathname: '/vendor/home',
+                openSnackbar: true
+              });
             }
             
     }
@@ -140,7 +147,7 @@ function VendorSignIn() {
         
       </Container>
       <Link href="/customer/login" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asCustomerLogin}/>
+      <FloatingActionButtons  personIcon={true} text={strings.SignUp.Labels.asCustomerLogin}/>
       </Link>
     </ThemeProvider>
   );
