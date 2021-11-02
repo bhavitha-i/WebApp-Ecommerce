@@ -20,11 +20,11 @@ class CustomerHome extends Component {
     this.state = {
       products: [],
       oldCart:{},
-      oldCart:{},
       productsAll: [],
       tableProd:[],
       loggedin:false,
-      errAlert:''
+      errAlert:'',
+      notify:0
     };
   }
 
@@ -91,6 +91,8 @@ class CustomerHome extends Component {
         
     }).then(resposne =>{
       this.setState({ oldCart: resposne.data });
+      this.setState({notify: this.state.oldCart[0].productlist.length})
+
       console.log(this.state.oldCart[0].productlist)
     })
   
