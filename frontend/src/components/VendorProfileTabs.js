@@ -6,13 +6,10 @@ import theme from "./theme";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Box } from "@mui/system";
 import styles from "../assets/styles";
-import CustomerUpdate from "./CustomerUpdate";
-import AddAddress from "./AddAddressForm"
-import ManageAddress from "./ManageAddresses"
-import CustomerUpdatePassword from "./CustomerUpdatePassword"
+import VendorUpdate from "./VendorUpdate";
 
 
-class CustomerProfileTabs extends React.PureComponent {
+class VendorProfileTabs extends React.PureComponent {
     state = { activeIndex: 0 };
   
     handleChange = (_, activeIndex) => this.setState({ activeIndex });
@@ -29,16 +26,14 @@ class CustomerProfileTabs extends React.PureComponent {
           <Tabs value={activeIndex} onChange={this.handleChange} orientation="vertical" >
             <Tab style={styles.MyProfileTab} label="Update my details" />
             <Tab style={styles.MyProfileTab} label="Update password" />
-            <Tab style={styles.MyProfileTab} label="My Orders" />
-            <Tab style={styles.MyProfileTab} label="My Addresses" />
+            <Tab style={styles.MyProfileTab} label="Update Address" />
 
           </Tabs>
           </Box>
   
-          {activeIndex === 0 && <TabContainer > <CustomerUpdate /> </TabContainer>}
-          {activeIndex === 1 && <TabContainer> <CustomerUpdatePassword/> </TabContainer>}
+          {activeIndex === 0 && <TabContainer> <VendorUpdate/> </TabContainer>}
+          {activeIndex === 1 && <TabContainer>Item Two</TabContainer>}
           {activeIndex === 2 && <TabContainer>Item Three</TabContainer>}
-          {activeIndex === 3 && <TabContainer ><ManageAddress/></TabContainer>}
 
         </div>
 
@@ -51,10 +46,10 @@ class CustomerProfileTabs extends React.PureComponent {
   
   function TabContainer(props) {
     return (
-      <Typography component="div"  style={styles.TypographyTabContainer}>
+      <Typography component="div" style={{ padding: 24 }}>
         {props.children}
       </Typography>
     );
   }
   
-  export default CustomerProfileTabs;
+  export default VendorProfileTabs;

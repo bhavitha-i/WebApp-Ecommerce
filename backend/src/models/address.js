@@ -9,14 +9,23 @@ const addressSchmea =  new mongoose.Schema({
 
     },
 
-    apt_no:{
-        type: String,
-        required: false
+    firstName:{
+        type: String
     },
-    streetName:{
+
+    lastName:{
+        type: String
+    },
+
+    street1:{
         type: String,
         required: true
     },
+
+    street2:{
+        type: String,
+    },
+
     city:{
         type: String,
         required: true
@@ -25,6 +34,7 @@ const addressSchmea =  new mongoose.Schema({
         type: String,
         required: true
     },
+
     country:{
         type: String,
         required: true

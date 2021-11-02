@@ -15,7 +15,7 @@ import Box from '@mui/material/Box';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import FloatingActionButtons from '../components/FloatingButton';
 import CustomizedSnackbars from '../components/CustomizedSnackbars';
 import AppBar from '../components/AppBar';
@@ -24,6 +24,7 @@ import theme from '../components/theme'
 import styles from '../assets/styles';
 import { string } from 'prop-types';
 import strings from '../assets/strings';
+import { useHistory } from "react-router-dom";
 
 
 const CustomerSignUp = (callback) => {
@@ -32,6 +33,8 @@ const CustomerSignUp = (callback) => {
   const [user,setUser] = useState("");
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
+
+  const history = useHistory();
 
 
   async function signup(event){
@@ -52,6 +55,10 @@ const CustomerSignUp = (callback) => {
                 setErrAlert("success")
                 setMessage("Welcome")
                 setUser(hitback.data.customer.firstName)
+                history.push({
+                  pathname: '/customer/home',
+                  openSnackbar: true
+                });
               }
               
       }
@@ -91,7 +98,7 @@ const CustomerSignUp = (callback) => {
             <PersonAddAltIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            {strings.SignUp.Labels.customerSignup}
           </Typography>
           <Box component="form"  onSubmit={signup} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -190,134 +197,10 @@ const CustomerSignUp = (callback) => {
         
       </Container>
       <Link href="/vendor/signup" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asVendorSignup}/>
+      <FloatingActionButtons  personIcon={true} text={strings.SignUp.Labels.asVendorSignup}/>
       </Link>
     </ThemeProvider>
   );
 }
-
-
-// function CustomerSignUp() {
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const data = new FormData(event.currentTarget);
-//     // eslint-disable-next-line no-console
-//     console.log({
-//       email: data.get('email'),
-//       password: data.get('password'),
-//     });
-//   };
-
-//   return (
-//     <ThemeProvider theme={theme}>
-
-//     <AppBar/>
-//       <Container component="main" maxWidth="xs">
-//         <Box
-//           sx={{
-//             marginTop: 8,
-//             display: 'flex',
-//             flexDirection: 'column',
-//             alignItems: 'center',
-//           }}
-//         >
-//           <Avatar style={styles.Avatar} sx={{ m: 1, bgcolor: 'secondary.main' }}>
-//             <PersonAddAltIcon fontSize="large" />
-//           </Avatar>
-//           <Typography component="h1" variant="h5">
-//             Sign up
-//           </Typography>
-//           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-//             <Grid container spacing={2}>
-//               <Grid item xs={12} sm={6}>
-//                 <TextField
-//                   autoComplete="given-name"
-//                   name="firstName"
-//                   required
-//                   fullWidth
-//                   id="firstName"
-//                   label="First Name"
-//                   autoFocus
-//                 />
-//               </Grid>
-//               <Grid item xs={12} sm={6}>
-//                 <TextField
-//                   required
-//                   fullWidth
-//                   id="lastName"
-//                   label="Last Name"
-//                   name="lastName"
-//                   autoComplete="family-name"
-//                 />
-//               </Grid>
-        
-//               <Grid item xs={12}>
-//                 <TextField
-//                   required
-//                   fullWidth
-//                   id="email"
-//                   label="Email Address"
-//                   name="email"
-//                   autoComplete="email"
-//                 />
-//               </Grid>
-//               <Grid item xs={12}>
-//                 <TextField
-//                   required
-//                   fullWidth
-//                   name="password"
-//                   label="Password"
-//                   type="password"
-//                   id="password"
-//                   autoComplete="new-password"
-//                 />
-//               </Grid>
-//               <Grid item xs={12} sm={6}>
-//                 <TextField
-//                   required
-//                   fullWidth
-//                   id="age"
-//                   label="Age"
-//                   name="age"
-//                   autoComplete="family-name"
-//                 />
-//               </Grid>
-//               <Grid item xs={12} sm={6}>
-//                 <TextField
-//                   required
-//                   fullWidth
-//                   id="contact"
-//                   label="Contact"
-//                   name="contact"
-//                   autoComplete="family-name"
-//                 />
-//               </Grid>
-            
-//             </Grid>
-//             <Button
-//               type="submit"
-//               fullWidth
-//               variant="contained"
-//               sx={{ mt: 3, mb: 2 }}
-//             >
-//               Sign Up
-//             </Button>
-//             <Grid container justifyContent="flex-end">
-//               <Grid item>
-//                 <Link href="/vendor/login" variant="body2">
-//                   Already have an account? Sign in
-//                 </Link>
-//               </Grid>
-//             </Grid>
-//           </Box>
-//         </Box>
-        
-//       </Container>
-//       <Link href="/customer/login" variant="body2">
-//       <FloatingActionButtons text="Register as Customer"/>
-//       </Link>
-//     </ThemeProvider>
-//   );
-// }
 
 export default withRoot(CustomerSignUp);

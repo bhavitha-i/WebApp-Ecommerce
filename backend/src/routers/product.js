@@ -14,7 +14,7 @@ router.post('/product/add', auth,async (req,res) =>{
         await product.save()
         res.status(200).send(product)
     }catch(e){
-        res.status(400).send()
+        res.status(400).send(e)
     }
 
     
