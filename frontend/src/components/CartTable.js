@@ -133,7 +133,9 @@ console.log(cartItems,'begin')
     };
 
       axios.patch(`http://localhost:5000/cart/mine`,patchData,axiosConfig,{
-     withCredentials: true }).then(response =>{ console.log(response.data.price,"from api")}).catch(error => {console.log(error)})
+     withCredentials: true }).then(response =>{ 
+      console.log("in cart Table") 
+      console.log(response.data.price,"from api")}).catch(error => {console.log(error)})
       
 
 

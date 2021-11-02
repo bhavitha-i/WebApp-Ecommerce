@@ -5,6 +5,7 @@ import RecipeReviewCard from "../components/RecipeReviewCard";
 import Cookies from 'js-cookie';
 import FloatingActionButtons from '../components/FloatingButton';
 import CustomizedSnackbars from '../components/CustomizedSnackbars';
+
 import CartTable from "../components/CartTable";
 
 
@@ -98,25 +99,6 @@ export default class CustomerCart extends Component {
     this.state.message ="Only vendors can add products"
     console.log("in error")
     console.log(e)
-}
-console.log("before for",this.state.productsAll )
-
-
-
-
-  }
-
-  render() {
-      
-  
-      return(
-         
-    <div style={{ display: "inline-block" ,position:"relative",top:"50px",left:"110px"}}>
-    <CartTable products = {this.state.tableProd} />
-  </div>
-  )
-    
-  }
 }
 console.log("before for",this.state.productsAll )
 

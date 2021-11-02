@@ -6,6 +6,10 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import  { useState , useEffect} from "react"
+import Cookies from 'js-cookie';
+import { useHistory } from 'react-router';
+
+import axios from "axios";
 
 const bull = (
   <Box
@@ -18,21 +22,69 @@ const bull = (
 
 export default function BasicCard(props) {
     const [address,setAddress]=useState(props.address)
+    const [cart,setCart] = useState()
+    const [oldCart,setOldCart] = useState(props.oldCart)
+    const [order,setOrder]=useState()
+
+    const history = useHistory();
 
     console.log(address)
+    console.log(oldCart,"in basiccard")
 
     const onAdd = async (address) => {
         console.log("selected address:",address)
+
+        const Bearer = "Bearer "+ Cookies.get('token')
+    console.log(Bearer)
+    let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Authorization" : Bearer
+      }
+    };
+    
+    console.log(newO,"newO")
+    const hitback =  await axios.get("http://localhost:5000/cart/mine",axiosConfig, {
+      withCredentials: true
+      
+  });
+  console.log(hitback.data,"in basic card final try")
+
+  var newO ={
+    cart:hitback.data._id,
+    price:hitback.data.price,
+    productlist:hitback.data.productlist,
+
+   
+    address:address
+  }
+  console.log(newO,"after assign")
+
+    axios.post(`http://localhost:5000/order/add`,newO,axiosConfig,{
+      withCredentials: true }).then(response =>{ console.log(response.data,"from api")
+       
+       var o=response.data
+       console.log(o,"Order placed")
+       setOrder(o)
+     }).catch(error => {console.log(error)})
+
+
+
+ 
+
+
+
+
     }
 
 
     useEffect(() => {
       const fetchPlanetas = async () => {
-          
+          setOldCart(props.oldCart)
           setAddress(props.address) // remove curly braces here
       };    
       fetchPlanetas()
-  }, [props.address]);
+  }, [props.address,props.oldCart]);
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
