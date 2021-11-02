@@ -64,25 +64,7 @@ import Paper from "./../components/Paper"
                       size:this.state.size,
                       color:this.state.color
                   }
-        //   if(this.state.password == ""){
-            
-        //       jusJson = {
-        //           firstName:this.state.firstName,
-        //           lastName:this.state.lastName,
-        //           age:this.state.age,
-        //           contact:this.state.contact
-        //       }
-        //   }
-        //   else{
-        //     jusJson = {
-        //         password:this.state.password,
-        //         firstName:this.state.firstName,
-        //         lastName:this.state.lastName,
-        //         age:this.state.age,
-        //         contact:this.state.contact
-        //     }
 
-        //   }
           const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
      headers: {

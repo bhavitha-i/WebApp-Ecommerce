@@ -3,13 +3,19 @@ import React, { Component } from "react";
 import axios from "axios";
 import RecipeReviewCard from "../components/RecipeReviewCard";
 import Cookies from 'js-cookie';
-import FloatingActionButtons from '../components/FloatingButton';
 import CustomizedSnackbars from '../components/CustomizedSnackbars';
 
 import CartTable from "../components/CartTable";
+import AppBar from "../components/AppBarCustomer"
+import theme from "../components/theme";
+import { ThemeProvider } from '@material-ui/core/styles';
+import withRoot from '../components/WithRoot';
+import { CssBaseline } from "@mui/material";
+import { Box } from "@mui/system";
+import styles from "../assets/styles";
 
 
-export default class CustomerCart extends Component {
+class CustomerCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -111,11 +117,22 @@ console.log("before for",this.state.productsAll )
       
   
       return(
+
+        <ThemeProvider theme={theme}>
+          <CssBaseline/>
+          <AppBar/>
+          <Box style={styles.ProductListBox}>
+              <CartTable products = {this.state.tableProd} />
+            </Box>
+
+        </ThemeProvider>
          
-    <div style={{ display: "inline-block" ,position:"relative",top:"50px",left:"110px"}}>
-    <CartTable products = {this.state.tableProd} />
-  </div>
+  //   <div style={{ display: "inline-block" ,position:"relative",top:"50px",left:"110px"}}>
+  //   <CartTable products = {this.state.tableProd} />
+  // </div>
   )
     
   }
 }
+
+export default withRoot(CustomerCart)

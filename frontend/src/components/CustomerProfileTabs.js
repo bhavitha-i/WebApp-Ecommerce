@@ -13,10 +13,11 @@ import CustomerUpdatePassword from "./CustomerUpdatePassword"
 
 
 class CustomerProfileTabs extends React.PureComponent {
-    state = { activeIndex: 0 };
-  
+    state = this.props
     handleChange = (_, activeIndex) => this.setState({ activeIndex });
+
     render() {
+      console.log(this.props,"-- props", this.state , "   state")
       const { activeIndex } = this.state;
       return (
         <ThemeProvider theme={theme}>

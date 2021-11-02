@@ -101,7 +101,7 @@ const TypographyTabContainer = {
   //   top: "10%",
   //   left: "20%",
   //   padding: "24"
-  margin: "auto",
+  // margin: "auto",
 }
 
 const TabContainer ={
@@ -110,6 +110,26 @@ const TabContainer ={
   left: "40%"
 }
 
+const CartButton ={
+  padding : "0",
+}
+
+const CartPrice = {
+  position : "relative",
+  flexGrow: 1,
+  ml:2
+}
+
+const ManageAddressContainer={
+  maxWidth : "300px",
+  pr : 6,
+  pb :6
+
+}
+
+const CardGridAddress={
+  maxWidth : "inherit"
+}
   const styles = {
     Header: Header,
     ErrorMessage: ErrorMessage,
@@ -128,6 +148,10 @@ const TabContainer ={
     TabContainer:TabContainer,
     MyProfileTabAdddress:MyProfileTabAdddress,
     TypographyTabContainer:TypographyTabContainer,
+    CartButton:CartButton,
+    CartPrice:CartPrice,
+    ManageAddressContainer:ManageAddressContainer,
+    CardGridAddress:CardGridAddress
   }
 
   export default styles

@@ -33,9 +33,10 @@ function AddAddress(props)  {
         setMessage("Invalid authentication")
       }
 
-        if (props.recordForEdit != null)
+        if (props.recordForEdit != null){
             setInputs(props.recordForEdit)
             setIsEdit(true)
+          }
         }, []
       )
 

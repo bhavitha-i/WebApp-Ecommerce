@@ -31,7 +31,6 @@ import styles from '../assets/styles';
         super(props);
         this.state = {
             user:{},
-          password: "",
           firstName:"",
           lastName:"",
           age:"",
@@ -49,25 +48,13 @@ import styles from '../assets/styles';
           this.setState({loggedin:false})
           var jusJson={}
         e.preventDefault();
-          if(this.state.password == ""){
-            
+
               jusJson = {
                   firstName:this.state.firstName,
                   lastName:this.state.lastName,
                   age:this.state.age,
                   contact:this.state.contact
               }
-          }
-          else{
-            jusJson = {
-                password:this.state.password,
-                firstName:this.state.firstName,
-                lastName:this.state.lastName,
-                age:this.state.age,
-                contact:this.state.contact
-            }
-
-          }
           const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
      headers: {
@@ -81,52 +68,22 @@ import styles from '../assets/styles';
 }).then(response =>{
 
 
-console.log("customer updated")
+      console.log("customer updated")
 
-    this.setState({user:response.data})
-    this.setState({loggedin:true})
-    this.setState({errAlert:"success"})
-    this.setState({message:"changes updated"})
-}).catch(error => {
-    this.setState({loggedin:true})
-    this.setState({errAlert:"error"})
-    this.setState({message:"Something went wrong"})
-    console.log(error);
-  });;
-
-
-
-
-        
-        console.log(jusJson)
+          this.setState({user:response.data})
+          this.setState({loggedin:true})
+          this.setState({errAlert:"success"})
+          this.setState({message:"changes updated"})
+      }).catch(error => {
+          this.setState({loggedin:true})
+          this.setState({errAlert:"error"})
+          this.setState({message:"Something went wrong"})
+          console.log(error);
+        });;
+              
+          console.log(jusJson)
       }
       
-  
-//   const [password,setPassword] = useState("");
-//   const [firstName,setFirstname] = useState("");
-//   const [lastName,setLastname] = useState("");
-//   const [age,setAge] = useState("");
-//   const [contact,setContact] = useState(0);
-  
-//   const [count, setCount] = useState(1)
-//   const [loggedin,setLoggedin] = useState(false);
-//   const [user,setUser] = useState("");
-//   const [errAlert,setErrAlert] = useState("");
-//   const [message,setMessage] = useState("");
-//   const [me,setMe]=useState("")
-
-//   useEffect( () => {
-//     if(!Cookies.get('token')){
-//         setLoggedin(true)
-//         setErrAlert("error")
-//         setMessage("please login to access this page")
-//     }
-//     pop()
-
-    
-  
-
-
 
 
 // });
@@ -171,38 +128,6 @@ console.log("customer updated")
 }
 
 
-
-
-//    function update(e){
-//     e.preventDefault();
-//     // const data = new FormData(e.currentTarget);
-//     const updatedData={firstName,lastName,age,password,contact};
-    
-//     try{
-//       setLoggedin(false)
-//       const hitback = await axios.patch("http://localhost:5000/customers/me",updatedData,{
-//                 withCredentials: true
-//             });
-//             console.log(hitback)
-//             if(hitback){
-              
-//               setLoggedin(true)
-//               setErrAlert("success")
-//               setMessage("Welcome")
-//               setUser(hitback.data.vendor.firstName)
-//             }
-            
-//     }
-//     catch(err){
-//       setUser("")
-//       setErrAlert("error")
-//       setLoggedin(true)
-//       setMessage("Invalid Data")
-//       console.log("in error")
-//       console.log(err)
-//   }
-   
-//   }
 render(){
 
   return (
@@ -250,19 +175,6 @@ render(){
               </Grid>
         
           
-              <Grid item xs={12}>
-                <TextField
-                  
-                  fullWidth
-                  name="password"
-                  label={strings.SignUp.Labels.password}
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  value={this.state.password}
-                  onChange={(e) => this.setState({password:e.target.value})}
-                />
-              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   

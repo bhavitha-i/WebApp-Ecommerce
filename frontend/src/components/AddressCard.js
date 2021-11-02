@@ -21,10 +21,10 @@ export default function AddressCard(props) {
 
 
   return (
-    <Card sx={{ minWidth:150, maxWidth:200, maxHeight:200 }}>
+    <Card sx={{ minWidth:250, maxWidth:300, maxHeight:300, minHeight: 200 }}>
       {console.log(props, " -- pop")}
-      <CardContent  sx={{ flexGrow: 1 }}>
-        <Typography variant="h6" component="div" sx={{ mb: 1.5 }}>
+      <CardContent sx= {{minHeight: 150}} >
+        <Typography variant="h6" sx={{ mb: 1.5 }}>
           {props.address.firstName} {props.address.lastName}
         </Typography>
 
@@ -38,7 +38,6 @@ export default function AddressCard(props) {
       <CardActions>
         <Button style={styles.CardButton} onClick={() => handleEditClick(props.address)} size ="small" variant="outlined" color="secondary">Edit </Button>
         <Button style={styles.CardButton} onClick={() => handleDelete(props.address)} size ="small" variant="outlined" color="secondary">Delete</Button>
-        
       </CardActions>
     </Card>
   );
