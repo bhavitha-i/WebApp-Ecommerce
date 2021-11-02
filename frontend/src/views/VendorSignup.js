@@ -180,7 +180,7 @@ function VendorSignUp() {
         
       </Container>
       <Link href="/customer/signup" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asCustomeSignup}/>
+      <FloatingActionButtons personIcon={true} text={strings.SignUp.Labels.asCustomeSignup}/>
       </Link>
     </ThemeProvider>
   );

@@ -8,10 +8,6 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import trimWords from 'trim-words';
 import styles from '../assets/styles';
-import  { useState , useEffect} from "react"
-import Cookies from 'js-cookie';
-
-import axios from "axios";
 
 export default function RecipeReviewCard(props) {
   var base64Icon = `${props.product.photo}`;
@@ -156,6 +152,7 @@ export default function RecipeReviewCard(props) {
 
   // console.log(base64Icon)
 
+  console.log(base64Icon)
   return (
     <Card sx={{ minWidth:250, maxWidth:275, maxHeight:300 }}>
       <CardMedia
@@ -167,7 +164,7 @@ export default function RecipeReviewCard(props) {
       
       <CardContent  sx={{ flexGrow: 1 }}>
         <Typography gutterBottom >
-          <Link underline="none" href={`/productS/${props.product._id}`} variant="h6" color="inherit" >
+          <Link underline="none" href={`/product/${props.product._id}`} variant="h6" color="inherit" >
             {trimWords(props.product.name, 3, '...')}
           </Link>
         </Typography>
@@ -176,9 +173,8 @@ export default function RecipeReviewCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-      {console.log(props.product,"in diuv")}
-      {console.log(cartItems,"in duvi")}
-        <Button style={styles.CardButton} size ="small" variant="outlined" color="secondary" onClick={() => onAdd(props.product)}>Add to Cart</Button>
+      
+        <Button style={styles.CardButton} size ="small" variant="outlined" color="secondary">Add to Cart</Button>
         
       </CardActions>
     </Card>

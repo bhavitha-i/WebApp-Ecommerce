@@ -2,27 +2,24 @@ import * as React from 'react';
 import { useState, useEffect } from "react"
 import Cookies from 'js-cookie';
 import axios from "axios";
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import FloatingActionButtons from './FloatingButton';
+import { ThemeProvider } from '@mui/material/styles';
 import FileBase from 'react-file-base64';
 import CustomizedSnackbars from './CustomizedSnackbars';
+import theme from './theme';
+import { styled } from '@mui/material/styles';
 
 
 
-
-const theme = createTheme();
+const Input = styled('input')({
+    display: 'none',
+  });
 
 export default function CreateProduct() {
   const [name,setName] = useState("");
@@ -106,10 +103,8 @@ export default function CreateProduct() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
+
+                    <Typography component="h1" variant="h4">
                         Add Product
                     </Typography>
                     <Box component="form"  onSubmit={addProd} sx={{ mt: 3 }}>
@@ -128,9 +123,10 @@ export default function CreateProduct() {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-                                    required
+                                    multiline
+                                    rows={2}
+                                    rowsMax={4}
                                     fullWidth
-                                    
                                     id="description"
                                     label="Description"
                                     name="description"
@@ -186,8 +182,17 @@ export default function CreateProduct() {
                                     onChange={(e) => setColor(e.target.value)} value={color}
                                 />
                             </Grid>
+                            {/* <Grid item xs={6} sm={12} >
+                            <label htmlFor="contained-button-file">
+                                <Input sx={{display:"none"}} accept="image/*" id="contained-button-file" type="file" onDone={({ base64 }) => setPhoto(base64)} />
+                                <Button variant="contained" component="span">
+                                 Upload
+                                </Button>
+                            </label>
+                            </Grid> */}
+
                             <Grid item xs={6} sm={12} >
-                            <FileBase type="file" multiple={false} onDone={({ base64 }) => setPhoto(base64)} />
+                                <FileBase type="file" multiple={false} onDone={({ base64 }) => setPhoto(base64)} />
                             </Grid>
 
                         </Grid>
@@ -198,22 +203,14 @@ export default function CreateProduct() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign Up
+                            Add Products
                         </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="/vendor/login" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid>
+ 
                     </Box>
                 </Box>
 
             </Container>
-            <Link href="/customer/login" variant="body2">
-                <FloatingActionButtons text="Register as Customer" />
-            </Link>
+
         </ThemeProvider>
     );
 }
