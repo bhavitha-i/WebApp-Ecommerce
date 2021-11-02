@@ -8,6 +8,7 @@ import { Box } from "@mui/system";
 import styles from "../assets/styles";
 import VendorUpdate from "./VendorUpdate";
 import VendorUpdatePassword from "./VendorUpdatePassword"
+import VendorAddress from "./VendorAddress"
 
 
 class VendorProfileTabs extends React.PureComponent {
@@ -34,7 +35,7 @@ class VendorProfileTabs extends React.PureComponent {
   
           {activeIndex === 0 && <TabContainer> <VendorUpdate/> </TabContainer>}
           {activeIndex === 1 && <TabContainer> <VendorUpdatePassword/> </TabContainer>}
-          {activeIndex === 2 && <TabContainer>Item Three</TabContainer>}
+          {activeIndex === 2 && <TabContainer> <VendorAddress/> </TabContainer>}
 
         </div>
 

@@ -13,32 +13,64 @@ import axios from "axios";
 import strings from '../assets/strings';
 import CustomizedSnackbars from './CustomizedSnackbars';
 import Cookies from 'js-cookie';
+import styles from '../assets/styles';
 
 
 
 
-
-
-const AddAddress = (callback) => {
-    const [inputs, setInputs] = useState({});
+function VendorAddress(props)  {
+    const [address, setAddress] = useState({});
     const [callFlag,setCallFlag] = useState(false);
     const [user,setUser] = useState("");
     const [errAlert,setErrAlert] = useState("");
     const [message,setMessage] = useState("");
 
+
+      const getAddress = async () => {
+
+        const Bearer = "Bearer "+ Cookies.get('token')
+        let axiosConfig = {
+         headers: {
+             'Content-Type': 'application/json;charset=UTF-8',
+             "Authorization" : Bearer
+         }
+        };
+    
+        try{
+           
+           const hitback =  await axios.get("http://localhost:5000/vendors/me",axiosConfig, {
+                     withCredentials: true
+                   });
+                   
+                   console.log(hitback)
+                   setAddress(hitback.data.address)     
+         }catch(e){
+        
+               this.setState({callFlag:true})
+               this.setState({errAlert:"error"})
+               this.setState({message:"Invalid Authentication"})
+               console.log("in error")
+               console.log(e)
+           }
+         };
+    
+
     useEffect(() => {
-        if(!Cookies.get('token')){
-            setCallFlag(true)
-            setErrAlert("error")
-            setMessage("Invalid authentication")
-        }
-    },[]);
+      if(!Cookies.get('token')){
+        setCallFlag(true)
+        setErrAlert("error")
+        setMessage("Invalid authentication")
+      }
+      getAddress()
+      }, [])
+
+    
 
 
-    async function addAddress(event){
+    async function handleUpdate(event){
         if (event) {
           event.preventDefault();
-          const addressData=inputs;
+          const addressData={"address" : address};
         console.log(addressData,"  address")
           const Bearer = "Bearer "+ Cookies.get('token')
           let axiosConfig = {
@@ -47,10 +79,11 @@ const AddAddress = (callback) => {
                "Authorization" : Bearer
            }
         };
-    
+        
           try{
+            console.log(address,"  input")
             setCallFlag(false)
-            const hitback = await axios.post("http://localhost:5000/address/add",addressData,axiosConfig,{
+            const hitback = await axios.patch(`http://localhost:5000/vendors/me`,addressData,axiosConfig,{
                       withCredentials: true
                   });
                   console.log(hitback)
@@ -58,7 +91,11 @@ const AddAddress = (callback) => {
                     
                     setCallFlag(true)
                     setErrAlert("success")
-                    setMessage("Welcome")
+                    setMessage("Address Edited")
+                    console.log("Address Edited")
+
+                    // setAddress(null)
+
                   }
                   
           }
@@ -69,20 +106,20 @@ const AddAddress = (callback) => {
             setMessage("Invalid Data")
             console.log("in error")
             console.log(err)
+          }
         }
+    }
     
-        }
-      }
 
       const handleInputChange = (event) => {
         event.persist();
-        setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
+        setAddress(address => ({...address, [event.target.name]: event.target.value}));
       }
 
   return (
     <ThemeProvider theme={theme}>
-          { callFlag && <CustomizedSnackbars errAlert={errAlert} message={message} user={user} /> }
-    <Container component="main" maxWidth="xs" >
+          { callFlag && <CustomizedSnackbars errAlert={errAlert} message={message}  /> }
+    <Container component="main" maxWidth="xs" style={styles.TabContainer}>
         <Box
           sx={{
             marginTop: 8,
@@ -90,36 +127,12 @@ const AddAddress = (callback) => {
             flexDirection: 'column',
             alignItems: 'center',
           }}
-          component="form"  onSubmit={addAddress}
+          component="form"  onSubmit={handleUpdate}
         >
     <Typography variant="h6" gutterBottom component="h1">
-        Shipping address
+        Vendor address
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label={strings.Common.firstName}
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label={strings.Common.lastName}
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
-            onChange={handleInputChange}
-          />
-        </Grid>
         <Grid item xs={12}>
           <TextField
             required
@@ -130,6 +143,8 @@ const AddAddress = (callback) => {
             autoComplete="shipping address-line1"
             variant="standard"
             onChange={handleInputChange}
+            value={address.street1}
+
           />
         </Grid>
         <Grid item xs={12}>
@@ -141,6 +156,8 @@ const AddAddress = (callback) => {
             autoComplete="shipping address-line2"
             variant="standard"
             onChange={handleInputChange}
+            value={address.street2}
+
 
           />
         </Grid>
@@ -154,6 +171,8 @@ const AddAddress = (callback) => {
             autoComplete="shipping address-level2"
             variant="standard"
             onChange={handleInputChange}
+            value={address.city}
+
 
           />
         </Grid>
@@ -166,6 +185,8 @@ const AddAddress = (callback) => {
             fullWidth
             variant="standard"
             onChange={handleInputChange}
+            value={address.state}
+
 
           />
         </Grid>
@@ -179,6 +200,8 @@ const AddAddress = (callback) => {
             autoComplete="shipping postal-code"
             variant="standard"
             onChange={handleInputChange}
+            value={address.zipcode}
+
 
           />
         </Grid>
@@ -192,6 +215,8 @@ const AddAddress = (callback) => {
             autoComplete="shipping country"
             variant="standard"
             onChange={handleInputChange}
+            value={address.country}
+
 
           />
         </Grid>
@@ -202,7 +227,7 @@ const AddAddress = (callback) => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {strings.Address.addAddress}
+              Submit
         </Button>
         </Grid>
       </Grid>
@@ -212,4 +237,4 @@ const AddAddress = (callback) => {
   );
 }
 
-export default withRoot(AddAddress);
+export default withRoot(VendorAddress);

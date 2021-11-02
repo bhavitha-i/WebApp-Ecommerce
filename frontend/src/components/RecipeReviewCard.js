@@ -8,6 +8,9 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import trimWords from 'trim-words';
 import styles from '../assets/styles';
+import { useEffect, useState } from 'react-magnifier/node_modules/@types/react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 export default function RecipeReviewCard(props) {
   var base64Icon = `${props.product.photo}`;
