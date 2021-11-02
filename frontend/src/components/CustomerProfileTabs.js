@@ -7,7 +7,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { Box } from "@mui/system";
 import styles from "../assets/styles";
 import CustomerUpdate from "./CustomerUpdate";
-import AddAddress from "./AddAddress"
+import AddAddress from "./AddAddressForm"
 import ManageAddress from "./ManageAddresses"
 
 
