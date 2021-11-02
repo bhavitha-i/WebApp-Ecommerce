@@ -45,6 +45,13 @@ const Header = {
     fontSize: "16px"
   }
 
+  const MyProfileTabAdddress = {
+    textTransform: "none",
+    padding: "15px",
+    fontSize: "16px"
+  }
+
+
   const ProductListBox ={
     display: "inline-block" ,
     position:"relative",
@@ -88,6 +95,21 @@ const CardButton = {
     justifyContent: 'center'
 }
 
+
+const TypographyTabContainer = {
+  // position: "relative",
+  //   top: "10%",
+  //   left: "20%",
+  //   padding: "24"
+  margin: "auto",
+}
+
+const TabContainer ={
+  position: "absolute",
+  top: "50px",
+  left: "40%"
+}
+
   const styles = {
     Header: Header,
     ErrorMessage: ErrorMessage,
@@ -102,7 +124,10 @@ const CardButton = {
     MyProfileTab:MyProfileTab,
     ProductListBox:ProductListBox,
     ProductTableCell:ProductTableCell,
-    ProductTableCell_First:ProductTableCell_First
+    ProductTableCell_First:ProductTableCell_First,
+    TabContainer:TabContainer,
+    MyProfileTabAdddress:MyProfileTabAdddress,
+    TypographyTabContainer:TypographyTabContainer,
   }
 
   export default styles

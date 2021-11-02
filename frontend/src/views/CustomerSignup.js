@@ -15,7 +15,7 @@ import Box from '@mui/material/Box';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import FloatingActionButtons from '../components/FloatingButton';
 import CustomizedSnackbars from '../components/CustomizedSnackbars';
 import AppBar from '../components/AppBar';
@@ -24,6 +24,7 @@ import theme from '../components/theme'
 import styles from '../assets/styles';
 import { string } from 'prop-types';
 import strings from '../assets/strings';
+import { useHistory } from "react-router-dom";
 
 
 const CustomerSignUp = (callback) => {
@@ -32,6 +33,8 @@ const CustomerSignUp = (callback) => {
   const [user,setUser] = useState("");
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
+
+  const history = useHistory();
 
 
   async function signup(event){
@@ -52,6 +55,10 @@ const CustomerSignUp = (callback) => {
                 setErrAlert("success")
                 setMessage("Welcome")
                 setUser(hitback.data.customer.firstName)
+                history.push({
+                  pathname: '/customer/home',
+                  openSnackbar: true
+                });
               }
               
       }
@@ -91,7 +98,7 @@ const CustomerSignUp = (callback) => {
             <PersonAddAltIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            {strings.SignUp.Labels.customerSignup}
           </Typography>
           <Box component="form"  onSubmit={signup} sx={{ mt: 3 }}>
             <Grid container spacing={2}>

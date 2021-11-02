@@ -40,7 +40,9 @@ const strings = {
       login: "Sign in",
       vendor: "Vendor",
       customer: "Customer",
-      update: "Update"
+      update: "Update",
+      firstName: "First Name",
+      lastName: "Last Name"
     },
     Home: {
       labels:{
@@ -57,6 +59,17 @@ const strings = {
     },
     vendor: {
       sales: "My Sales",
+    },
+    Address: {
+      street1: "Address line 1",
+      street2: "Address line 2",
+      city: "City",
+      state: "State/Province/Region",
+      zip: "Zipcode",
+      country: "Country",
+      addAddress: "Add Address"
+
+
     }
   }
   

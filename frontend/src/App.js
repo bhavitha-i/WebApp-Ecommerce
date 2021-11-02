@@ -14,7 +14,7 @@ import VendorHome from './views/VendorHome';
 import VendorProfile from './views/VendorProfile';
 
 
-import CustomerUpdate from './views/CustomerUpdate';
+import CustomerUpdate from './components/CustomerUpdate';
 import VendorUpdate from './views/VendorUpdate';
 import ProductUpdate from './views/ProductUpdate';
 import CustomerProfile from './views/CustomerProfile';
@@ -40,12 +40,12 @@ function App() {
         <Route path="/customer/login" component={CustomerLogin} />
         <Route path="/customer/signup"  component={CustomerSignup} />
         <Route path="/customer/home"  component={CustomerHome} />
-        <Route path="/product/create"  component={CreateProduct} />
         <Route path="/customer/update" component={CustomerUpdate} />
         <Route path="/vendor/update" component={VendorUpdate} />
         <Route path="/product/update/:id" component={ProductUpdate} />
         <Route path="/customer/profile"  component={CustomerProfile} />
         <Route path="/customer/cart"  component={CustomerCart} />
+
 
 
 
