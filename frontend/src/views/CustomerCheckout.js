@@ -11,6 +11,10 @@ import { CssBaseline } from "@mui/material";
 import Cookies from 'js-cookie';
 import Checkout from "../components/Checkout";
 import AddressForm from "../components/AddressForm";
+import AppBarCustomer from '../components/AppBarCustomer';
+import styles from '../assets/styles';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
 
 
@@ -48,7 +52,6 @@ class CustomerCheckout extends Component {
          
       }
 
-
     axios
       .get(`http://localhost:5000/product/all`)
       .then(response => {
@@ -82,15 +85,10 @@ class CustomerCheckout extends Component {
         console.log(error);
       });
 
-
-
-
-
-
       try{
        
       
-        axios.get("http://localhost:5000/customers/myCart'",axiosConfig, {
+        axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
         withCredentials: true
         
     }).then(resposne =>{
@@ -100,11 +98,6 @@ class CustomerCheckout extends Component {
       console.log(this.state.oldCart,"oldcart")
     })
   
-      
-      
-  
-      // 
-      // this.setState({}) SET PRODTABLE DATA HERE
   }catch(e){
          
        
@@ -130,29 +123,18 @@ console.log(this.state.address,"set")
     console.log(error);
   });
 
-
-
- 
   }
 
 
   render() {
       return(
-  //   <div style={{ display: "inline-block" ,position:"relative",top:"50px",left:"110px"}}>
-  //   {this.state.products.map(currentproduct => (
-  //     <div style={{ display: "inline-block", margin: "20px" }}>
-  //       <RecipeReviewCard product={currentproduct} />
-  //     </div>
-  //   ))}
-  // </div>
 
-  <div>
-<Checkout add={this.state.address} cart={this.state.oldCart} />
-{/* <AddressForm add={this.state.address} cart={this.state.oldCart} /> */}
-
-  </div>
-      
-
+        <ThemeProvider theme={theme}>
+        <AppBarCustomer/>
+          <Checkout add={this.state.address} 
+          // cart={this.state.oldCart}
+          />
+        </ThemeProvider>
 
 
   );

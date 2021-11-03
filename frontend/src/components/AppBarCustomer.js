@@ -56,8 +56,8 @@ export default function ButtonAppBar() {
       axios.post(`http://localhost:5000/vendor/logout`,axiosConfig,{
                 withCredentials: true }).
         then(response =>{ 
-            console.log("Vendor Logged out ") 
-            console.log(response.data.price,"from api")})
+            console.log("Customer Logged out ") 
+          })
             .catch(error => {console.log(error)})
             history.push({
               pathname: '/customer/login',
