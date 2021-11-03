@@ -112,3 +112,30 @@ this.setState({address:response.data})
  
   }
 
+
+
+
+  for(var j=0;j<ordProds;j++){
+    // console.log("In prodslist",ords[i].productlist[j])
+        for( var k=0;k<vendProds.length;k++){
+            if(vendProds[k] == ordProds[j].product){
+                total = total + (vendProds[k].price * ordProds[j].quantity)
+                prodsol = prodsol + ordProds[j].quantity
+                popProd.push(vendProds[k])
+                console.log("In if condition")
+            
+                temp ={
+                    "order_id":ords[i]._id,
+                    "productName":myProds[k].name,
+                    "quantity":myProds[k].quantity,
+                    "price":myProds[k].price,
+                    "product_id":myProds[k]._id,
+                    "OrderStatus":ord[i].productlist[k].status
+
+
+                }
+                resList.push(temp)
+
+            }
+        }
+    }

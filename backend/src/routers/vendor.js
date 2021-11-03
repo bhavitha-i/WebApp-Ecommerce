@@ -2,6 +2,7 @@ const express = require('express')
 const Vendor = require('../models/vendor')
 const auth = require('../middleware/vendorAuth')
 const Product = require('../models/product')
+const Order = require('../models/order')
 const multer = require('multer')
 
 const router = new express.Router()
@@ -111,6 +112,142 @@ router.get('/vendors/all', auth ,async (req,res)=>{
     }catch(e){
         res.status(500).send(e)
     }
+ 
+})
+
+
+router.get('/vendors/dashboard', auth ,async (req,res)=>{
+    var myProds = [];
+    var ords = [];
+    var allProds=[];
+    var myAllProds=[];
+    try{
+         myprods = await req.vendor.populate('products').execPopulate()
+         
+        //  console.log(req.vendor.products)
+
+         req.vendor.products.forEach( ord=>{
+           
+                myAllProds.push(ord)
+         
+
+        })
+        // res.send(req.vendor.products)
+
+    }catch(e){
+        res.status(500).send(e)
+    }
+
+    try{
+        ords = await Order.find({})
+        // res.send(orders)
+        // order.productlist.forEach(pro => {
+        //     console.log(pro.product)
+        //     if(pro.product == prod){
+        //         pro.status = req.body.status
+        //     }
+
+        // }
+        ords.forEach( ord=>{
+            console.log
+           
+            ord.productlist.forEach( p=>{
+                // p["ord_id"] =ord._id
+               var temp={
+                   "order_id":ord._id,
+                   "status":p.status,
+                   "product":p.product,
+                   "quantity":p.quantity
+
+               }
+                allProds.push(temp)
+            })
+
+        })
+    //   console.log(allProds,"from construction")
+
+    }catch(e){
+        res.status(500).send(e)
+    }
+
+    
+
+    // console.log(ords,"orders")
+    // console.log(myProds,"myProds")
+    var  popProd=[];
+    var total = 0;
+    var prodsol=0;
+    var resList=[]
+    var temp={}
+    console.log("all rpods in order",allProds)
+    console.log("all my prods",myAllProds)
+    for(var i=0;i<allProds.length;i++){
+        for(var j=0;j<myAllProds.length;j++){
+            console.log(allProds[i].product+"-------"+myAllProds[j]._id)
+            if(allProds[i].product.equals( myAllProds[j]._id)){
+                console.log("In if")
+                total = total + (myAllProds[j].price * allProds[i].quantity)
+                    prodsol = prodsol + allProds[i].quantity
+                    popProd.push(myAllProds[j])
+                    console.log("In if condition")
+                temp ={
+                                            "order_id":allProds[i].order_id,
+                                            "productName":myAllProds[j].name,
+                                            "quantity":myAllProds[j].quantity,
+                                            "price":myAllProds[j].price,
+                                            "product_id":myAllProds[j]._id,
+                                            "OrderStatus":allProds[i].status
+                    
+                    
+                                        }
+                                        resList.push(temp)
+            }
+        }
+    }
+    console.log(total)
+//     for(var i =0;i<ords.length;i++){
+//         // console.log("In orders loops",ords[i])
+//         for(var j=0;j<ords[i].productlist;j++){
+//         console.log("In prodslist",ords[i].productlist[j])
+//             for( var k=0;k<myAllProds.length;k++){
+//                 if(myAllProds[k]._id == ords[i].productlist[j].product){
+//                     total = total + (myAllProds[k].price * ord[i].productlist[j].quantity)
+//                     prodsol = prodsol + ord[i].productlist[j].quantity
+//                     popProd.push(myAllProds[k])
+//                     console.log("In if condition")
+                
+//                     temp ={
+//                         "order_id":ords[i]._id,
+//                         "productName":myAllProds[k].name,
+//                         "quantity":myAllProds[k].quantity,
+//                         "price":myAllProds[k].price,
+//                         "product_id":myAllProds[k]._id,
+//                         "OrderStatus":ord[i].productlist[k].status
+
+
+//                     }
+//                     resList.push(temp)
+
+//                 }
+//             }
+//         }
+//     }
+   const chaos = Math.floor(Math.random() * popProd.length);
+   const pop =  popProd[chaos];
+   var resJson = {
+       "tabData":resList,
+       "totalSales":total,
+       "ProductsSold":prodsol,
+       "populatProd":pop
+   }
+   console.log(resJson)
+   res.send(resJson)
+
+
+
+
+ 
+        
  
 })
 router.get('/vendors/me', auth ,async (req,res)=>{
