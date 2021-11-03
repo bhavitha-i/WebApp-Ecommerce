@@ -71,8 +71,6 @@ export default function RecipeReviewCard(props) {
             trail.push(tempJson)
             
   
-        
-        
       }
       var selectedProd = {
         "product":product._id,
@@ -97,64 +95,18 @@ export default function RecipeReviewCard(props) {
     };
 
       axios.patch(`http://localhost:5000/cart/mine`,patchData,axiosConfig,{
-     withCredentials: true }).then(response =>{ console.log(response.data.productlist,"from api")}).catch(error => {console.log(error)})
-      
-
-
-
+        withCredentials: true }).then(response =>{ console.log(response.data.productlist,"from api")}).catch(error => {console.log(error)})
 
     }
 
-    
-
-    
 
 
-
-    // for(var i=0;i<cartItems.length;i++){
-    //   console.log(cartItems[i],"inloop")
-    // }
-
-   
-
-
-
-
-  //   if(!Cookies.get('token')){
-  //     setErrAlert("error")
-  //     setMessage("Only vendors can add products")
-
-     
-  // }
   console.log(props.oldCart)
   console.log(cartItems,"after add")
-
-//   axios.patch(`http://localhost:5000/cart/mine`,jusJson,axiosConfig,{
-//     withCredentials: true
-// }).then(response =>{
-
-
-// console.log("customer updated")
-
-//     this.setState({item:response.data})
-//     this.setState({loggedin:true})
-//     this.setState({errAlert:"success"})
-//     this.setState({message:"changes updated for"})
-// }).catch(error => {
-//     this.setState({loggedin:true})
-//     this.setState({errAlert:"error"})
-//     this.setState({message:"Something went wrong"})
-//     console.log("In error");
-//     console.log(error);
-//   });;
-
-
-
 
 
   };
 
-  // console.log(base64Icon)
 
   return (
     <Card sx={{ minWidth:250, maxWidth:275, maxHeight:300 }}>

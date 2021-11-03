@@ -60,7 +60,7 @@ export default function ButtonAppBar() {
             console.log(response.data.price,"from api")})
             .catch(error => {console.log(error)})
             history.push({
-              pathname: '/vendor/login',
+              pathname: '/customer/login',
             });
     }
     catch(err){
