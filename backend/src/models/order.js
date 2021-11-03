@@ -8,11 +8,25 @@ const orderSchema = new mongoose.Schema({
         ref:'Customer'
     },
     address:{
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref:'Address'
     },
     cart:{
         type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref:'Cart'
         
+    },
+    productlist:[{
+        
+        quantity: {type:Number},
+        product:{
+        type: mongoose.Schema.Types.ObjectId}
+    }],
+    price:{
+        type:Number,
+        default: 0
     },
     status:{
         type: String,

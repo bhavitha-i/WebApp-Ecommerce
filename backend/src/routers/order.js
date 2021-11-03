@@ -11,26 +11,28 @@ const router = new express.Router()
 
 
 router.post('/order/add', auth,async (req,res) =>{
+    
     console.log('inside irder add')
     const order  = new Order({...req.body,owner:req.customer._id})
+    
     console.log("1___________"+  order)
     const _id = req.customer.cart
     try{
-    const cart = await Cart.findById(_id)
-    cart.status = "order placed"
-    cart.isActive = false
-    await cart.save().then(()=>{
-        console.log("saved")
-    }).catch((error)=>{
-        res.status(400).send(error)
-    })
 
-    const newCart = new Cart({owner:req.customer._id})
-    await newCart.save().then(()=>{
-        console.log("New cart created")
-    }).catch((error)=>{
-        res.status(400).send(error)
-    })
+
+
+
+    const cart =  Cart.findByIdAndUpdate(_id, { productlist: [] },
+    function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+            console.log("Updated User : ", docs);
+            }
+            });
+
+ 
     
     console.log("cart1",cart)
     }catch(err){
@@ -41,6 +43,8 @@ router.post('/order/add', auth,async (req,res) =>{
         res.send(order)
 
     }).catch((error)=>{
+        console.log("in order error")
+        console.log(error)
         res.status(400).send(error)
     })
 })
