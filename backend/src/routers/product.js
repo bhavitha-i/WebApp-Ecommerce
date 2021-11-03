@@ -48,6 +48,29 @@ router.get('/product/mine', auth, async (req,res)=>{
  
 })
 
+router.get('/product/order', async (req,res)=>{
+    console.log('inside mine get all')
+    
+    try{
+        // await req.vendor.populate('products').execPopulate()
+
+        const product = Product.findById("617f5d9080f2f8af98b2e5ec")
+
+        product.populate('ordereProducts').execPopulate()
+
+        res.send(product.ordereProducts)
+
+
+    
+        // res.send(req.vendor.products)
+
+    }catch(e){
+        console.log(e)
+        res.status(500).send(e)
+    }
+ 
+})
+
 router.get('/products/:id', async (req,res)=>{
     const _id = req.params.id
     

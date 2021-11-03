@@ -3,7 +3,7 @@ const auth = require('../middleware/customerAuth')
 const Order = require('../models/order')
 const Customer = require('../models/customer')
 const Cart = require('../models/cart')
-const roduct = require('../models/product')
+const Product = require('../models/product')
 const cartDetails = require('../middleware/cartDetails')
 
 const router = new express.Router()
@@ -18,8 +18,24 @@ router.post('/order/add', auth,async (req,res) =>{
     console.log("1___________"+  order)
     const _id = req.customer.cart
     const prodlist = req.body.productlist
+    console.log(prodlist,req.body,"In order add")
     try{
 
+        prodlist.forEach(pro => {
+            console.log("in for each")
+    
+            const cart =  Product.findByIdAndUpdate(pro.product, {$inc:{'quantity':- pro.quantity}  },
+                function (err, docs) {
+                        if (err){
+                            
+                            console.log(err)
+                        }
+                        else{
+                        console.log("Updated shake : ", docs);
+                        }
+                        });
+            
+          });
 
 
 
@@ -33,8 +49,12 @@ router.post('/order/add', auth,async (req,res) =>{
             }
             });
 
-    
+    // prodlist.forEach(prod =>{
+        
+    //     const product = Product.findByIdAndUpdate(prod.product,{quantity: quantity-prod.productlist})
+    // }
  
+   
     
     console.log("cart1",cart)
     }catch(err){
@@ -110,6 +130,47 @@ router.patch('/order/:id', async (req,res)=>{
     }
  
 })
+
+
+router.get('/order/status/:id', async (req,res)=>{
+    console.log("inside status patch")
+    const _id = req.params.id
+    const prod = req.body.product
+
+
+    
+
+    // const updates = Object.keys(req.body)
+
+    
+    
+    try{
+        const order = await Order.findById(req.params.id)
+
+        order.productlist.forEach(pro => {
+            console.log(pro.product)
+            if(pro.product == prod){
+                pro.status = req.body.status
+            }
+
+        }
+)
+        // updates.forEach((update) => order[update] = req.body[update])
+
+        await order.save()
+        
+        if(!order){
+            console.log("inside not found")
+            return res.status(404).send()
+        }
+        res.status(200).send(order)
+    }catch(e){
+            
+            res.body(e)
+    }
+ 
+})
+
 
 
 
