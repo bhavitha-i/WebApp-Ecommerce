@@ -30,6 +30,8 @@ import CustomerPayment from './views/CustomerPayment';
 //Common
 import ProductDetails from './views/ProductDetails';
 import CustomerCheckout from './views/CustomerCheckout';
+import CustomerOrders from './views/CustomerOrders';
+
 
 
 
@@ -68,6 +70,7 @@ function App() {
 {/* app js new components by gopi */}
         <Route path="/customer/checkout" component={CustomerCheckout} />
         <Route path="/customer/payment" component={CustomerPayment} />
+        <Route path="/customer/orders" component={CustomerOrders} />
         
 
 

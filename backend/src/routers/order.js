@@ -17,6 +17,7 @@ router.post('/order/add', auth,async (req,res) =>{
     
     console.log("1___________"+  order)
     const _id = req.customer.cart
+    const prodlist = req.body.productlist
     try{
 
 
@@ -32,6 +33,7 @@ router.post('/order/add', auth,async (req,res) =>{
             }
             });
 
+    
  
     
     console.log("cart1",cart)
