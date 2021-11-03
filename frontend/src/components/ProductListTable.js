@@ -17,6 +17,10 @@ import strings from '../assets/strings'
 import styles from '../assets/styles';
 import trimWords from 'trim-words';
 import { Avatar } from '@mui/material';
+import Popup from "./popup";
+import ProductForm from './ProductForm';
+import ProductUpdate from '../views/ProductUpdate';
+
 
 
 
@@ -34,9 +38,14 @@ export default function ProductListTable(props) {
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
   const [loggedin,setLoggedin] = useState(false);
+  const [recordForEdit, setRecordForEdit] = useState(null)
+  const [openPopup, setOpenPopup] = useState(false);
 
 
- 
+  const openInPopup = item => {
+    setRecordForEdit(item)
+    setOpenPopup(true)
+  }
 
   async function delProd(product){
    
@@ -115,10 +124,13 @@ export default function ProductListTable(props) {
               <TableCell style={styles.ProductTableCell}>{product.price}</TableCell>
               <TableCell style={styles.ProductTableCell}>{product.quantity}</TableCell>
               <TableCell variant="body2">
-              <Link underline="none" href={`/product/update/${product._id}`} >
+              {/* <Link underline="none" href={`/product/update/${product._id}`} >
                   <EditIcon />
 
-              </Link>
+              </Link> */}
+                <Link underline="none" href="#" variant="body2">
+                    <EditIcon onClick={() => openInPopup(product)}/>
+                </Link>
               </TableCell>
               <TableCell>
                 <Link underline="none" href="#" variant="body2">
@@ -131,6 +143,17 @@ export default function ProductListTable(props) {
         </TableBody>
       </Table>
     </TableContainer>
+    <Popup
+                title="Edit Product"
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+            >
+                <ProductUpdate 
+                    recordForEdit={recordForEdit} 
+                    setOpenPopup={setOpenPopup}
+                    />
+                
+            </Popup>
     </div>
   );
 }

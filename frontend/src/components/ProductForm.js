@@ -17,11 +17,8 @@ import { styled } from '@mui/material/styles';
 
 
 
-const Input = styled('input')({
-    display: 'none',
-  });
 
-export default function CreateProduct() {
+export default function ProductForm() {
   const [name,setName] = useState("");
   const [description,setDescription] = useState("");
   const [price,setPrice]=useState("");
@@ -94,19 +91,18 @@ export default function CreateProduct() {
         <ThemeProvider theme={theme}>
              { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} /> }
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
                 <Box
                     sx={{
-                        marginTop: 8,
+                        // marginTop: 8,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}
                 >
-
+{/* 
                     <Typography component="h1" variant="h4">
                         Add Product
-                    </Typography>
+                    </Typography> */}
                     <Box component="form"  onSubmit={addProd} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} >
