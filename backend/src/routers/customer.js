@@ -9,7 +9,7 @@ const multer = require('multer')
 
 
 
-// Customer singup
+// vendor singup
 router.post('/customer/signup', async (req,res) =>{
 
     const customer  = new Customer(req.body)
@@ -55,7 +55,7 @@ router.post('/customer/logout',auth,async(req,res)=>{
         })
         await req.customer.save()
 
-        res.send()
+        res.clearCookie("token").send()
 
     }catch(e){
         res.status(500).send()
@@ -67,7 +67,7 @@ router.post('/customer/logoutAll',auth,async(req,res)=>{
         req.customer.tokens = []
         await req.customer.save()
 
-        res.send()
+        res.clearCookie("token").send()
 
     }catch(e){
         res.status(500).send()
@@ -162,7 +162,7 @@ router.patch('/customers/me', auth ,async (req,res)=>{
     
     const _id = req.params.id
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name','password','age','firstName','lastName']
+    const allowedUpdates = ['contact','password','age','firstName','lastName']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     if(!isValidOperation){
         return res.status(400).send({error:'Invalid updates'})

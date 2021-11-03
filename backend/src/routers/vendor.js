@@ -53,14 +53,15 @@ router.post('/vendor/login',async(req,res)=>{
     }
 })
 
+
 router.post('/vendor/logout',auth,async(req,res)=>{
     try{
         req.vendor.tokens = req.vendor.tokens.filter((token) =>{
             return token.token !== req.token
         })
         await req.vendor.save()
-
-        res.send()
+       
+        res.clearCookie("token").send()
 
     }catch(e){
         res.status(500).send()
@@ -72,7 +73,7 @@ router.post('/vendor/logoutAll',auth,async(req,res)=>{
         req.vendor.tokens = []
         await req.vendor.save()
 
-        res.send()
+        res.clearCookie("token").send()
 
     }catch(e){
         res.status(500).send()

@@ -88,7 +88,7 @@ router.patch('/cart/mine',auth, async (req,res)=>{
     try{
     
      
-        const cart =  await Cart.findOne({isActive:true,owner:req.customer._id})
+        const cart =  await Cart.findOne({owner:req.customer._id})
        
 
         updates.forEach((update) => cart[update] = req.body[update])
