@@ -95,6 +95,12 @@ const CardButton = {
     justifyContent: 'center'
 }
 
+const CheckoutCard={
+  direction:"column",
+  alignItems:"center",
+  justify:"center",
+}
+
 
 const TypographyTabContainer = {
   // position: "relative",
@@ -130,6 +136,20 @@ const ManageAddressContainer={
 const CardGridAddress={
   maxWidth : "inherit"
 }
+
+const HeadingCheckout={
+  textTransform:'none'
+}
+
+const titleCheckout={
+  textTransform:'none',
+  textAlign: "center",
+}
+
+const textTransformNone={
+  textTransform:'none'
+}
+
   const styles = {
     Header: Header,
     ErrorMessage: ErrorMessage,
@@ -151,7 +171,11 @@ const CardGridAddress={
     CartButton:CartButton,
     CartPrice:CartPrice,
     ManageAddressContainer:ManageAddressContainer,
-    CardGridAddress:CardGridAddress
+    CardGridAddress:CardGridAddress,
+    titleCheckout:titleCheckout,
+    HeadingCheckout:HeadingCheckout,
+    textTransformNone:textTransformNone,
+    CheckoutCard:CheckoutCard
   }
 
   export default styles

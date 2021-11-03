@@ -10,14 +10,27 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import { useHistory } from 'react-router';
-export default function PaymentForm() {
+import  { useState } from "react"
 
-  const history = useHistory();
 
+
+
+
+export default function PaymentForm(props) {
+  const [inputs, setInputs] = useState({});
+
+
+  const handleInputChange = (event) => {
+    event.persist();
+    setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
+  }
+
+
+
+  console.log(props, "--- payment")
   const moveOn = () => {
-    alert('Order placed')
-    let path = `/customer/home`; 
-    history.push(path);
+    props.setPaymentDetails(inputs)
+    props.handleNext()
 
   }
   return (
@@ -30,43 +43,48 @@ export default function PaymentForm() {
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
-            required
             id="cardName"
             label="Name on card"
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            onChange={handleInputChange}
+            name = "cardName"
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
             id="cardNumber"
             label="Card number"
             fullWidth
             autoComplete="cc-number"
             variant="standard"
+            onChange={handleInputChange}
+            name = "cardNumber"
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
             id="expDate"
             label="Expiry date"
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
+            onChange={handleInputChange}
+            name = "expDate"
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
+            
             id="cvv"
             label="CVV"
             helperText="Last three digits on signature strip"
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
+            onChange={handleInputChange}
+            name = "cvv"
           />
         </Grid>
         <Grid item xs={12}>
