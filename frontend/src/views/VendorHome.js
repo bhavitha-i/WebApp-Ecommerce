@@ -16,7 +16,9 @@ import Grid from '@mui/material/Grid';
 import { Box } from "@mui/system";
 import styles from "../assets/styles";
 import { Link } from "@mui/material";
-
+import Popup from "../components/popup";
+import ProductForm from "../components/ProductForm"
+import { Button } from "@mui/material";
 
 
 class VendorHome extends Component {
@@ -25,27 +27,31 @@ class VendorHome extends Component {
     this.state = {
       products: [],
       loggedin:false,
-      errAlert:''
-
+      errAlert:'',
+      openPopup:false,
+      recordForEdit:null,
     };
   }
+
  
   async componentDidMount ()  {
+
+    if(!Cookies.get('token')){
+      this.setState.loggedin = true
+      this.state.errAlert = "error"
+      this.state.message ="Invalid Authentication"
+     
+    }
 
     const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
      headers: {
          'Content-Type': 'application/json;charset=UTF-8',
          "Authorization" : Bearer
-     }
-   };
- 
-          if(!Cookies.get('token')){
-          this.setState.loggedin = true
-          this.state.errAlert = "error"
-          this.state.message ="Only vendors can add products"
-         
       }
+    };
+ 
+
 
  
       try{
@@ -67,6 +73,16 @@ class VendorHome extends Component {
         }
     }
 
+  updatePopup(value){
+    this.setState({openPopup:value})
+  }
+
+  openInPopup(item){
+
+    this.setState({recordForEdit:item})
+    this.updatePopup(true)
+  }
+
 
   render() {
   
@@ -76,12 +92,30 @@ class VendorHome extends Component {
         <CssBaseline/>
         <AppBarVendor/>
             <Box style={styles.ProductListBox}>
-              <BasicTable products = {this.state.products} />
+              <BasicTable products = {this.state.products} 
+                                openInPopup={(e) => this.openInPopup(e)} 
+                                />
             </Box>
-
+{/* 
             <Link href="/product/create" variant="body2">
                 <FloatingActionButtons addIcon={true} text="Add Product" />
-            </Link>
+            </Link> */}
+
+          <Button onClick={() => this.updatePopup(true)} variant="body2">
+                <FloatingActionButtons addIcon={true} text="Add Product" />
+            </Button>
+
+            <Popup
+                title="Add Product"
+                openPopup={this.state.openPopup}
+                setOpenPopup={(e) => this.updatePopup(e)}
+            >
+                <ProductForm 
+                    recordForEdit={this.state.recordForEdit} 
+                    setOpenPopup={(e) => this.updatePopup(e)}
+                    />
+                
+            </Popup>
         </ThemeProvider>
   );
     

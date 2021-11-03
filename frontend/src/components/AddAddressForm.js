@@ -128,16 +128,16 @@ function AddAddress(props)  {
     <Container component="main" maxWidth="xs" >
         <Box
           sx={{
-            marginTop: 8,
+            // marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
           component="form"  onSubmit={handleSubmit}
         >
-    <Typography variant="h6" gutterBottom component="h1">
+    {/* <Typography variant="h6" gutterBottom component="h1">
         Shipping address
-      </Typography>
+      </Typography> */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField

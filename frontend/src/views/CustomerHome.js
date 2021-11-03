@@ -12,8 +12,6 @@ import Cookies from 'js-cookie';
 
 
 
-
-
 class CustomerHome extends Component {
   constructor(props) {
     super(props);
@@ -115,13 +113,6 @@ class CustomerHome extends Component {
 
   render() {
       return(
-  //   <div style={{ display: "inline-block" ,position:"relative",top:"50px",left:"110px"}}>
-  //   {this.state.products.map(currentproduct => (
-  //     <div style={{ display: "inline-block", margin: "20px" }}>
-  //       <RecipeReviewCard product={currentproduct} />
-  //     </div>
-  //   ))}
-  // </div>
 
     <ThemeProvider theme={theme}>
       <CssBaseline/>
