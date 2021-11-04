@@ -32,6 +32,8 @@ import CustomerPayment from './views/CustomerPayment';
 import ProductDetails from './views/ProductDetails';
 import CustomerCheckout from './views/CustomerCheckout';
 import CustomerOrders from './views/CustomerOrders';
+import Dashboard from './components/Dashboard';
+import VendorSales from './views/VendorSales';
 
 
 
@@ -73,6 +75,7 @@ function App() {
         <Route path="/customer/checkout" component={CustomerCheckout} />
         <Route path="/customer/payment" component={CustomerPayment} />
         <Route path="/customer/orders" component={CustomerOrders} />
+        <Route path="/vendor/sales" component={VendorSales} />
         
 
 
