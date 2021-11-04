@@ -132,7 +132,7 @@ router.patch('/order/:id', async (req,res)=>{
 })
 
 
-router.get('/order/status/:id', async (req,res)=>{
+router.patch('/order/status/:id', async (req,res)=>{
     console.log("inside status patch")
     const _id = req.params.id
     const prod = req.body.product

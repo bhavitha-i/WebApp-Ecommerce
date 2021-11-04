@@ -5,55 +5,70 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import InputLabel from '@mui/material/InputLabel';
+import NativeSelect from '@mui/material/NativeSelect';
 import Title from './Title';
+import Cookies from 'js-cookie';
+import axios from "axios";
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44,
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99,
-  ),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-];
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
+
 export default function Orders(props) {
+    
+    const[status,setStatus] = React.useState(props.OrderStatus)
     console.log(props,"in orders")
+
+    function refreshPage() {
+        setTimeout(()=>{
+            window.location.reload(true);
+        }, 1000);
+        console.log('page to reload')
+    }
+
+    const handleAddrTypeChange = async (e,row) => {
+        console.log((e.target.value,row))
+
+        const Bearer = "Bearer "+ Cookies.get('token')
+        let axiosConfig = {
+         headers: {
+             'Content-Type': 'application/json;charset=UTF-8',
+             "Authorization" : Bearer
+         }
+      };
+      try{
+       
+ 
+        const statusUpdate={
+            "product":row.product_id,
+            "status":e.target.value
+        }
+        console.log(row.order_id,"order")
+        const hitback = await axios.patch(`http://localhost:5000/order/status/${row.order_id}`,statusUpdate,axiosConfig,{
+                  withCredentials: true
+              });
+              console.log(hitback)
+              if(hitback){
+                
+           
+
+                // setInputs(null)
+                refreshPage()
+
+              }
+              
+      }
+      catch(err){
+ 
+        console.log("in error")
+        console.log(err)
+      }
+    }
+
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
@@ -75,15 +90,27 @@ export default function Orders(props) {
               <TableCell>{row.productName}</TableCell>
               <TableCell>{row.quantity}</TableCell>
               <TableCell>{row.price}</TableCell>
-              <TableCell >Action</TableCell>
+              <TableCell >    
+        <NativeSelect
+          defaultValue={30}
+          inputProps={{
+            name: 'age',
+            id: 'uncontrolled-native',
+         
+          }}
+          onChange={(e) => handleAddrTypeChange(e,row)}
+        >
+            <option value={row.OrderStatus}>-</option>
+          <option value={"Order Dispatched"}>Order Dispatched</option>
+          <option value={"Out for Delivery"}>Out for Delivery</option>
+          <option value={"Delivered"}>Delivered</option>
+        </NativeSelect></TableCell>
               <TableCell>{row.OrderStatus}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link>
+    
     </React.Fragment>
   );
 }
