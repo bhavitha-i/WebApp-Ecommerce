@@ -14,7 +14,6 @@ import OrderCard from "../components/OrderCard";
 
 
 
-
 class CustomerOrders extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +25,7 @@ class CustomerOrders extends Component {
       tableProd:[],
       loggedin:false,
       errAlert:'',
-      notify:0
+      notify:0,
     };
   }
 
@@ -59,84 +58,50 @@ class CustomerOrders extends Component {
         console.log(this.state.orders[0].productlist,"orders from customer orders")
 
 
-    //     for(var i =0;i<this.state.productsAll.length;i++){
-    
-    //       for(var j=0;j<this.state.oldCart[0].productlist.length;j++){
-              
-    //         if(this.state.productsAll[i]._id == this.state.oldCart[0].productlist[j].product){
-    //             var tempJson = {
-    //                 "id":this.state.productsAll[i]._id,
-    //                 "name": this.state.productsAll[i].name,
-    //                 "photo": this.state.productsAll[i].photo,
-    //                 "price": this.state.productsAll[i].price,
-    //                 "quantity": this.state.oldCart[0].productlist[j].quantity,
-    //                 "backQuantity":this.state.productsAll.quantity
 
-    //             }
-    //             this.setState({ tableProd: [...this.state.tableProd, tempJson] })
-
-    //         }
-            
-    //       }
-    //       console.log(this.state.tableProd,"tab")
-    //   }
-    
-
+        var totalpri =0
     for(var i =0;i<this.state.orders.length;i++){
-            
-        for(var j =0;j<this.state.orders[i].productlist.length;j++){
-            console.log(this.state.orders[i].productlist[j].product,"sep prod from customer orders")
-            for(var k=0;k<this.state.products.length;k++){
-                if(this.state.products[k]._id == this.state.orders[i].productlist[j].product){
-                    var tempJson = {
-                        order_id:this.state.orders[i]._id,
-                                    item:{
-                                        "id":this.state.products[k]._id,
-                                        "name": this.state.products[k].name,
-                                        "photo": this.state.products[k].photo,
-                                        "price": this.state.products[k].price,
-                                        "owner": this.state.products[k].owner,
-                                        "status": this.state.orders[i].productlist[j].status,
-                                        "quantity":this.state.orders[i].productlist[j].quantity
-                                    }
-                    
-                                    }
-                                    this.setState({ tableProd: [...this.state.tableProd, tempJson] })
+      var tempJson = {order_id:this.state.orders[i]._id,items:[],totalPrice:0}
+      for(var j =0;j<this.state.orders[i].productlist.length;j++){
+          console.log(this.state.orders[i].productlist[j].product,"sep prod from customer orders")
+          for(var k=0;k<this.state.products.length;k++){
+              if(this.state.products[k]._id == this.state.orders[i].productlist[j].product){
+                                 var item={
+                                      "id":this.state.products[k]._id,
+                                      "name": this.state.products[k].name,
+                                      "photo": this.state.products[k].photo,
+                                      "price": this.state.products[k].price,
+                                      "owner": this.state.products[k].owner,
+                                      "status": this.state.orders[i].productlist[j].status,
+                                      "quantity":this.state.orders[i].productlist[j].quantity
+                                  }
+                                  totalpri = totalpri + this.state.products[k].price
+                                  tempJson.items.push(item)
 
-                }
-            }
-        }
+              }
+          }
+      }
+      tempJson.totalPrice = totalpri
+      this.setState({ tableProd: [...this.state.tableProd, tempJson] })
+  }
+  console.log(this.state.tableProd,"dump from customer orders")
 
-        console.log(this.state.tableProd,"dump from customer orders")
-    }
       })
       .catch(error => {
         console.log(error);
       });
 
-
-
-
-
-
-      try{
+      try{  
       
-        axios.get("http://localhost:5000/customers/myorders",axiosConfig, {
-        withCredentials: true
+            axios.get("http://localhost:5000/customers/myorders",axiosConfig, {
+              withCredentials: true
         
-    }).then(resposne =>{
-      this.setState({ orders: resposne.data });
-      console.log(this.state.orders,"after api")
-    //   this.setState({notify: this.state.oldCart[0].productlist.length})
+              }).then(resposne =>{
+                this.setState({ orders: resposne.data });
+                console.log(this.state.orders,"after api")
 
-    //   console.log(this.state.oldCart[0].productlist)
-    })
+              })
   
-      
-      
-  
-      // 
-      // this.setState({}) SET PRODTABLE DATA HERE
   }catch(e){
          
        
@@ -151,28 +116,21 @@ class CustomerOrders extends Component {
 
   render() {
       return(
-  //   <div style={{ display: "inline-block" ,position:"relative",top:"50px",left:"110px"}}>
-  //   {this.state.products.map(currentproduct => (
-  //     <div style={{ display: "inline-block", margin: "20px" }}>
-  //       <RecipeReviewCard product={currentproduct} />
-  //     </div>
-  //   ))}
-  // </div>
 
     <ThemeProvider theme={theme}>
-        
-      <CssBaseline/>
-   <AppBarCus/>
-      <Container sx={{ py: 6 }} >
-          <Grid container spacing={4} >
 
+      <Container sx={{ py: 6 }} >
+
+          <Grid container spacing={4} >
+              {console.log(this.state.tableProd, "-- table prod")}
             {this.state.tableProd.map(currentOrder => (
-              <Grid item key={currentOrder} xs={3} >
+              <Grid item key={currentOrder} xs={3} style={{minWidth:"1000px"}}>
                   <OrderCard orderinfo={currentOrder} />
               </Grid>
             ))}
           </Grid>
-        </Container> *
+
+        </Container> 
     </ThemeProvider>
       
 

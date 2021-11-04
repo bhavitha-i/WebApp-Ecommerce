@@ -91,7 +91,7 @@ class CustomerPayment extends Component {
       try{
        
       
-        axios.get("http://localhost:5000/customers/myCart'",axiosConfig, {
+        axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
         withCredentials: true
         
     }).then(resposne =>{

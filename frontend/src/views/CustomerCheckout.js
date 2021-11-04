@@ -11,6 +11,10 @@ import { CssBaseline } from "@mui/material";
 import Cookies from 'js-cookie';
 import Checkout from "../components/Checkout";
 import AddressForm from "../components/AddressForm";
+import AppBarCustomer from '../components/AppBarCustomer';
+import styles from '../assets/styles';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
 
 
@@ -44,115 +48,35 @@ class CustomerCheckout extends Component {
           if(!Cookies.get('token')){
           this.setState.loggedin = true
           this.state.errAlert = "error"
-          this.state.message ="Only vendors can add products"
+          this.state.message ="Invalid Authentication"
          
       }
 
+            axios.get("http://localhost:5000/addresses/mine",axiosConfig,{
+              withCredentials: true
+          }).then(response =>{
+          console.log(response.data,"addres")
+          this.setState({address:response.data})
+          console.log(this.state.address,"set")
+          }).catch(error => {
+              this.setState({loggedin:true})
+              this.setState({errAlert:"error"})
+              this.setState({message:"Something went wrong"})
+              console.log(error);
+            });
 
-    axios
-      .get(`http://localhost:5000/product/all`)
-      .then(response => {
-        console.log("response" + response.data);
-        this.setState({ products: response.data });
-        this.setState({ productsAll: response.data });
-
-
-        for(var i =0;i<this.state.productsAll.length;i++){
-    
-          for(var j=0;j<this.state.oldCart[0].productlist.length;j++){
-              
-            if(this.state.productsAll[i]._id == this.state.oldCart[0].productlist[j].product){
-                
-                var tempJson = {
-                    "id":this.state.productsAll[i]._id,
-                    "quantity": this.state.productsAll[i].quantity - this.state.oldCart[0].productlist[j].quantity,
-                   
-
-                }
-                this.setState({ updateProd: [...this.state.updateProd, tempJson] })
-
-            }
-            
-          }
-          console.log(this.state.updateProd,"tab")
-      }
-      })
-      .catch(error => {
-        
-        console.log(error);
-      });
-
-
-
-
-
-
-      try{
-       
-      
-        axios.get("http://localhost:5000/customers/myCart'",axiosConfig, {
-        withCredentials: true
-        
-    }).then(resposne =>{
-      this.setState({ oldCart: resposne.data });
-      this.setState({notify: this.state.oldCart[0].productlist.length})
-
-      console.log(this.state.oldCart,"oldcart")
-    })
-  
-      
-      
-  
-      // 
-      // this.setState({}) SET PRODTABLE DATA HERE
-  }catch(e){
-         
-       
-      this.setState.loggedin = true
-      this.state.errAlert = "error"
-      this.state.message ="Only vendors can add products"
-      console.log("in error")
-      console.log(e)
-  }
-
-
-
-  axios.get("http://localhost:5000/addresses/mine",axiosConfig,{
-    withCredentials: true
-}).then(response =>{
-console.log(response.data,"addres")
-this.setState({address:response.data})
-console.log(this.state.address,"set")
-}).catch(error => {
-    this.setState({loggedin:true})
-    this.setState({errAlert:"error"})
-    this.setState({message:"Something went wrong"})
-    console.log(error);
-  });
-
-
-
- 
   }
 
 
   render() {
       return(
-  //   <div style={{ display: "inline-block" ,position:"relative",top:"50px",left:"110px"}}>
-  //   {this.state.products.map(currentproduct => (
-  //     <div style={{ display: "inline-block", margin: "20px" }}>
-  //       <RecipeReviewCard product={currentproduct} />
-  //     </div>
-  //   ))}
-  // </div>
 
-  <div>
-<Checkout add={this.state.address} cart={this.state.oldCart} />
-{/* <AddressForm add={this.state.address} cart={this.state.oldCart} /> */}
-
-  </div>
-      
-
+        <ThemeProvider theme={theme}>
+        <AppBarCustomer/>
+          <Checkout add={this.state.address} 
+          // cart={this.state.oldCart}
+          />
+        </ThemeProvider>
 
 
   );

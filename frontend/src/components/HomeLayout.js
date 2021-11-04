@@ -14,7 +14,5 @@ export default function HomeLayout() {
             <Button href="customer/signup" variant="contained" color="secondary">Sign Up</Button>
         </div>
     </div>
-
-
 );
 }

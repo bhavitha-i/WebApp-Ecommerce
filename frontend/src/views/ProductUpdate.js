@@ -33,7 +33,7 @@ import Paper from "./../components/Paper"
     constructor(props) {
         super(props);
         this.state = {
-            productId:"",
+            productId:this.props.recordForEdit._id,
             item:{},
           name: "",
           description:"",
@@ -51,6 +51,7 @@ import Paper from "./../components/Paper"
     
         };
       }
+
       update(e){
           this.setState({loggedin:false})
           var jusJson={}
@@ -98,42 +99,32 @@ console.log("customer updated")
         
         console.log(jusJson)
       }
-      
+
+// setProductVariable(){
+
+//   console.log(this.props, "-- props")
+//   const response = this.props.recordForEdit
   
-//   const [password,setPassword] = useState("");
-//   const [firstName,setFirstname] = useState("");
-//   const [lastName,setLastname] = useState("");
-//   const [age,setAge] = useState("");
-//   const [contact,setContact] = useState(0);
-  
-//   const [count, setCount] = useState(1)
-//   const [loggedin,setLoggedin] = useState(false);
-//   const [user,setUser] = useState("");
-//   const [errAlert,setErrAlert] = useState("");
-//   const [message,setMessage] = useState("");
-//   const [me,setMe]=useState("")
+//   this.setState({
+//         name:response.name,
+//       description:response.description,
+//       quantity:response.quantity,
+//       price:response.price,
+//       photo:response.photo,
+//       size:response.size,
+//       color:response.color,
+//       productId:response._id
+//     })
 
-//   useEffect( () => {
-//     if(!Cookies.get('token')){
-//         setLoggedin(true)
-//         setErrAlert("error")
-//         setMessage("please login to access this page")
-//     }
-//     pop()
-
-    
-  
-
-
-
-
-// });
+// }
  componentDidMount (){
 
-    let paramProdId = this.props.match.params;
-    this.setState({productId:paramProdId.id})
-    console.log("oarams:",this.state.productId)
-    console.log("oarams:",paramProdId.id)
+  // this.setProductVariable();
+  //   let paramProdId = this.props.recordForEdit;
+  //   console.log(paramProdId)
+  //   this.setState({productId:paramProdId._id})
+  //   console.log("oarams:",this.state.productId)
+  //   console.log("oarams:",paramProdId.id)
   
 
     const Bearer = "Bearer "+ Cookies.get('token')
@@ -150,18 +141,19 @@ console.log("customer updated")
           this.state.message ="Only vendors can add products"
          
       }
-      axios.get(`http://localhost:5000/products/${paramProdId.id}`,axiosConfig,{
+      axios.get(`http://localhost:5000/products/${this.state.productId}`,axiosConfig,{
         withCredentials: true
     }).then(response =>{
-        this.setState({name:response.data.name,
+        this.setState({
+          name:response.data.name,
         description:response.data.description,
         quantity:response.data.quantity,
         price:response.data.price,
         photo:response.data.photo,
         size:response.data.size,
-        color:response.data.color})
-        
-
+        color:response.data.color
+      })
+      
 
 
             console.log(this.state.name)
@@ -169,50 +161,15 @@ console.log("customer updated")
         this.setState({item:response.data})
     }).catch(error => {
         console.log(error);
-      });;
-    // this.setState.user = hitback
+  });;
    
-    
-    
-    
+  
  
 
 
 }
 
 
-
-
-//    function update(e){
-//     e.preventDefault();
-//     // const data = new FormData(e.currentTarget);
-//     const updatedData={firstName,lastName,age,password,contact};
-    
-//     try{
-//       setLoggedin(false)
-//       const hitback = await axios.patch("http://localhost:5000/customers/me",updatedData,{
-//                 withCredentials: true
-//             });
-//             console.log(hitback)
-//             if(hitback){
-              
-//               setLoggedin(true)
-//               setErrAlert("success")
-//               setMessage("Welcome")
-//               setUser(hitback.data.vendor.firstName)
-//             }
-            
-//     }
-//     catch(err){
-//       setUser("")
-//       setErrAlert("error")
-//       setLoggedin(true)
-//       setMessage("Invalid Data")
-//       console.log("in error")
-//       console.log(err)
-//   }
-   
-//   }
 render(){
 
   return (
@@ -220,18 +177,18 @@ render(){
       
     <ThemeProvider theme={theme}>
       { this.state.loggedin && <CustomizedSnackbars errAlert={this.state.errAlert} message={this.state.message} user={this.state.firstName} /> }
-    <AppBar/>
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
-            marginTop: 8,
+            // marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
-        >  <Typography component="h1" variant="h5">
+        >  
+        {/* <Typography component="h1" variant="h5">
         Update product
-      </Typography>
+      </Typography> */}
         <Paper variant="outlined" src={this.state.photo} />
         
 
@@ -330,9 +287,6 @@ render(){
         </Box>
         
       </Container>
-      <Link href="/customer/signup" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asCustomeSignup}/>
-      </Link>
     </ThemeProvider>
     </>
   );

@@ -150,9 +150,6 @@ console.log(cartItems,'begin')
       console.log("in cart Table") 
       console.log(response.data.price,"from api")}).catch(error => {console.log(error)})
       
-
-
-    
   }
 
 

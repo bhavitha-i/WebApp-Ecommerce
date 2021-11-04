@@ -11,7 +11,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./views/Home";
 import VendorLogin from "./views/VendorLogin";
 import VendorSignup from "./views/VendorSignup";
-import CreateProduct from './components/CreateProduct';
 // import VendorSales from "./components/VendorSales"
 import VendorHome from './views/VendorHome';
 import VendorUpdate from './components/VendorUpdate';
@@ -49,7 +48,6 @@ function App() {
         <Route path="/vendor/login" component={VendorLogin} />
         <Route path="/vendor/signup"  component={VendorSignup} />
         <Route path="/vendor/home" component={VendorHome} />
-        <Route exact path="/product/create"  component={CreateProduct} />
         {/* <Route path="/vendor/sales"  component={VendorSales} /> */}
         <Route path="/vendor/profile"  component={VendorProfile} />
 

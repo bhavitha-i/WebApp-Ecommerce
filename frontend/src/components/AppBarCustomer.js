@@ -14,11 +14,66 @@ import Badge from '@mui/material/Badge';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useState, useEffect } from "react"
+import Cookies from 'js-cookie';
+import axios from "axios";
+import { useHistory } from 'react-router';
 
 
 
 export default function ButtonAppBar() {
+
+  const [callFlag,setCallFlag] = useState(false);
+  const [errAlert,setErrAlert] = useState("");
+  const [message,setMessage] = useState("");
+
+  const history = useHistory();
+
+
+  useEffect(() => {
+    if(!Cookies.get('token')){
+      setCallFlag(true)
+      setErrAlert("error")
+      setMessage("Invalid authentication")
+    }
+      }, [])
+
+  async function logoutCustomer(){
+
+    const Bearer = "Bearer "+ Cookies.get('token')
+    let axiosConfig = {
+     headers: {
+         'Content-Type': 'application/json;charset=UTF-8',
+         'Authorization' : Bearer 
+     }
+    };
+
+
+    try{
+
+
+      axios.post(`http://localhost:5000/customer/logout`,axiosConfig,{
+              withCredentials: true 
+            })
+                .then(response =>{ 
+                console.log("Customer Logged out ") 
+              })
+                .catch(error => {console.log(error)})
+                history.push({
+                  pathname: '/customer/login',
+                });
+    }
+    catch(err){
+      setErrAlert("error")
+      setCallFlag(true)
+      setMessage("Invalid Data")
+      console.log("in error")
+      console.log(err)
+    }
+  }
+
+
   return (
     <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
@@ -43,19 +98,29 @@ export default function ButtonAppBar() {
               aria-label="show number of products in cart" 
               color="inherit"
               href="/customer/cart">
-              <Badge badgeContent={4} color="secondary">
+              <Badge 
+                  // badgeContent={4} 
+                  color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
 
             <IconButton
               size="large"
-              edge="end"
               aria-label="account of current user"
               href="/customer/profile"
               color="inherit"
             >
               <AccountCircle />
+            </IconButton>
+
+            <IconButton
+              size="large"
+              edge="end"
+              onClick={() => logoutCustomer()}
+              color="inherit"
+            >
+              <LogoutIcon />
             </IconButton>
           </Box>
         </Toolbar>

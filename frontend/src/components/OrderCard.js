@@ -15,6 +15,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Grid from '@mui/material/Grid';
+import styles from '../assets/styles'
+import { Divider } from '@mui/material';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -33,39 +37,28 @@ export default function OrderCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log(props.orderinfo)
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card >
+      {  console.log(props.orderinfo,"--- order info")}
+
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: '#ff3366'}} aria-label="recipe">
             <ShoppingCartIcon />
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={props.orderinfo.order_id}
         subheader="OrderId"
       />
     
+ 
+      <CardActions disableSpacing>
       <CardContent>
-        <Typography variant="body2" color="text.primary">
-         Status:{props.orderinfo.item.status}
-         </Typography>
-        
-        <Typography variant="body2" color="text.primary">
-        name:{props.orderinfo.item.name}
-        </Typography>
-        <Typography variant="body2" color="text.primary">
-          price:{props.orderinfo.item.price}
+        <Typography variant="h5" color="text.primary">
+          ${props.orderinfo.totalPrice}
           </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -77,13 +70,59 @@ export default function OrderCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-        <CardMedia
-        component="img"
-        height="194"
-        image={props.orderinfo.item.photo}
-        alt="track order"
-      />
-        
+
+          <Grid item xs={12}> 
+                  <Divider orientation="horizontal" flexItem/>
+          </Grid>
+            <Grid container direction="column" spacing={0} >
+                {props.orderinfo.items.map(item => (
+                  <Grid container direction="row"key={item} xs={12} sx={{p:2}}>
+                        <Grid item xs={2} 
+                           style={{ display: "flex" }}
+                           alignItems="center"
+                           justifyContent="flex-end"
+                          > 
+                            <Avatar variant="rounded" src={item.photo} ></Avatar>
+
+                        </Grid>
+                        <Grid item xs={7} 
+                           style={{ display: "flex", paddingLeft:"15px", paddingRight:"15px" }}
+                           direction="column"
+                           justifyContent="center"
+
+                          > 
+                             <Typography variant="h6" color="text.primary" style={styles.textTransformNone}>
+                              {item.name}
+                              </Typography>
+                          </Grid>
+                          <Grid item xs={3} 
+                                 style={{ display: "flex", paddingRight:"15px" }}
+                                direction="column"
+                                justifyContent="center"
+                              >
+                              <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
+                              Quantity : {item.quantity}  
+                              </Typography>
+
+
+                              <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
+                              Price : ${item.price}
+                              </Typography>
+
+                              <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
+                              Status : {item.status}  
+                              </Typography>
+
+
+                              {/* <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
+                              {item.quantity*item.price}
+                              </Typography> */}
+                        </Grid>
+                              
+                  </Grid>
+                  ))}
+            </Grid>
+
         </CardContent>
       </Collapse>
     </Card>

@@ -31,7 +31,7 @@ import { useHistory } from "react-router-dom";
 function CustomerSignin() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-  const [loggedin,setLoggedin] = useState(false);
+  const [callFlag,setCallFlag] = useState();
   const [user,setUser] = useState("");
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
@@ -49,14 +49,13 @@ function CustomerSignin() {
     };
     
     try{
-      setLoggedin(false)
       const hitback = await axios.post("http://localhost:5000/customer/login",loginData,{
                 withCredentials: true
             });
             console.log(hitback)
             if(hitback){
               
-              setLoggedin(true)
+              setCallFlag(true)
               setErrAlert("success")
               setMessage("Welcome")
               setUser(hitback.data.customer.firstName)
@@ -71,7 +70,7 @@ function CustomerSignin() {
     catch(err){
       setUser("")
       setErrAlert("error")
-      setLoggedin(true)
+      setCallFlag(true)
       setMessage("Invalid Credentials")
       console.log("in error")
       console.log(err)
@@ -82,7 +81,7 @@ function CustomerSignin() {
 
   return (
     <ThemeProvider theme={theme}>
-      { loggedin && <CustomizedSnackbars errAlert={errAlert}message={message} user={user} /> }
+      { callFlag && <CustomizedSnackbars errAlert={errAlert}message={message} user={user} /> }
       <AppBar/>
 
       

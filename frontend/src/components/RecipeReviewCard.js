@@ -28,133 +28,103 @@ export default function RecipeReviewCard(props) {
         setCartItems(props.oldCart[0].productlist) // remove curly braces here
     };    
     fetchPlanetas()
-}, [props.oldCart[0].productlists]);
+}, []);
 
 
   const onAdd = async (product) => {
-    console.log("in Add",product)
+
+  //   console.log("in Add",product)  
+  //  console.log("in add function")
+  //   const exist = cartItems.find((x) => x.product === product._id);
     
-   console.log("in add function")
-    const exist = cartItems.find((x) => x.product === product._id);
-    
-    if (exist) {
-      console.log(product._id,exist.product,"in equation")
-      console.log(exist.quantity,"quan")
-        if(exist.quantity + 1 > product.quantity){
-            alert('reached the maximum order limit')
-            return
-        }
+  //   if (exist) {
+  //     console.log(product._id,exist.product,"in equation")
+  //     console.log(exist.quantity,"quan")
+  //       if(exist.quantity + 1 > product.quantity){
+  //           alert('reached the maximum order limit')
+  //           return
+  //       }
         
-      setCartItems(
-        cartItems.map((x) =>
-          x.product === product.id ? { ...exist, quantity: exist.quantity + 1 } : x
-        )
-      );
-      console.log("after set",exist.quantity )
-    } else {
-      console.log("not exist")
-      const p_id = product._id
-      setCartItems([...cartItems, {product:p_id, quantity: 1 }]);
-      var trail =[]
+  //     setCartItems(
+  //       cartItems.map((x) =>
+  //         x.product === product.id ? { ...exist, quantity: exist.quantity + 1 } : x
+  //       )
+  //     );
+  //     console.log("after set",exist.quantity )
+  //   } else {
+  //     console.log("not exist")
+  //     const p_id = product._id
+  //     setCartItems([...cartItems, {product:p_id, quantity: 1 }]);
+  //     var trail =[]
       
-      console.log(product._id,"in not exist")
-      for(var j=0;j<cartItems.length;j++){
-        console.log("EHHEHEHE");
+  //     console.log(product._id,"in not exist")
+  //     for(var j=0;j<cartItems.length;j++){
+  //       console.log("EHHEHEHE");
                   
         
-            var tempJson = {
-                "product":cartItems[j].product,
-                "quantity": cartItems[j].quantity
+  //           var tempJson = {
+  //               "product":cartItems[j].product,
+  //               "quantity": cartItems[j].quantity
         
   
-            }
-            trail.push(tempJson)
+  //           }
+  //           trail.push(tempJson)
             
   
-        
-        
-      }
-      var selectedProd = {
-        "product":product._id,
-        "quantity": 1
+  //     }
+  //     var selectedProd = {
+  //       "product":product._id,
+  //       "quantity": 1
 
-      }
-      trail.push(selectedProd)
+  //     }
+  //     trail.push(selectedProd)
 
-      var patchData = {
-        "productlist":trail
-      }
+  //     var patchData = {
+  //       "productlist":trail
+  //     }
 
-      console.log(patchData,"trails")
+  //     console.log(patchData,"trails")
 
-    const Bearer = "Bearer "+ Cookies.get('token')
-    console.log(Bearer)
-    let axiosConfig = {
+  //   const Bearer = "Bearer "+ Cookies.get('token')
+  //   console.log(Bearer)
+  //   let axiosConfig = {
+  //     headers: {
+  //         'Content-Type': 'application/json;charset=UTF-8',
+  //         "Authorization" : Bearer
+  //     }
+  //   };
+
+  //     axios.patch(`http://localhost:5000/cart/mine`,patchData,axiosConfig,{
+  //       withCredentials: true }).then(response =>{ console.log(response.data.productlist,"from api")}).catch(error => {console.log(error)})
+
+  //   }
+
+
+
+  // console.log(props.oldCart)
+  // console.log(cartItems,"after add")
+
+        var selectedProd = {
+          "product":product._id,
+        }
+
+      const Bearer = "Bearer "+ Cookies.get('token')
+      let axiosConfig = {
       headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           "Authorization" : Bearer
-      }
-    };
+        }
+      };
 
-      axios.patch(`http://localhost:5000/cart/mine`,patchData,axiosConfig,{
-     withCredentials: true }).then(response =>{ console.log(response.data.productlist,"from api")}).catch(error => {console.log(error)})
-      
-
-
-
+      axios.patch(`http://localhost:5000/cart/addProduct`,selectedProd,axiosConfig,{
+        withCredentials: true })
+        .then(response =>{ 
+          console.log(response.data.productlist,"from api")})
+          .catch(error => {console.log(error)})
 
     }
+  
 
-    
-
-    
-
-
-
-    // for(var i=0;i<cartItems.length;i++){
-    //   console.log(cartItems[i],"inloop")
-    // }
-
-   
-
-
-
-
-  //   if(!Cookies.get('token')){
-  //     setErrAlert("error")
-  //     setMessage("Only vendors can add products")
-
-     
-  // }
-  console.log(props.oldCart)
-  console.log(cartItems,"after add")
-
-//   axios.patch(`http://localhost:5000/cart/mine`,jusJson,axiosConfig,{
-//     withCredentials: true
-// }).then(response =>{
-
-
-// console.log("customer updated")
-
-//     this.setState({item:response.data})
-//     this.setState({loggedin:true})
-//     this.setState({errAlert:"success"})
-//     this.setState({message:"changes updated for"})
-// }).catch(error => {
-//     this.setState({loggedin:true})
-//     this.setState({errAlert:"error"})
-//     this.setState({message:"Something went wrong"})
-//     console.log("In error");
-//     console.log(error);
-//   });;
-
-
-
-
-
-  };
-
-  // console.log(base64Icon)
 
   return (
     <Card sx={{ minWidth:250, maxWidth:275, maxHeight:300 }}>
@@ -176,8 +146,7 @@ export default function RecipeReviewCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-      {console.log(props.product,"in diuv")}
-      {console.log(cartItems,"in duvi")}
+
         <Button style={styles.CardButton} size ="small" variant="outlined" color="secondary" onClick={() => onAdd(props.product)}>Add to Cart</Button>
         
       </CardActions>
