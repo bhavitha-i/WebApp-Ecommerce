@@ -39,21 +39,27 @@ export default function ButtonAppBar() {
 
   async function logoutVendor(){
 
-    const Bearer = "Bearer "+ Cookies.get('token')
-    let axiosConfig = {
-     headers: {
+    // const Bearer = "Bearer "+ Cookies.get('token')
+    // let axiosConfig = {
+    //  headers: {
+    //      'Content-Type': 'application/json;charset=UTF-8',
+    //      "Authorization" : Bearer
+    //  }
+    // };
+
+      const Bearer = "Bearer "+ Cookies.get('token')
+     const headers= {
          'Content-Type': 'application/json;charset=UTF-8',
          "Authorization" : Bearer
-     }
     };
-
 
     try{
 
 
-      axios.post(`http://localhost:5000/vendor/logout`,axiosConfig,{
-                withCredentials: true }).
-        then(response =>{ 
+      axios.post("http://localhost:5000/vendor/logout",
+      {         headers: headers,
+                withCredentials: true })
+                .then(response =>{ 
             console.log("Vendor Logged out ") 
             console.log(response.data.price,"from api")})
             .catch(error => {console.log(error)})

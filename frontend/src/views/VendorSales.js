@@ -70,7 +70,7 @@ class VendorSales extends Component {
        this.setState({tableData:response.data.tabData})
        this.setState({proSold:response.data.ProductsSold})
        this.setState({totalsales:"$"+response.data.totalSales})
-       this.setState({popular:response.data.populatProd})
+       this.setState({popularPord:response.data.populatProd})
        this.setState({isLoading:false})
        
        
@@ -100,6 +100,9 @@ class VendorSales extends Component {
     if(this.state.isLoading){
         return <div className="App"><CircularIndeterminate /> No Data Available</div>;
     }
+    if(this.state.tableData.length ==0){
+      return <div className="App"><CircularIndeterminate /> No Data Available</div>;
+  }
   
       return(
          
@@ -107,8 +110,8 @@ class VendorSales extends Component {
         <CssBaseline/>
         <AppBarVendor/>
             <Box style={styles.ProductListBox}>
-                {console.log(this.state.popular.name,"from sales-------->")}
-              <Dashboard  data={this.state.tableData} total={this.state.totalsales} popular={this.state.popular.name}  productsSold={this.state.proSold}/>
+                {console.log(this.state,"from sales-------->")}
+              <Dashboard  data={this.state.tableData} total={this.state.totalsales} popular={this.state.popularPord}  productsSold={this.state.proSold}/>
             </Box>
 
          

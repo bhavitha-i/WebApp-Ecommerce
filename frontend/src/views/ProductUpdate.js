@@ -100,33 +100,10 @@ console.log("customer updated")
         console.log(jusJson)
       }
 
-// setProductVariable(){
 
-//   console.log(this.props, "-- props")
-//   const response = this.props.recordForEdit
-  
-//   this.setState({
-//         name:response.name,
-//       description:response.description,
-//       quantity:response.quantity,
-//       price:response.price,
-//       photo:response.photo,
-//       size:response.size,
-//       color:response.color,
-//       productId:response._id
-//     })
-
-// }
  componentDidMount (){
 
-  // this.setProductVariable();
-  //   let paramProdId = this.props.recordForEdit;
-  //   console.log(paramProdId)
-  //   this.setState({productId:paramProdId._id})
-  //   console.log("oarams:",this.state.productId)
-  //   console.log("oarams:",paramProdId.id)
-  
-
+ 
     const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
      headers: {
@@ -186,12 +163,8 @@ render(){
             alignItems: 'center',
           }}
         >  
-        {/* <Typography component="h1" variant="h5">
-        Update product
-      </Typography> */}
+ 
         <Paper variant="outlined" src={this.state.photo} />
-        
-
         
           <Box component="form" onSubmit={this.update.bind(this)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
