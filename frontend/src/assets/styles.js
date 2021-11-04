@@ -75,6 +75,7 @@ const Header = {
     width: '100vw',
     height: '100vh',
     backgroundColor: 'Red',
+    maxWidth:"none"
 
 }
 

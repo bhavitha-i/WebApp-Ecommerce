@@ -29,6 +29,15 @@ function AddAddress(props)  {
     const [isEdit,setIsEdit] = useState(false);
 
 
+
+    function refreshPage() {
+      setTimeout(()=>{
+          window.location.reload(true);
+      }, 1000);
+      console.log('page to reload')
+  }
+
+
     const history = useHistory();
 
     useEffect(() => {
@@ -77,6 +86,7 @@ function AddAddress(props)  {
                     console.log("Address Edited")
                     props.setOpenPopup(false)
                     history.push('/customer/profile/3')
+                    refreshPage()
 
                   }
                   

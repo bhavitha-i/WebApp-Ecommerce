@@ -31,7 +31,7 @@ export default function ButtonAppBar() {
             </Link>
           </Typography>
 
-            <Link
+            {/* <Link
               color="inherit"
               underline="none"
               variant="h6"
@@ -49,7 +49,7 @@ export default function ButtonAppBar() {
               style = {styles.HeaderIcons}
             >
                {strings.Common.login} 
-            </Link>
+            </Link> */}
         </Toolbar>
       </AppBar>
     </Box>

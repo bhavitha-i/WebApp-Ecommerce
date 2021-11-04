@@ -71,7 +71,6 @@ class CustomerCart extends Component {
               }
               
             }
-            console.log(this.state.tableProd,"tab")
         }
 
        
