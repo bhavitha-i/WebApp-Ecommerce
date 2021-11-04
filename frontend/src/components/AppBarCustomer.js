@@ -57,6 +57,7 @@ export default function ButtonAppBar() {
               withCredentials: true 
             })
                 .then(response =>{ 
+                  Cookies.remove()
                 console.log("Customer Logged out ") 
               })
                 .catch(error => {console.log(error)})
@@ -65,11 +66,16 @@ export default function ButtonAppBar() {
                 });
     }
     catch(err){
+      Cookies.remove()
+      
       setErrAlert("error")
       setCallFlag(true)
       setMessage("Invalid Data")
       console.log("in error")
       console.log(err)
+      history.push({
+        pathname: '/customer/login',
+      });
     }
   }
 

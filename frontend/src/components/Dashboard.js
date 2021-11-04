@@ -17,6 +17,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import theme from "./theme"
 
 
 import Deposits from './Deposits';
@@ -30,7 +31,6 @@ const drawerWidth = 240;
 
 
 
-const mdTheme = createTheme();
 
 export default function Dashboard(props) {
     const { tableData } = props.data;
@@ -55,23 +55,15 @@ useEffect(() => {
    
     
   
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={theme}>
 
 {console.log(props,"inside dashboard")}
     <Box
       component="main"
-      sx={{
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-      }}
+
     >
       <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="lg" sx={{ mb: 4 }}>
         <Grid container spacing={3}>
           {/* Chart */}
         

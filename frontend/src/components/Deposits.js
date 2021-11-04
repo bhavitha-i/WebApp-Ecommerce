@@ -11,11 +11,13 @@ function preventDefault(event) {
 export default function Deposits(props) {
   return (
     <React.Fragment>
-      <Title>{props.title}</Title>
+        
+      <Title ><Typography color="secondary" variant="h6" >{props.title}      </Typography></Title>
+
       <Typography component="p" variant="h4">
         {props.data}
       </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
+      <Typography color="secondary" sx={{ flex: 1 }}>
        Until Today
       </Typography>
       <div>
