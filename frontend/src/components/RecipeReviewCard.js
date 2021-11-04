@@ -15,7 +15,7 @@ import axios from "axios";
 
 export default function RecipeReviewCard(props) {
   var base64Icon = `${props.product.photo}`;
-  const [cartItems, setCartItems] = useState(props.oldCart[0].productlist);
+  // const [cartItems, setCartItems] = useState(props.oldCart[0].productlist);
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
   const [loggedin,setLoggedin] = useState(false);
@@ -25,7 +25,7 @@ export default function RecipeReviewCard(props) {
   useEffect(() => {
     const fetchPlanetas = async () => {
         
-        setCartItems(props.oldCart[0].productlist) // remove curly braces here
+        // setCartItems(props.oldCart[0].productlist) // remove curly braces here
     };    
     fetchPlanetas()
 }, []);

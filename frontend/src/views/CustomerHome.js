@@ -22,7 +22,6 @@ class CustomerHome extends Component {
       tableProd:[],
       loggedin:false,
       errAlert:'',
-      notify:0
     };
   }
 
@@ -79,32 +78,31 @@ class CustomerHome extends Component {
 
 
 
-      try{
+  //     try{
       
-        axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
-        withCredentials: true
+  //       axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
+  //       withCredentials: true
         
-    }).then(resposne =>{
-      this.setState({ oldCart: resposne.data });
-      this.setState({notify: this.state.oldCart[0].productlist.length})
+  //   }).then(resposne =>{
+  //     this.setState({ oldCart: resposne.data });
 
-      console.log(this.state.oldCart[0].productlist)
-    })
+  //     console.log(this.state.oldCart[0].productlist)
+  //   })
   
       
       
   
-      // 
-      // this.setState({}) SET PRODTABLE DATA HERE
-  }catch(e){
+  //     // 
+  //     // this.setState({}) SET PRODTABLE DATA HERE
+  // }catch(e){
          
        
-      this.setState.loggedin = true
-      this.state.errAlert = "error"
-      this.state.message ="Only vendors can add products"
-      console.log("in error")
-      console.log(e)
-  }
+  //     this.setState.loggedin = true
+  //     this.state.errAlert = "error"
+  //     this.state.message ="Only vendors can add products"
+  //     console.log("in error")
+  //     console.log(e)
+  // }
   }
 
 
