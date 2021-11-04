@@ -98,7 +98,7 @@ class VendorSales extends Component {
   render() {
     console.log(this.state.tableData,"set=============")
     if(this.state.isLoading){
-        return <div className="App"><CircularIndeterminate /></div>;
+        return <div className="App"><CircularIndeterminate /> No Data Available</div>;
     }
   
       return(

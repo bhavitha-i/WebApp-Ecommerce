@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import theme from "../components/theme";
 import { ThemeProvider } from '@material-ui/core/styles';
 import withRoot from '../components/WithRoot';
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Typography } from "@mui/material";
 import Cookies from 'js-cookie';
 
 
@@ -22,6 +22,7 @@ class CustomerHome extends Component {
       tableProd:[],
       loggedin:false,
       errAlert:'',
+      noProducts:false
     };
   }
 
@@ -49,7 +50,9 @@ class CustomerHome extends Component {
         this.setState({ products: response.data });
         this.setState({ productsAll: response.data });
 
-
+        if(response.data.length == 0){
+            this.setState({noProducts:true})
+        }
         for(var i =0;i<this.state.productsAll.length;i++){
     
           for(var j=0;j<this.state.oldCart[0].productlist.length;j++){
@@ -77,32 +80,6 @@ class CustomerHome extends Component {
       });
 
 
-
-  //     try{
-      
-  //       axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
-  //       withCredentials: true
-        
-  //   }).then(resposne =>{
-  //     this.setState({ oldCart: resposne.data });
-
-  //     console.log(this.state.oldCart[0].productlist)
-  //   })
-  
-      
-      
-  
-  //     // 
-  //     // this.setState({}) SET PRODTABLE DATA HERE
-  // }catch(e){
-         
-       
-  //     this.setState.loggedin = true
-  //     this.state.errAlert = "error"
-  //     this.state.message ="Only vendors can add products"
-  //     console.log("in error")
-  //     console.log(e)
-  // }
   }
 
 
@@ -113,10 +90,11 @@ class CustomerHome extends Component {
       <CssBaseline/>
       <AppBarCus/>
       <Container sx={{ py: 6 }} >
+          {this.state.noProducts && <Typography> No Products Available</Typography>}
           <Grid container spacing={4} >
             {this.state.products.map(currentproduct => (
               <Grid item key={currentproduct} xs={3} >
-                  <RecipeReviewCard oldCart={this.state.oldCart} product={currentproduct} />
+                  { currentproduct.quantity>0 && <RecipeReviewCard oldCart={this.state.oldCart} product={currentproduct} />}
               </Grid>
             ))}
           </Grid>

@@ -20,6 +20,8 @@ import withRoot from '../components/WithRoot';
 import theme from '../components/theme'
 import strings from '../assets/strings';
 import styles from '../assets/styles';
+import { useHistory } from "react-router-dom";
+
 
 
 
@@ -39,6 +41,8 @@ function VendorSignUp() {
   const [message,setMessage] = useState("");
 
 
+  const history = useHistory();
+
 
   async function signup(e){
     e.preventDefault();
@@ -55,8 +59,12 @@ function VendorSignUp() {
               
               setLoggedin(true)
               setErrAlert("success")
-              setMessage("Welcome")
+              setMessage("Welcome ",hitback.data.vendor.firstName)
               setUser(hitback.data.vendor.firstName)
+              history.push({
+                pathname: '/vendor/home',
+                openSnackbar: true
+              });
             }
             
     }
