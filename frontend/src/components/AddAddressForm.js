@@ -13,6 +13,10 @@ import axios from "axios";
 import strings from '../assets/strings';
 import CustomizedSnackbars from './CustomizedSnackbars';
 import Cookies from 'js-cookie';
+import { useHistory } from 'react-router';
+
+
+
 
 
 
@@ -20,11 +24,12 @@ import Cookies from 'js-cookie';
 function AddAddress(props)  {
     const [inputs, setInputs] = useState({});
     const [callFlag,setCallFlag] = useState(false);
-    const [user,setUser] = useState("");
     const [errAlert,setErrAlert] = useState("");
     const [message,setMessage] = useState("");
     const [isEdit,setIsEdit] = useState(false);
 
+
+    const history = useHistory();
 
     useEffect(() => {
       if(!Cookies.get('token')){
@@ -70,15 +75,13 @@ function AddAddress(props)  {
                     setErrAlert("success")
                     setMessage("Address Edited")
                     console.log("Address Edited")
-
-                    // setInputs(null)
                     props.setOpenPopup(false)
+                    history.push('/customer/profile/3')
 
                   }
                   
           }
           catch(err){
-            setUser("")
             setErrAlert("error")
             setCallFlag(true)
             setMessage("Invalid Data")
@@ -101,11 +104,12 @@ function AddAddress(props)  {
                     setMessage("Welcome")
                     // setInputs(null)
                     props.setOpenPopup(false)
+                    history.push('/customer/profile/3')
+
                   }
                   
           }
           catch(err){
-            setUser("")
             setErrAlert("error")
             setCallFlag(true)
             setMessage("Invalid Data")

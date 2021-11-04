@@ -55,7 +55,7 @@ router.post('/customer/logout',auth,async(req,res)=>{
         })
         await req.customer.save()
 
-        res.clearCookie("token").send()
+        res.clearCookie("token").send("Customer Logged out")
 
     }catch(e){
         res.status(500).send()

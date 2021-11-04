@@ -79,9 +79,6 @@ class CustomerHome extends Component {
 
 
 
-
-
-
       try{
       
         axios.get("http://localhost:5000/customers/myCart",axiosConfig, {

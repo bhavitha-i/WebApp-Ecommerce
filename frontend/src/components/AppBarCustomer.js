@@ -45,7 +45,7 @@ export default function ButtonAppBar() {
     let axiosConfig = {
      headers: {
          'Content-Type': 'application/json;charset=UTF-8',
-         "Authorization" : Bearer
+         'Authorization' : Bearer 
      }
     };
 
@@ -53,15 +53,16 @@ export default function ButtonAppBar() {
     try{
 
 
-      axios.post(`http://localhost:5000/vendor/logout`,axiosConfig,{
-                withCredentials: true }).
-        then(response =>{ 
-            console.log("Customer Logged out ") 
-          })
-            .catch(error => {console.log(error)})
-            history.push({
-              pathname: '/customer/login',
-            });
+      axios.post(`http://localhost:5000/customer/logout`,axiosConfig,{
+              withCredentials: true 
+            })
+                .then(response =>{ 
+                console.log("Customer Logged out ") 
+              })
+                .catch(error => {console.log(error)})
+                history.push({
+                  pathname: '/customer/login',
+                });
     }
     catch(err){
       setErrAlert("error")

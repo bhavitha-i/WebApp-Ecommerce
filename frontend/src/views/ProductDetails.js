@@ -51,6 +51,7 @@ import Paper from "./../components/Paper"
     
         };
       }
+
       addtoCart(e){
           console.log("added to cart")
           this.setState({loggedin:false})
@@ -65,25 +66,7 @@ import Paper from "./../components/Paper"
                       size:this.state.size,
                       color:this.state.color
                   }
-        //   if(this.state.password == ""){
-            
-        //       jusJson = {
-        //           firstName:this.state.firstName,
-        //           lastName:this.state.lastName,
-        //           age:this.state.age,
-        //           contact:this.state.contact
-        //       }
-        //   }
-        //   else{
-        //     jusJson = {
-        //         password:this.state.password,
-        //         firstName:this.state.firstName,
-        //         lastName:this.state.lastName,
-        //         age:this.state.age,
-        //         contact:this.state.contact
-        //     }
 
-        //   }
           const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
      headers: {
@@ -118,30 +101,6 @@ console.log("customer updated")
         console.log(jusJson)
       }
       
-  
-//   const [password,setPassword] = useState("");
-//   const [firstName,setFirstname] = useState("");
-//   const [lastName,setLastname] = useState("");
-//   const [age,setAge] = useState("");
-//   const [contact,setContact] = useState(0);
-  
-//   const [count, setCount] = useState(1)
-//   const [loggedin,setLoggedin] = useState(false);
-//   const [user,setUser] = useState("");
-//   const [errAlert,setErrAlert] = useState("");
-//   const [message,setMessage] = useState("");
-//   const [me,setMe]=useState("")
-
-//   useEffect( () => {
-//     if(!Cookies.get('token')){
-//         setLoggedin(true)
-//         setErrAlert("error")
-//         setMessage("please login to access this page")
-//     }
-//     pop()
-
-    
-  
 
 
 
@@ -179,12 +138,7 @@ console.log("customer updated")
         photo:response.data.photo,
         size:response.data.size,
         color:response.data.color})
-        
 
-
-
-            console.log(this.state.name)
-            console.log(this.state.photo)
         this.setState({item:response.data})
     }).catch(error => {
         console.log(error);
@@ -192,46 +146,8 @@ console.log("customer updated")
     // this.setState.user = hitback
    
     
-    
-    
- 
-
-
 }
 
-
-
-
-//    function update(e){
-//     e.preventDefault();
-//     // const data = new FormData(e.currentTarget);
-//     const updatedData={firstName,lastName,age,password,contact};
-    
-//     try{
-//       setLoggedin(false)
-//       const hitback = await axios.patch("http://localhost:5000/customers/me",updatedData,{
-//                 withCredentials: true
-//             });
-//             console.log(hitback)
-//             if(hitback){
-              
-//               setLoggedin(true)
-//               setErrAlert("success")
-//               setMessage("Welcome")
-//               setUser(hitback.data.vendor.firstName)
-//             }
-            
-//     }
-//     catch(err){
-//       setUser("")
-//       setErrAlert("error")
-//       setLoggedin(true)
-//       setMessage("Invalid Data")
-//       console.log("in error")
-//       console.log(err)
-//   }
-   
-//   }
 render(){
 
   return (
@@ -347,9 +263,7 @@ render(){
         </Box>
         
       </Container>
-      <Link href="/customer/signup" variant="body2">
-      <FloatingActionButtons text={strings.SignUp.Labels.asCustomeSignup}/>
-      </Link>
+
     </ThemeProvider>
     </>
   );

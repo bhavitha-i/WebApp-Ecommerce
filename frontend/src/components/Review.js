@@ -88,7 +88,7 @@ export default function Review(props) {
             var o=response.data
             console.log(o,"Order placed")
             setOrder(o)
-            history.push("/customer/profile/4")
+            history.push("/customer/profile/2")
       }).catch(error => {console.log(error)})
 
       }

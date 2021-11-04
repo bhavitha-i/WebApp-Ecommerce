@@ -23,10 +23,7 @@ const bull = (
 
 export default function BasicCard(props) {
     const [address,setAddress]=useState(props.address)
-    const [cart,setCart] = useState()
     const [oldCart,setOldCart] = useState(props.oldCart)
-    const [order,setOrder]=useState()
-    const [disabledStatus,setDisabledStatus]=useState(false)
 
 
     const history = useHistory();
@@ -38,51 +35,15 @@ export default function BasicCard(props) {
       props.selection(add)
     }
 
-  //   const onAdd = async (address) => {
-  //       console.log("selected address:",address)
-
-  //       const Bearer = "Bearer "+ Cookies.get('token')
-  //   console.log(Bearer)
-  //   let axiosConfig = {
-  //     headers: {
-  //         'Content-Type': 'application/json;charset=UTF-8',
-  //         "Authorization" : Bearer
-  //     }
-  //   };
-    
-  //   console.log(newO,"newO")
-  //   const hitback =  await axios.get("http://localhost:5000/cart/mine",axiosConfig, {
-  //     withCredentials: true
-      
-  // });
-  // console.log(hitback.data,"in basic card final try")
-
-  // var newO ={
-  //   cart:hitback.data._id,
-  //   price:hitback.data.price,
-  //   productlist:hitback.data.productlist,
-  //   address:address
-  // }
-  // console.log(newO,"after assign")
-
-  //   axios.post(`http://localhost:5000/order/add`,newO,axiosConfig,{
-  //     withCredentials: true }).then(response =>{ console.log(response.data,"from api")
-       
-  //      var o=response.data
-  //      console.log(o,"Order placed")
-  //      setOrder(o)
-  //    }).catch(error => {console.log(error)})
-
-  //   }
-
 
     useEffect(() => {
       const fetchPlanetas = async () => {
-          setOldCart(props.oldCart)
-          setAddress(props.address) // remove curly braces here
+          setAddress(props.address) 
       };    
       fetchPlanetas()
-  }, [props.address,props.oldCart]);
+  }, []);
+
+
   return (
     <Card sx={{ minWidth: 300, maxWidth:400, maxHeight:300, minHeight: 150 }}>
       <CardContent>
