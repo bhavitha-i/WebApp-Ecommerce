@@ -9,11 +9,16 @@ import BasicCard from './BasicCard';
 import { padding } from '@mui/system';
 import styles from '../assets/styles';
 import { Button, Container } from '@mui/material';
+import NoAddressCard from './NoAddressCard'
+import axios from "axios";
+import Cookies from 'js-cookie';
+
 
 export default function AddressForm(props) {
 
     const [address,setAddress]=useState(props.address)
     const [oldCart,setOldCart]=useState(props.oldCart)
+    const [noAddress,nosetNOAddress]=useState(false)
 
     const [addresSel, setAddressSel] = useState()
 
@@ -39,7 +44,35 @@ export default function AddressForm(props) {
         props.setselAddress(addresSel)
         props.handleNext()
       }
-  }, [props.address,props.oldCart]);
+
+      if(props.address == null){
+        nosetNOAddress(true)
+      }
+
+      const Bearer = "Bearer "+ Cookies.get('token')
+      console.log(Bearer)
+      let axiosConfig = {
+       headers: {
+           'Content-Type': 'application/json;charset=UTF-8',
+           "Authorization" : Bearer
+       }
+     };
+
+              axios.get("http://localhost:5000/addresses/mine",axiosConfig,{
+                withCredentials: true
+            }).then(response =>{
+            console.log(response.data,"addres")
+            // this.setState({address:response.data})
+            setAddress(response.data)
+            console.log(this.state.address,"set")
+            }).catch(error => {
+                // this.setState({loggedin:true})
+                // this.setState({errAlert:"error"})
+                // this.setState({message:"Something went wrong"})
+                console.log(error);
+              });
+
+  }, []);
 
 
 
@@ -56,7 +89,10 @@ export default function AddressForm(props) {
               </Grid>
             ))}
         </Grid>
+        <NoAddressCard/>
+
     </Container>
+    
       
     </React.Fragment>
   );

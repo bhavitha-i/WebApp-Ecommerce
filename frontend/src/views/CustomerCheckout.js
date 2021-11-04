@@ -48,80 +48,22 @@ class CustomerCheckout extends Component {
           if(!Cookies.get('token')){
           this.setState.loggedin = true
           this.state.errAlert = "error"
-          this.state.message ="Only vendors can add products"
+          this.state.message ="Invalid Authentication"
          
       }
 
-    axios
-      .get(`http://localhost:5000/product/all`)
-      .then(response => {
-        console.log("response" + response.data);
-        this.setState({ products: response.data });
-        this.setState({ productsAll: response.data });
-
-
-        for(var i =0;i<this.state.productsAll.length;i++){
-    
-          for(var j=0;j<this.state.oldCart[0].productlist.length;j++){
-              
-            if(this.state.productsAll[i]._id == this.state.oldCart[0].productlist[j].product){
-                
-                var tempJson = {
-                    "id":this.state.productsAll[i]._id,
-                    "quantity": this.state.productsAll[i].quantity - this.state.oldCart[0].productlist[j].quantity,
-                   
-
-                }
-                this.setState({ updateProd: [...this.state.updateProd, tempJson] })
-
-            }
-            
-          }
-          console.log(this.state.updateProd,"tab")
-      }
-      })
-      .catch(error => {
-        
-        console.log(error);
-      });
-
-      try{
-       
-      
-        axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
-        withCredentials: true
-        
-    }).then(resposne =>{
-      this.setState({ oldCart: resposne.data });
-      this.setState({notify: this.state.oldCart[0].productlist.length})
-
-      console.log(this.state.oldCart,"oldcart")
-    })
-  
-  }catch(e){
-         
-       
-      this.setState.loggedin = true
-      this.state.errAlert = "error"
-      this.state.message ="Only vendors can add products"
-      console.log("in error")
-      console.log(e)
-  }
-
-
-
-  axios.get("http://localhost:5000/addresses/mine",axiosConfig,{
-    withCredentials: true
-}).then(response =>{
-console.log(response.data,"addres")
-this.setState({address:response.data})
-console.log(this.state.address,"set")
-}).catch(error => {
-    this.setState({loggedin:true})
-    this.setState({errAlert:"error"})
-    this.setState({message:"Something went wrong"})
-    console.log(error);
-  });
+            axios.get("http://localhost:5000/addresses/mine",axiosConfig,{
+              withCredentials: true
+          }).then(response =>{
+          console.log(response.data,"addres")
+          this.setState({address:response.data})
+          console.log(this.state.address,"set")
+          }).catch(error => {
+              this.setState({loggedin:true})
+              this.setState({errAlert:"error"})
+              this.setState({message:"Something went wrong"})
+              console.log(error);
+            });
 
   }
 
