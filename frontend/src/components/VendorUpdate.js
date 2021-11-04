@@ -56,12 +56,12 @@ import styles from '../assets/styles';
                   contact:this.state.contact
               }
           const Bearer = "Bearer "+ Cookies.get('token')
-    let axiosConfig = {
-     headers: {
-         'Content-Type': 'application/json;charset=UTF-8',
-         "Authorization" : Bearer
-     }
-   };
+            let axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Authorization" : Bearer
+            }
+          };
 
    axios.patch("http://localhost:5000/vendors/me",jusJson,axiosConfig,{
     withCredentials: true
