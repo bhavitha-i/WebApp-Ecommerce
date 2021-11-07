@@ -18,7 +18,8 @@ import { styled } from '@mui/material/styles';
 
 
 
-export default function ProductForm() {
+
+export default function ProductForm(props) {
   const [name,setName] = useState("");
   const [description,setDescription] = useState("");
   const [price,setPrice]=useState("");
@@ -30,6 +31,13 @@ export default function ProductForm() {
   const [user,setUser] = useState("");
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
+
+  function refreshPage() {
+    setTimeout(()=>{
+        window.location.reload(true);
+    }, 1000);
+    console.log('page to reload')
+}
 
   useEffect(() => {
       if(!Cookies.get('token')){
@@ -62,6 +70,8 @@ export default function ProductForm() {
     setLoggedin(true)
     setErrAlert("success")
     setMessage("Product successfully added")
+    props.setOpenPopup(false)
+    refreshPage()
 
   
 

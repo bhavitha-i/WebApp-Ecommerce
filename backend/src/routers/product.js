@@ -7,14 +7,14 @@ const router = new express.Router()
 
 
 router.post('/product/add', auth,async (req,res) =>{
-    console.log('inside prodcut add')
+    console.log('inside prodcut add',req.body)
     const product  = new Product({...req.body,owner:req.vendor._id})
 
     try{
         await product.save()
         res.status(200).send(product)
     }catch(e){
-        res.status(400).send()
+        res.status(400).send(e)
     }
 
     

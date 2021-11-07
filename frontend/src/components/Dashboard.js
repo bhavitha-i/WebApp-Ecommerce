@@ -89,7 +89,7 @@ useEffect(() => {
                 height: 240,
               }}
             >
-              <Deposits title="Products Sold" data={props.productsSold} />
+        { props.productsSold &&  <Deposits title="Products Sold" data={props.productsSold}/> }
             </Paper>
           </Grid>   
           <Grid item xs={12} md={4} lg={3}>
@@ -101,7 +101,8 @@ useEffect(() => {
                 height: 240,
               }}
             >
-              <Deposits title="Popular Product" data={props.popular}/>
+              
+           { props.popular.name &&  <Deposits title="Popular Product" data={props.popular.name}/> }
             </Paper>
           </Grid>
           <Grid item xs={12} md={4} lg={3}>

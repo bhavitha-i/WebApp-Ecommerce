@@ -4,8 +4,12 @@ const Vendor = require('../models/vendor')
 const vendorAuth = async(req,res,next) =>{
     try{
         console.log('Before barrer')
+        console.log(req)
+
+        // const authHeader = req.headers['Authorization']
+        // const token = authHeader && authHeader.split(' ')[1]
         const token = req.header('Authorization').replace('Bearer ','')
-        console.log('token verify')
+        console.log('token verify',req)
         const decoded = jwt.verify(token,'thisismynewcourse')
 
         console.log(decoded)
@@ -22,6 +26,7 @@ const vendorAuth = async(req,res,next) =>{
    
 
     }catch(e){
+        console.log(e)
         res.status(401).send({error: "Please authenticate"})
     }
 

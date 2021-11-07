@@ -53,7 +53,7 @@ const CustomerSignUp = (callback) => {
                 
                 setLoggedin(true)
                 setErrAlert("success")
-                setMessage("Welcome")
+                setMessage("Welcome ",user.firstName)
                 setUser(hitback.data.customer.firstName)
                 history.push({
                   pathname: '/customer/home',

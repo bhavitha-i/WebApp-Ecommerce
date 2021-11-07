@@ -18,7 +18,7 @@ export default function RecipeReviewCard(props) {
   // const [cartItems, setCartItems] = useState(props.oldCart[0].productlist);
   const [errAlert,setErrAlert] = useState("");
   const [message,setMessage] = useState("");
-  const [loggedin,setLoggedin] = useState(false);
+  const [callBack,setCallBack] = useState(false);
   
 
   console.log(props.product)
@@ -32,77 +32,6 @@ export default function RecipeReviewCard(props) {
 
 
   const onAdd = async (product) => {
-
-  //   console.log("in Add",product)  
-  //  console.log("in add function")
-  //   const exist = cartItems.find((x) => x.product === product._id);
-    
-  //   if (exist) {
-  //     console.log(product._id,exist.product,"in equation")
-  //     console.log(exist.quantity,"quan")
-  //       if(exist.quantity + 1 > product.quantity){
-  //           alert('reached the maximum order limit')
-  //           return
-  //       }
-        
-  //     setCartItems(
-  //       cartItems.map((x) =>
-  //         x.product === product.id ? { ...exist, quantity: exist.quantity + 1 } : x
-  //       )
-  //     );
-  //     console.log("after set",exist.quantity )
-  //   } else {
-  //     console.log("not exist")
-  //     const p_id = product._id
-  //     setCartItems([...cartItems, {product:p_id, quantity: 1 }]);
-  //     var trail =[]
-      
-  //     console.log(product._id,"in not exist")
-  //     for(var j=0;j<cartItems.length;j++){
-  //       console.log("EHHEHEHE");
-                  
-        
-  //           var tempJson = {
-  //               "product":cartItems[j].product,
-  //               "quantity": cartItems[j].quantity
-        
-  
-  //           }
-  //           trail.push(tempJson)
-            
-  
-  //     }
-  //     var selectedProd = {
-  //       "product":product._id,
-  //       "quantity": 1
-
-  //     }
-  //     trail.push(selectedProd)
-
-  //     var patchData = {
-  //       "productlist":trail
-  //     }
-
-  //     console.log(patchData,"trails")
-
-  //   const Bearer = "Bearer "+ Cookies.get('token')
-  //   console.log(Bearer)
-  //   let axiosConfig = {
-  //     headers: {
-  //         'Content-Type': 'application/json;charset=UTF-8',
-  //         "Authorization" : Bearer
-  //     }
-  //   };
-
-  //     axios.patch(`http://localhost:5000/cart/mine`,patchData,axiosConfig,{
-  //       withCredentials: true }).then(response =>{ console.log(response.data.productlist,"from api")}).catch(error => {console.log(error)})
-
-  //   }
-
-
-
-  // console.log(props.oldCart)
-  // console.log(cartItems,"after add")
 
         var selectedProd = {
           "product":product._id,
@@ -119,7 +48,12 @@ export default function RecipeReviewCard(props) {
       axios.patch(`http://localhost:5000/cart/addProduct`,selectedProd,axiosConfig,{
         withCredentials: true })
         .then(response =>{ 
-          console.log(response.data.productlist,"from api")})
+          console.log(response.data.productlist,"from api")
+          setErrAlert("success")
+          setMessage("Product Added to Cart Successfully!!")
+          setCallBack(true)
+
+          })
           .catch(error => {console.log(error)})
 
     }

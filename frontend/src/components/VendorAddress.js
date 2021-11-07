@@ -26,6 +26,7 @@ function VendorAddress(props)  {
     const [message,setMessage] = useState("");
 
 
+
       const getAddress = async () => {
 
         const Bearer = "Bearer "+ Cookies.get('token')
@@ -43,7 +44,12 @@ function VendorAddress(props)  {
                    });
                    
                    console.log(hitback)
-                   setAddress(hitback.data.address)     
+                   if(hitback.data.address != null){
+                      setAddress(hitback.data.address)     
+                   }else{
+                      setAddress({street1:"",street2:"",zipcode:"",city:"",state:"",country:""})     
+                   }
+
          }catch(e){
         
                this.setState({callFlag:true})

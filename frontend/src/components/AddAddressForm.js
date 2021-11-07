@@ -74,7 +74,7 @@ function AddAddress(props)  {
           try{
             console.log(inputs,"  input")
             setCallFlag(false)
-            const hitback = await axios.patch(`http://localhost:5000/address/${inputs._id}`,addressData,axiosConfig,{
+            const hitback = await axios.patch(process.env.API_URL,`/${inputs._id}`,addressData,axiosConfig,{
                       withCredentials: true
                   });
                   console.log(hitback)
