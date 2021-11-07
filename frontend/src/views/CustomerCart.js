@@ -46,6 +46,33 @@ class CustomerCart extends Component {
          
       }
 
+      try{
+      
+        const hitback =  await axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
+          withCredentials: true
+          
+      });
+  
+      
+      console.log(hitback)
+      this.setState({ oldCart: hitback.data });
+      console.log("after hitback assignmemnt")
+      console.log(this.state.oldCart[0].productlist)
+      
+      console.log(this.state.productsAll)
+  
+      // 
+      // this.setState({}) SET PRODTABLE DATA HERE
+  }catch(e){
+         
+       
+      this.setState.loggedin = true
+      this.state.errAlert = "error"
+      this.state.message ="Only vendors can add products"
+      console.log("in error")
+      console.log(e)
+  }
+
 
       axios.get(`http://localhost:5000/product/all`,axiosConfig).then(response => {console.log("response" + response.data);
         this.setState({ productsAll: response.data });
@@ -79,32 +106,7 @@ class CustomerCart extends Component {
           console.log(error)
         
       });
-      try{
-      
-      const hitback =  await axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
-        withCredentials: true
-        
-    });
 
-    
-    console.log(hitback)
-    this.setState({ oldCart: hitback.data });
-    console.log("after hitback assignmemnt")
-    console.log(this.state.oldCart[0].productlist)
-    
-    console.log(this.state.productsAll)
-
-    // 
-    // this.setState({}) SET PRODTABLE DATA HERE
-}catch(e){
-       
-     
-    this.setState.loggedin = true
-    this.state.errAlert = "error"
-    this.state.message ="Only vendors can add products"
-    console.log("in error")
-    console.log(e)
-}
 console.log("before for",this.state.productsAll )
 
 
