@@ -92,9 +92,10 @@ class CustomerHome extends Component {
       <Container sx={{ py: 6 }} >
           {this.state.noProducts && <Typography> No Products Available</Typography>}
           <Grid container spacing={4} >
-            {this.state.products.map(currentproduct => (
-              <Grid item key={currentproduct} xs={3} >
-                  { currentproduct.quantity>0 && <RecipeReviewCard oldCart={this.state.oldCart} product={currentproduct} />}
+            {this.state.products.filter(product => product.quantity > 0).map(currentproduct => (
+            
+             <Grid item key={currentproduct} xs={3} >
+                   <RecipeReviewCard oldCart={this.state.oldCart} product={currentproduct} />
               </Grid>
             ))}
           </Grid>

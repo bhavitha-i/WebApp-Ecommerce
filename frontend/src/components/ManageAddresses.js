@@ -41,7 +41,7 @@ function ManageAddress() {
   function refreshPage() {
     setTimeout(()=>{
         window.location.reload(true);
-    }, 1000);
+    }, 10);
     console.log('page to reload')
   }   
 

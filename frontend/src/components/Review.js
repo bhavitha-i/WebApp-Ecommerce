@@ -121,25 +121,21 @@ export default function Review(props) {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          {/* <Typography gutterBottom>John Smith</Typography> */}
+          <Typography gutterBottom>{address.firstName}&nbsp;{address.lastName}</Typography>
+          <Typography gutterBottom>{address.street1}&nbsp;{address.city}</Typography>
+          <Typography gutterBottom>{address.state}&nbsp;{address.zipcode}</Typography>
           {/* <Typography gutterBottom>{address.join(', ')}</Typography> */}
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Payment details
           </Typography>
-          {/* <Grid container>
-            {paymentDetails.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
-          </Grid> */}
+          {console.log(paymentDetails)}
+          <Typography gutterBottom>{paymentDetails.cardName}</Typography>
+          <Typography gutterBottom>{paymentDetails.cardNumber}</Typography>
+          
+          
+
         </Grid>
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>

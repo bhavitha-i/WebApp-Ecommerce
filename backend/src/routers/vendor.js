@@ -20,12 +20,13 @@ router.get('/test',(req,res) =>{
 
 // vendor singup
 router.post('/vendor/signup', async (req,res) =>{
+    
     const vendor  = new Vendor(req.body)
     try{
-         console.log(vendor)
         await vendor.save()
+      
         const token = await vendor.generateAuthToken()
-        res.status(200).cookie("token", token, {
+        res.status(200).cookie("token", token,"vendor",vendor, {
             httpOnly: true,
             secure: true,
             sameSite: "none",
@@ -184,6 +185,7 @@ router.get('/vendors/dashboard', auth ,async (req,res)=>{
     for(var i=0;i<allProds.length;i++){
         for(var j=0;j<myAllProds.length;j++){
             console.log(allProds[i].product+"-------"+myAllProds[j]._id)
+            console.log(allProds[0].priduct)
             if(allProds[i].product.equals( myAllProds[j]._id)){
                 console.log("In if")
                 total = total + (myAllProds[j].price * allProds[i].quantity)

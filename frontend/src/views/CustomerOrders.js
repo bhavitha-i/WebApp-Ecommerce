@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+
 import RecipeReviewCard from "../components/RecipeReviewCard";
 import Grid from '@mui/material/Grid';
 import AppBarCus from "../components/AppBarCustomer";
@@ -9,6 +9,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import withRoot from '../components/WithRoot';
 import { CssBaseline } from "@mui/material";
 import Cookies from 'js-cookie';
+import axios from "axios";
 import OrderCard from "../components/OrderCard";
 
 
@@ -62,9 +63,12 @@ class CustomerOrders extends Component {
         var totalpri =0
     for(var i =0;i<this.state.orders.length;i++){
       var tempJson = {order_id:this.state.orders[i]._id,items:[],totalPrice:0}
+      totalpri=0
       for(var j =0;j<this.state.orders[i].productlist.length;j++){
           console.log(this.state.orders[i].productlist[j].product,"sep prod from customer orders")
+          
           for(var k=0;k<this.state.products.length;k++){
+            
               if(this.state.products[k]._id == this.state.orders[i].productlist[j].product){
                                  var item={
                                       "id":this.state.products[k]._id,
@@ -115,7 +119,11 @@ class CustomerOrders extends Component {
 
 
   render() {
+    if(this.state.tableProd.length == 0){
+      return <div className="App">No Data Available</div>;
+  }
       return(
+       
 
     <ThemeProvider theme={theme}>
 

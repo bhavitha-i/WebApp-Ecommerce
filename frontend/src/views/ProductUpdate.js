@@ -84,13 +84,21 @@ console.log("customer updated")
     this.setState({item:response.data})
     this.setState({loggedin:true})
     this.setState({errAlert:"success"})
-    this.setState({message:"changes updated for"})
+    this.setState({message:"changes updated"})
+   
+      setTimeout(()=>{
+          window.location.reload(true);
+      }, 100);
+      console.log('page to reload')
+
+
 }).catch(error => {
     this.setState({loggedin:true})
     this.setState({errAlert:"error"})
     this.setState({message:"Something went wrong"})
     console.log("In error");
     console.log(error);
+
   });;
 
 

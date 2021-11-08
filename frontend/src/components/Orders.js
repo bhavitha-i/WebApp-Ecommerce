@@ -104,6 +104,8 @@ export default function Orders(props) {
           <option value={"Order Dispatched"}>Order Dispatched</option>
           <option value={"Out for Delivery"}>Out for Delivery</option>
           <option value={"Delivered"}>Delivered</option>
+          <option value={"Return Accepted"}>Return Accepted</option>
+          <option value={"Return Rejected"}>Return Rejected</option>
         </NativeSelect></TableCell>
               <TableCell>{row.OrderStatus}</TableCell>
             </TableRow>

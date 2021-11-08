@@ -72,9 +72,9 @@ function AddAddress(props)  {
         
         if(isEdit){
           try{
-            console.log(inputs,"  input")
+            console.log(inputs._id,"  input")
             setCallFlag(false)
-            const hitback = await axios.patch(process.env.API_URL,`/${inputs._id}`,addressData,axiosConfig,{
+            const hitback = await axios.patch(`http://localhost:5000/address/${inputs._id}`,addressData,axiosConfig,{
                       withCredentials: true
                   });
                   console.log(hitback)
@@ -85,7 +85,7 @@ function AddAddress(props)  {
                     setMessage("Address Edited")
                     console.log("Address Edited")
                     props.setOpenPopup(false)
-                    history.push('/customer/profile/3')
+                    // history.push('/customer/profile/3')
                     refreshPage()
 
                   }
@@ -114,7 +114,8 @@ function AddAddress(props)  {
                     setMessage("Welcome")
                     // setInputs(null)
                     props.setOpenPopup(false)
-                    history.push('/customer/profile/3')
+                    // history.push('/customer/profile/3')
+                    refreshPage()
 
                   }
                   
