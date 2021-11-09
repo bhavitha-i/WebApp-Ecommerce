@@ -101,6 +101,7 @@ export default function Orders(props) {
           onChange={(e) => handleAddrTypeChange(e,row)}
         >
             <option value={row.OrderStatus}>-</option>
+            <option value={"Order Placed"}>Order Placed</option>
           <option value={"Order Dispatched"}>Order Dispatched</option>
           <option value={"Out for Delivery"}>Out for Delivery</option>
           <option value={"Delivered"}>Delivered</option>
