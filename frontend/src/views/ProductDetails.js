@@ -1,28 +1,17 @@
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
-import  { useState } from "react"
-import  { useEffect,Component } from "react"
+import  { Component } from "react"
 import Cookies from 'js-cookie';
 import axios from "axios";
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import FloatingActionButtons from '../components/FloatingButton';
 import CustomizedSnackbars from '../components/CustomizedSnackbars';
-import AppBar from '../components/AppBar';
 import withRoot from '../components/WithRoot';
 import theme from '../components/theme'
-import strings from '../assets/strings';
-import styles from '../assets/styles';
-import FileBase from 'react-file-base64';
-import { withRouter } from "react-router-dom";
 import Paper from "./../components/Paper"
 import AppBarCustomer from '../components/AppBarCustomer';
 
@@ -49,7 +38,6 @@ import AppBarCustomer from '../components/AppBarCustomer';
           loggedin:false,
           errAlert:"",
           message:"",
-          loggedin:false,
           updateDate:{}
           
     
