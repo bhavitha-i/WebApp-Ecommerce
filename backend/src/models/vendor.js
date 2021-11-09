@@ -103,8 +103,11 @@ vendorSchema.methods.generateAuthToken = async function(){
         const vendor = this
         const token = jwt.sign({ _id:vendor._id.toString() },'thisismynewcourse')
         vendor.tokens = vendor.tokens.concat({token})
-        await vendor.save()
+        const new_vendor = await vendor.save()
         return token
+
+
+
 
 }
 

@@ -18,6 +18,22 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Grid from '@mui/material/Grid';
 import styles from '../assets/styles'
 import { Divider } from '@mui/material';
+import Cookies from 'js-cookie';
+import { Button } from '@mui/material';
+import axios from "axios";
+import { useHistory } from 'react-router';
+
+
+function refreshPage() {
+  setTimeout(()=>{
+    window.location.reload(true);
+}, 1000);
+console.log('page to reload')
+
+
+  
+
+}
 
 
 const ExpandMore = styled((props) => {
@@ -33,10 +49,54 @@ const ExpandMore = styled((props) => {
 
 export default function OrderCard(props) {
   const [expanded, setExpanded] = React.useState(false);
+  
+  const history = useHistory();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleAddrTypeChange = async (row,item) => {
+    
+    console.log(row,item  ,"on click==========")
+
+    const Bearer = "Bearer "+ Cookies.get('token')
+    let axiosConfig = {
+     headers: {
+         'Content-Type': 'application/json;charset=UTF-8',
+         "Authorization" : Bearer
+     }
+  };
+  try{
+   
+
+    const statusUpdate={
+        "product":item.id,
+        "status":"Return Request Initiated"
+    }
+    console.log(row.order_id,"order")
+    const hitback = await axios.patch(`http://localhost:5000/order/status/${row.order_id}`,statusUpdate,axiosConfig,{
+              withCredentials: true
+          });
+          console.log(hitback)
+          if(hitback){
+            
+       
+
+            // setInputs(null)
+            refreshPage()
+         
+            history.push('/customer/profile/2') 
+
+          }
+          
+  }
+  catch(err){
+
+    console.log("in error")
+    console.log(err)
+  }
+}
 
   return (
     <Card >
@@ -111,8 +171,23 @@ export default function OrderCard(props) {
 
                               <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
                               Status : {item.status}  
+                           
                               </Typography>
 
+                              {(item.status =="Return Request Initiated" || item.status =="Return Accepted" || item.status =="Return Rejected")?null:                         <Button
+              type="submit"
+              fullWidth
+              value="Return Request Initiated"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+          
+              
+              onClick={() => handleAddrTypeChange(props.orderinfo,item)}
+            >
+             Return Item
+        </Button>}
+
+        
 
                               {/* <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
                               {item.quantity*item.price}

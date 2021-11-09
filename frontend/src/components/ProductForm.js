@@ -35,11 +35,12 @@ export default function ProductForm(props) {
   function refreshPage() {
     setTimeout(()=>{
         window.location.reload(true);
-    }, 1000);
+    }, 10   );
     console.log('page to reload')
 }
 
   useEffect(() => {
+
       if(!Cookies.get('token')){
           setLoggedin(true)
           setErrAlert("error")
@@ -54,6 +55,7 @@ export default function ProductForm(props) {
        name,description,price,quantity,size,color,photo
    }
    const Bearer = "Bearer "+ Cookies.get('token')
+    console.log(Bearer)
    let axiosConfig = {
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',

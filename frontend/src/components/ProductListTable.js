@@ -121,7 +121,7 @@ export default function ProductListTable(props) {
               </TableCell>
               <TableCell style={styles.ProductTableCell}>{product.name}</TableCell>
               <TableCell style={styles.ProductTableCell}>{trimWords(product.description, 3, '...')}</TableCell>
-              <TableCell style={styles.ProductTableCell}>{product.price}</TableCell>
+              <TableCell style={styles.ProductTableCell}>${product.price}</TableCell>
               <TableCell style={styles.ProductTableCell}>{product.quantity}</TableCell>
               <TableCell variant="body2">
               {/* <Link underline="none" href={`/product/update/${product._id}`} >
