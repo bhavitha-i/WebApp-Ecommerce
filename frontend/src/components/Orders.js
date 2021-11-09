@@ -13,9 +13,7 @@ import axios from "axios";
 
 // Generate Order Data
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+
 
 
 export default function Orders(props) {
@@ -81,6 +79,7 @@ export default function Orders(props) {
             <TableCell>Price </TableCell>
             <TableCell >Action</TableCell>
             <TableCell>Order Status </TableCell>
+            <TableCell>Return Reason </ TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -109,6 +108,7 @@ export default function Orders(props) {
           <option value={"Return Rejected"}>Return Rejected</option>
         </NativeSelect></TableCell>
               <TableCell>{row.OrderStatus}</TableCell>
+              <TableCell>{row.returnReason}</TableCell>
             </TableRow>
           ))}
         </TableBody>

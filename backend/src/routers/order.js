@@ -151,6 +151,8 @@ router.patch('/order/status/:id', async (req,res)=>{
             console.log(pro.product)
             if(pro.product == prod){
                 pro.status = req.body.status
+                pro.returnReason = req.body.returnReason
+
             }
 
         }

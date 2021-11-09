@@ -37,15 +37,7 @@ export default function Dashboard(props) {
     // const [fav] = useFav();
     const [loaded, setLoaded] = React.useState(false);
   const [open, setOpen] = React.useState(true);
-//   const [tableData,setTableData] = React.useState(props.data)
 
-//   useEffect(() => {
-//     const fetchPlanetas = async () => {
-//         setTableData(props.data)
-//  // remove curly braces here
-//     };    
-//     fetchPlanetas()
-// }, [props.data]);
 useEffect(() => {
     setTimeout(setLoaded, 1000, true);
     console.log(props.data)
