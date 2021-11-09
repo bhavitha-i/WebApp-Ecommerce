@@ -22,6 +22,12 @@ import Cookies from 'js-cookie';
 import { Button } from '@mui/material';
 import axios from "axios";
 import { useHistory } from 'react-router';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import CustomizedSnackbars from './CustomizedSnackbars';
+import { useState } from 'react';
+import OrderProductBar from './OrderProductBar';
+
 
 
 function refreshPage() {
@@ -49,57 +55,72 @@ const ExpandMore = styled((props) => {
 
 export default function OrderCard(props) {
   const [expanded, setExpanded] = React.useState(false);
-  
+  const [returnRes, setReturnRea] = React.useState();
+  const [callFlag, setCallFlag] = React.useState(false)
+  const [errAlert,setErrAlert] = useState("");
+  const [message,setMessage] = useState("");
+
   const history = useHistory();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const handleAddrTypeChange = async (row,item) => {
-    
-    console.log(row,item  ,"on click==========")
+  function onReasonChange(e){
+    console.log(e)
+    setReturnRea(e.target.value)
+  }
+
+  function handleReturnRequest(e,item){
+    e.preventDefault()
+
+    console.log(props.orderinfo.order_id,item  ,"on click==========")
 
     const Bearer = "Bearer "+ Cookies.get('token')
     let axiosConfig = {
-     headers: {
-         'Content-Type': 'application/json;charset=UTF-8',
-         "Authorization" : Bearer
-     }
-  };
-  try{
-   
-
-    const statusUpdate={
-        "product":item.id,
-        "status":"Return Request Initiated"
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Authorization" : Bearer
+      }
     }
-    console.log(row.order_id,"order")
-    const hitback = await axios.patch(`http://localhost:5000/order/status/${row.order_id}`,statusUpdate,axiosConfig,{
-              withCredentials: true
-          });
-          console.log(hitback)
-          if(hitback){
-            
-       
+    if(returnRes != null)
+     {
+      console.log("In return ")
 
-            // setInputs(null)
-            refreshPage()
-         
-            history.push('/customer/profile/2') 
+
+                const statusUpdate={
+                  "product":item.id,
+                  "status":"Return Request Initiated",
+                  "returnReason":returnRes
+                }
+
+
+
+                axios.patch(`http://localhost:5000/order/status/${props.orderinfo.order_id}`,statusUpdate,axiosConfig,{
+                  withCredentials: true
+              }).then(response =>{
+              console.log(response.data," Status updates")
+              window.location.href = "/customer/profile/2";
+              
+              
+              }).catch(error => {
+
+                  console.log(error);
+                });
+     }
+          else{
+            console.log("No return ")
+            setCallFlag(true)
+            setErrAlert("error")
+            setMessage("Enter Reason for Return")
 
           }
-          
-  }
-  catch(err){
 
-    console.log("in error")
-    console.log(err)
   }
-}
 
   return (
     <Card >
+
       {  console.log(props.orderinfo,"--- order info")}
 
       <CardHeader
@@ -136,65 +157,7 @@ export default function OrderCard(props) {
           </Grid>
             <Grid container direction="column" spacing={0} >
                 {props.orderinfo.items.map(item => (
-                  <Grid container direction="row"key={item} xs={12} sx={{p:2}}>
-                        <Grid item xs={2} 
-                           style={{ display: "flex" }}
-                           alignItems="center"
-                           justifyContent="flex-end"
-                          > 
-                            <Avatar variant="rounded" src={item.photo} ></Avatar>
-
-                        </Grid>
-                        <Grid item xs={7} 
-                           style={{ display: "flex", paddingLeft:"15px", paddingRight:"15px" }}
-                           direction="column"
-                           justifyContent="center"
-
-                          > 
-                             <Typography variant="h6" color="text.primary" style={styles.textTransformNone}>
-                              {item.name}
-                              </Typography>
-                          </Grid>
-                          <Grid item xs={3} 
-                                 style={{ display: "flex", paddingRight:"15px" }}
-                                direction="column"
-                                justifyContent="center"
-                              >
-                              <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
-                              Quantity : {item.quantity}  
-                              </Typography>
-
-
-                              <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
-                              Price : ${item.price}
-                              </Typography>
-
-                              <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
-                              Status : {item.status}  
-                           
-                              </Typography>
-
-                              {(item.status =="Return Request Initiated" || item.status =="Return Accepted" || item.status =="Return Rejected")?null:                         <Button
-              type="submit"
-              fullWidth
-              value="Return Request Initiated"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-          
-              
-              onClick={() => handleAddrTypeChange(props.orderinfo,item)}
-            >
-             Return Item
-        </Button>}
-
-        
-
-                              {/* <Typography variant="body1" color="text.primary" style={styles.textTransformNone}>
-                              {item.quantity*item.price}
-                              </Typography> */}
-                        </Grid>
-                              
-                  </Grid>
+                    <OrderProductBar  item={item} order_id={props.orderinfo.order_id}/>
                   ))}
             </Grid>
 

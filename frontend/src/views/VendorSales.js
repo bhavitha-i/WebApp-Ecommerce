@@ -96,14 +96,8 @@ class VendorSales extends Component {
 
 
   render() {
-    console.log(this.state.tableData,"set=============")
-    // if(this.state.isLoading){
-    //     return <div className="App"><CircularIndeterminate /> No Data Available</div>;
-    // }
-  //   if(this.state.tableData.length ==0){
-  //     return <div className="App"><CircularIndeterminate /> No Data Available</div>;
-  // }
-  
+    // console.log(this.state.tableData,"set=============")
+
       return(
          
         <ThemeProvider theme={theme}>

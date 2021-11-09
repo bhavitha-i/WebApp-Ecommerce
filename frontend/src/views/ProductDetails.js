@@ -24,13 +24,17 @@ import styles from '../assets/styles';
 import FileBase from 'react-file-base64';
 import { withRouter } from "react-router-dom";
 import Paper from "./../components/Paper"
+import AppBarCustomer from '../components/AppBarCustomer';
 
 
 
 
 
  class ProductDetails extends Component {
+
+   
     constructor(props) {
+      
         super(props);
         this.state = {
             productId:"",
@@ -52,62 +56,67 @@ import Paper from "./../components/Paper"
         };
       }
 
-      addtoCart(e){
-          console.log("added to cart")
-          this.setState({loggedin:false})
-          var jusJson={}
-        e.preventDefault();
-        jusJson = {
-                      name:this.state.name,
-                      description:this.state.description,
-                      quantity:this.state.quantity,
-                      price:this.state.price,
-                      photo:this.state.photo,
-                      size:this.state.size,
-                      color:this.state.color
-                  }
+      
 
-          const Bearer = "Bearer "+ Cookies.get('token')
-    let axiosConfig = {
-     headers: {
-         'Content-Type': 'application/json;charset=UTF-8',
-         "Authorization" : Bearer
-     }
-   };
+//       addtoCart(e){
+//           console.log("added to cart")
+//           this.setState({loggedin:false})
+//           var jusJson={}
+//         e.preventDefault();
+//         jusJson = {
+//                       name:this.state.name,
+//                       description:this.state.description,
+//                       quantity:this.state.quantity,
+//                       price:this.state.price,
+//                       photo:this.state.photo,
+//                       size:this.state.size,
+//                       color:this.state.color
+//                   }
 
-   axios.patch(`http://localhost:5000/product/${this.state.productId}`,jusJson,axiosConfig,{
-    withCredentials: true
-}).then(response =>{
+//           const Bearer = "Bearer "+ Cookies.get('token')
+//     let axiosConfig = {
+//      headers: {
+//          'Content-Type': 'application/json;charset=UTF-8',
+//          "Authorization" : Bearer
+//      }
+//    };
+
+//    axios.patch(`https://eshop-spot-backend.herokuapp.com/product/${this.state.productId}`,jusJson,axiosConfig,{
+//     withCredentials: true
+// }).then(response =>{
 
 
-console.log("customer updated")
+// console.log("customer updated")
 
-    this.setState({item:response.data})
-    this.setState({loggedin:true})
-    this.setState({errAlert:"success"})
-    this.setState({message:"changes updated for"})
-}).catch(error => {
-    this.setState({loggedin:true})
-    this.setState({errAlert:"error"})
-    this.setState({message:"Something went wrong"})
-    console.log("In error");
-    console.log(error);
-  });
+//     this.setState({item:response.data})
+//     this.setState({loggedin:true})
+//     this.setState({errAlert:"success"})
+//     this.setState({message:"changes updated for"})
+// }).catch(error => {
+//     this.setState({loggedin:true})
+//     this.setState({errAlert:"error"})
+//     this.setState({message:"Something went wrong"})
+//     console.log("In error");
+//     console.log(error);
+//   });
 
 
 
 
         
-        console.log(jusJson)
-      }
+//         console.log(jusJson)
+//       }
       
 
 
 
 
 // });
+
+
  componentDidMount (){
 
+  
     let paramProdId = this.props.match.params;
     this.setState({productId:paramProdId.id})
     console.log("oarams:",this.state.productId)
@@ -148,14 +157,45 @@ console.log("customer updated")
     
 }
 
+
+
 render(){
+
+  const onAdd = async (product) => {
+
+    
+
+    var selectedProd = {
+      "product":product._id,
+    }
+
+  const Bearer = "Bearer "+ Cookies.get('token')
+  let axiosConfig = {
+  headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      "Authorization" : Bearer
+    }
+  };
+
+  axios.patch(`http://localhost:5000/cart/addProduct`,selectedProd,axiosConfig,{
+    withCredentials: true })
+    .then(response =>{ 
+      console.log(response.data.productlist,"from api")
+      window.location.href = "/customer/cart";
+
+      })
+      .catch(error => {console.log(error)})
+
+}
+
+
 
   return (
       <>
       
     <ThemeProvider theme={theme}>
       { this.state.loggedin && <CustomizedSnackbars errAlert={this.state.errAlert} message={this.state.message} user={this.state.firstName} /> }
-    <AppBar/>
+      <AppBarCustomer/>
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
@@ -171,7 +211,7 @@ render(){
         
 
         
-          <Box component="form" onSubmit={this.addtoCart.bind(this)} sx={{ mt: 3 }}>
+          <Box component="form"  sx={{ mt: 3 }}>
             <Grid container spacing={2}>
             
                 <Grid item xs={12} sm={12}>
@@ -246,19 +286,13 @@ render(){
                   
                 />
               </Grid>
+              <Grid item xs={12} sm={12}>
+           
+           <Button fullWidth variant="contained" color="primary" onClick={() => onAdd(this.state.item)}>Add to Cart</Button>
+            </Grid>
              
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-             Add to Cart
-            </Button>
-            <Grid container justifyContent="flex-end">
-              
-            </Grid>
+
           </Box>
         </Box>
         

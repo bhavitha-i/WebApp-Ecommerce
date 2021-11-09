@@ -55,8 +55,8 @@ class CustomerOrders extends Component {
         this.setState({ productsAll: response.data });
         
 
-        console.log(this.state.products,"from customer orders")
-        console.log(this.state.orders[0].productlist,"orders from customer orders")
+        // console.log(this.state.products,"from customer orders")
+        // console.log(this.state.orders[0].productlist,"orders from customer orders")
 
 
 
@@ -77,7 +77,9 @@ class CustomerOrders extends Component {
                                       "price": this.state.products[k].price,
                                       "owner": this.state.products[k].owner,
                                       "status": this.state.orders[i].productlist[j].status,
-                                      "quantity":this.state.orders[i].productlist[j].quantity
+                                      "quantity":this.state.orders[i].productlist[j].quantity,
+                                      "returnReason": this.state.orders[i].productlist[j].returnReason,
+
                                   }
                                   totalpri = totalpri + this.state.products[k].price
                                   tempJson.items.push(item)
@@ -88,7 +90,7 @@ class CustomerOrders extends Component {
       tempJson.totalPrice = totalpri
       this.setState({ tableProd: [...this.state.tableProd, tempJson] })
   }
-  console.log(this.state.tableProd,"dump from customer orders")
+  // console.log(this.state.tableProd,"dump from customer orders")
 
       })
       .catch(error => {
@@ -102,7 +104,7 @@ class CustomerOrders extends Component {
         
               }).then(resposne =>{
                 this.setState({ orders: resposne.data });
-                console.log(this.state.orders,"after api")
+                // console.log(this.state.orders,"after api")
 
               })
   
