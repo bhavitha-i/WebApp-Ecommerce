@@ -151,7 +151,12 @@ router.patch('/order/status/:id', async (req,res)=>{
             console.log(pro.product)
             if(pro.product == prod){
                 pro.status = req.body.status
-                pro.returnReason = req.body.returnReason
+                if(req.body.status == "Return Request Initiated" ){
+                    pro.returnReason = req.body.returnReason
+                }
+                else if(req.body.status == "Order Placed" || req.body.status == "Order Dispatched" || req.body.status == "Out for Delivery" || req.body.status == "Delivered"){
+                    pro.returnReason = "-"
+                }
 
             }
 
