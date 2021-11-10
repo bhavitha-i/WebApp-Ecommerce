@@ -56,7 +56,7 @@ class VendorHome extends Component {
  
       try{
       
-      const hitback =  await axios.get("http://localhost:5000/product/mine",axiosConfig, {
+      const hitback =  await axios.get(process.env.REACT_APP_API_URL+"/product/mine",axiosConfig, {
                   withCredentials: true
         
                 });

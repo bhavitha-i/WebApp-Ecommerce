@@ -67,7 +67,7 @@ import styles from '../assets/styles';
             }
           };
 
-              axios.patch("http://localhost:5000/customers/me",jusJson,axiosConfig,{
+              axios.patch(process.env.REACT_APP_API_URL+"/customers/me",jusJson,axiosConfig,{
                 withCredentials: true
               }).then(response =>{
 

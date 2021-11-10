@@ -51,7 +51,7 @@ function VendorSignUp() {
     
     try{
       setLoggedin(false)
-      const hitback = await axios.post("http://localhost:5000/vendor/signup",signupData,{
+      const hitback = await axios.post(process.env.REACT_APP_API_URL+"/vendor/signup",signupData,{
                 withCredentials: true
             });
             console.log(hitback)

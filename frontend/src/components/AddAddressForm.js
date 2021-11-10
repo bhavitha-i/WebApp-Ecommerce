@@ -74,7 +74,7 @@ function AddAddress(props)  {
           try{
             console.log(inputs._id,"  input")
             setCallFlag(false)
-            const hitback = await axios.patch(`http://localhost:5000/address/${inputs._id}`,addressData,axiosConfig,{
+            const hitback = await axios.patch(process.env.REACT_APP_API_URL+`/address/${inputs._id}`,addressData,axiosConfig,{
                       withCredentials: true
                   });
                   console.log(hitback)
@@ -103,7 +103,7 @@ function AddAddress(props)  {
 
           try{
             setCallFlag(false)
-            const hitback = await axios.post("http://localhost:5000/address/add",addressData,axiosConfig,{
+            const hitback = await axios.post(process.env.REACT_APP_API_URL+"/address/add",addressData,axiosConfig,{
                       withCredentials: true
                   });
                   console.log(hitback)

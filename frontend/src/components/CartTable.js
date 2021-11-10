@@ -145,7 +145,7 @@ console.log(cartItems,'begin')
       }
     };
 
-      axios.patch(`http://localhost:5000/cart/mine`,patchData,axiosConfig,{
+      axios.patch(process.env.REACT_APP_API_URL+`/cart/mine`,patchData,axiosConfig,{
      withCredentials: true }).then(response =>{ 
       console.log("in cart Table") 
       console.log(response.data.price,"from api")}).catch(error => {console.log(error)})
@@ -174,7 +174,7 @@ console.log(cartItems,'begin')
      
   }
     try{
-      const hitback =  await axios.delete(`http://localhost:5000/product/${product._id}`,axiosConfig, {
+      const hitback =  await axios.delete(process.env.REACT_APP_API_URL+`/product/${product._id}`,axiosConfig, {
         withCredentials: true
         
     });

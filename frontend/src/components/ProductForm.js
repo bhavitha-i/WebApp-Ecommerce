@@ -66,7 +66,7 @@ export default function ProductForm(props) {
    console.log(prodData)
 
    try{
-    const hitback = await axios.post("http://localhost:5000/product/add",prodData,axiosConfig, {
+    const hitback = await axios.post(process.env.REACT_APP_API_URL+"/product/add",prodData,axiosConfig, {
         withCredentials: true
     });
     setLoggedin(true)

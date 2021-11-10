@@ -96,7 +96,7 @@ export default function OrderCard(props) {
 
 
 
-                axios.patch(`http://localhost:5000/order/status/${props.orderinfo.order_id}`,statusUpdate,axiosConfig,{
+                axios.patch(process.env.REACT_APP_API_URL+`/order/status/${props.orderinfo.order_id}`,statusUpdate,axiosConfig,{
                   withCredentials: true
               }).then(response =>{
               console.log(response.data," Status updates")

@@ -45,7 +45,7 @@ const CustomerSignUp = (callback) => {
 
       try{
         setLoggedin(false)
-        const hitback = await axios.post("http://localhost:5000/customer/signup",signupData,{
+        const hitback = await axios.post(process.env.REACT_APP_API_URL+"/customer/signup",signupData,{
                   withCredentials: true
               });
               console.log(hitback)

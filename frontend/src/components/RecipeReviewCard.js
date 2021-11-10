@@ -45,7 +45,7 @@ export default function RecipeReviewCard(props) {
         }
       };
 
-      axios.patch(`http://localhost:5000/cart/addProduct`,selectedProd,axiosConfig,{
+      axios.patch(process.env.REACT_APP_API_URL+`/cart/addProduct`,selectedProd,axiosConfig,{
         withCredentials: true })
         .then(response =>{ 
           console.log(response.data.productlist,"from api")

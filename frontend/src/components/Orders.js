@@ -46,7 +46,7 @@ export default function Orders(props) {
             "status":e.target.value
         }
         console.log(row.order_id,"order")
-        const hitback = await axios.patch(`http://localhost:5000/order/status/${row.order_id}`,statusUpdate,axiosConfig,{
+        const hitback = await axios.patch(process.env.REACT_APP_API_URL+`/order/status/${row.order_id}`,statusUpdate,axiosConfig,{
                   withCredentials: true
               });
               console.log(hitback)

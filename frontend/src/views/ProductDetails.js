@@ -46,60 +46,7 @@ import AppBarCustomer from '../components/AppBarCustomer';
 
       
 
-//       addtoCart(e){
-//           console.log("added to cart")
-//           this.setState({loggedin:false})
-//           var jusJson={}
-//         e.preventDefault();
-//         jusJson = {
-//                       name:this.state.name,
-//                       description:this.state.description,
-//                       quantity:this.state.quantity,
-//                       price:this.state.price,
-//                       photo:this.state.photo,
-//                       size:this.state.size,
-//                       color:this.state.color
-//                   }
 
-//           const Bearer = "Bearer "+ Cookies.get('token')
-//     let axiosConfig = {
-//      headers: {
-//          'Content-Type': 'application/json;charset=UTF-8',
-//          "Authorization" : Bearer
-//      }
-//    };
-
-//    axios.patch(`https://eshop-spot-backend.herokuapp.com/product/${this.state.productId}`,jusJson,axiosConfig,{
-//     withCredentials: true
-// }).then(response =>{
-
-
-// console.log("customer updated")
-
-//     this.setState({item:response.data})
-//     this.setState({loggedin:true})
-//     this.setState({errAlert:"success"})
-//     this.setState({message:"changes updated for"})
-// }).catch(error => {
-//     this.setState({loggedin:true})
-//     this.setState({errAlert:"error"})
-//     this.setState({message:"Something went wrong"})
-//     console.log("In error");
-//     console.log(error);
-//   });
-
-
-
-
-        
-//         console.log(jusJson)
-//       }
-      
-
-
-
-
-// });
 
 
  componentDidMount (){
@@ -125,7 +72,7 @@ import AppBarCustomer from '../components/AppBarCustomer';
           this.state.message ="Only vendors can add products"
          
       }
-      axios.get(`http://localhost:5000/products/${paramProdId.id}`,axiosConfig,{
+      axios.get(process.env.REACT_APP_API_URL+`/products/${paramProdId.id}`,axiosConfig,{
         withCredentials: true
     }).then(response =>{
         this.setState({name:response.data.name,
@@ -165,7 +112,7 @@ render(){
     }
   };
 
-  axios.patch(`http://localhost:5000/cart/addProduct`,selectedProd,axiosConfig,{
+  axios.patch(process.env.REACT_APP_API_URL+`/cart/addProduct`,selectedProd,axiosConfig,{
     withCredentials: true })
     .then(response =>{ 
       console.log(response.data.productlist,"from api")

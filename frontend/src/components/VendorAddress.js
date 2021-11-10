@@ -39,7 +39,7 @@ function VendorAddress(props)  {
     
         try{
            
-           const hitback =  await axios.get("http://localhost:5000/vendors/me",axiosConfig, {
+           const hitback =  await axios.get(process.env.REACT_APP_API_URL+"/vendors/me",axiosConfig, {
                      withCredentials: true
                    });
                    
@@ -89,7 +89,7 @@ function VendorAddress(props)  {
           try{
             console.log(address,"  input")
             setCallFlag(false)
-            const hitback = await axios.patch(`http://localhost:5000/vendors/me`,addressData,axiosConfig,{
+            const hitback = await axios.patch(process.env.REACT_APP_API_URL+`/vendors/me`,addressData,axiosConfig,{
                       withCredentials: true
                   });
                   console.log(hitback)

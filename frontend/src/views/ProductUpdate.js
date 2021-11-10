@@ -63,7 +63,7 @@ import Paper from "./../components/Paper"
      }
    };
 
-   axios.patch(`http://localhost:5000/product/${this.state.productId}`,jusJson,axiosConfig,{
+   axios.patch(process.env.REACT_APP_API_URL+`/${this.state.productId}`,jusJson,axiosConfig,{
     withCredentials: true
 }).then(response =>{
 
@@ -115,7 +115,7 @@ console.log("customer updated")
             this.setState({message:"Only vendors can update products"})
          
       }
-      axios.get(`http://localhost:5000/products/${this.state.productId}`,axiosConfig,{
+      axios.get(process.env.REACT_APP_API_URL+`/products/${this.state.productId}`,axiosConfig,{
         withCredentials: true
     }).then(response =>{
         this.setState({

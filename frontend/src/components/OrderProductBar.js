@@ -82,7 +82,7 @@ export default function OrderProductBar(props) {
 
 
 
-                axios.patch(`http://localhost:5000/order/status/${props.order_id}`,statusUpdate,axiosConfig,{
+                axios.patch(process.env.REACT_APP_API_URL+`/order/status/${props.order_id}`,statusUpdate,axiosConfig,{
                   withCredentials: true
               }).then(response =>{
               console.log(response.data," Status updates")

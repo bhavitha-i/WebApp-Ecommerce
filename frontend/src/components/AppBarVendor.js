@@ -56,7 +56,7 @@ export default function ButtonAppBar() {
     try{
 
 
-      axios.post("http://localhost:5000/vendor/logout",
+      axios.post(process.env.REACT_APP_API_URL+"/vendor/logout",
       {         headers: headers,
                 withCredentials: true })
                 .then(response =>{ 

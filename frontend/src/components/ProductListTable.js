@@ -66,7 +66,7 @@ export default function ProductListTable(props) {
      
   }
     try{
-      const hitback =  await axios.delete(`http://localhost:5000/product/${product._id}`,axiosConfig, {
+      const hitback =  await axios.delete(process.env.REACT_APP_API_URL+`/product/${product._id}`,axiosConfig, {
         withCredentials: true
         
     });

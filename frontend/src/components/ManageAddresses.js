@@ -69,7 +69,7 @@ function ManageAddress() {
      
   }
     try{
-      const hitback =  await axios.delete(`http://localhost:5000/address/${address._id}`,axiosConfig, {
+      const hitback =  await axios.delete(process.env.REACT_APP_API_URL+`/address/${address._id}`,axiosConfig, {
         withCredentials: true
         
     });
@@ -105,7 +105,7 @@ function ManageAddress() {
 
     try{
        
-       const hitback =  await axios.get("http://localhost:5000/addresses/mine",axiosConfig, {
+       const hitback =  await axios.get(process.env.REACT_APP_API_URL+"/addresses/mine",axiosConfig, {
                  withCredentials: true
                });
                
