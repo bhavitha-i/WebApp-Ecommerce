@@ -49,7 +49,7 @@ function CustomerSignin() {
     };
     
     try{
-      const hitback = await axios.post("http://localhost:5000/customer/login",loginData,{
+      const hitback = await axios.post(process.env.REACT_APP_API_URL+"/customer/login",loginData,{
                 withCredentials: true
             });
             console.log(hitback)
