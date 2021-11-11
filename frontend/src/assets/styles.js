@@ -74,7 +74,7 @@ const Header = {
     backgroundRepeat: 'no-repeat',
     width: '100vw',
     height: '100vh',
-    backgroundColor: 'Red',
+    backgroundColor: 'White',
     maxWidth:"none"
 
 }
