@@ -86,7 +86,7 @@ export default function OrderProductBar(props) {
                   withCredentials: true
               }).then(response =>{
               console.log(response.data," Status updates")
-              window.location.href = "/customer/profile/2";
+              window.location.href = "/customerview/profile/2";
               
               
               }).catch(error => {

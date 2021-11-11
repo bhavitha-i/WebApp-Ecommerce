@@ -71,7 +71,7 @@ export default function RecipeReviewCard(props) {
       
       <CardContent  sx={{ flexGrow: 1 }}>
         <Typography gutterBottom >
-          <Link underline="none" href={`/productS/${props.product._id}`} variant="h5" color="inherit" >
+          <Link underline="none" href={`/productsview/${props.product._id}`} variant="h5" color="inherit" >
           {trimWords(props.product.name, 2, '...')}
           </Link>
         </Typography>

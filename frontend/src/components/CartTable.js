@@ -104,7 +104,7 @@ console.log(cartItems,'begin')
 
   function goToCheckout(){
     history.push({
-      pathname: '/customer/checkout',
+      pathname: '/customerview/checkout',
       openSnackbar: true
     });
   }
@@ -276,7 +276,7 @@ console.log(cartItems,'begin')
         <button onClick={() => updateCart(cartItems)} className="remove">
                 Save Cart
               </button>
-              <Link href="/customer/checkout" variant="body2">
+              <Link href="/customerview/checkout" variant="body2">
               <button className="remove">
                Checkout
               </button>

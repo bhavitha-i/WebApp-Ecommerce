@@ -85,8 +85,8 @@ function AddAddress(props)  {
                     setMessage("Address Edited")
                     console.log("Address Edited")
                     props.setOpenPopup(false)
-                    // history.push('/customer/profile/3')
-                    window.location.href = "/customer/profile/3";
+                    // history.push('/customerview/profile/3')
+                    window.location.href = "/customerview/profile/3";
 
                   }
                   
@@ -114,8 +114,8 @@ function AddAddress(props)  {
                     setMessage("Welcome")
                     // setInputs(null)
                     props.setOpenPopup(false)
-                    // history.push('/customer/profile/3')
-                    window.location.href = "/customer/profile/3";
+                    // history.push('/customerview/profile/3')
+                    window.location.href = "/customerview/profile/3";
 
                   }
                   

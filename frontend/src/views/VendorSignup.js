@@ -62,7 +62,7 @@ function VendorSignUp() {
               setMessage("Welcome ",hitback.data.vendor.firstName)
               setUser(hitback.data.vendor.firstName)
               history.push({
-                pathname: '/vendor/home',
+                pathname: '/vendorview/home',
                 openSnackbar: true
               });
             }
@@ -178,7 +178,7 @@ function VendorSignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/vendor/login" variant="body2">
+                <Link href="/vendorview/login" variant="body2">
                   {strings.SignUp.Labels.hasAccount}
                 </Link>
               </Grid>
@@ -187,7 +187,7 @@ function VendorSignUp() {
         </Box>
         
       </Container>
-      <Link href="/customer/signup" variant="body2">
+      <Link href="/customerview/signup" variant="body2">
       <FloatingActionButtons personIcon={true} text={strings.SignUp.Labels.asCustomeSignup}/>
       </Link>
     </ThemeProvider>

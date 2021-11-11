@@ -20,7 +20,7 @@ export default function NoAddressCard(props) {
     
 
     function handleClick(){
-        history.push('/customer/profile/3')
+        history.push('/customerview/profile/3')
     }
 
 

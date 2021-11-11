@@ -116,7 +116,7 @@ render(){
     withCredentials: true })
     .then(response =>{ 
       console.log(response.data.productlist,"from api")
-      window.location.href = "/customer/cart";
+      window.location.href = "/customerview/cart";
 
       })
       .catch(error => {console.log(error)})

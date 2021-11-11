@@ -56,7 +56,7 @@ const CustomerSignUp = (callback) => {
                 setMessage("Welcome ",user.firstName)
                 setUser(hitback.data.customer.firstName)
                 history.push({
-                  pathname: '/customer/home',
+                  pathname: '/customerview/home',
                   openSnackbar: true
                 });
               }
@@ -187,7 +187,7 @@ const CustomerSignUp = (callback) => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/customer/login" variant="body2">
+                <Link href="/customerview/login" variant="body2">
                   {strings.SignUp.Labels.hasAccount}
                 </Link>
               </Grid>
@@ -196,7 +196,7 @@ const CustomerSignUp = (callback) => {
         </Box>
         
       </Container>
-      <Link href="/vendor/signup" variant="body2">
+      <Link href="/vendorview/signup" variant="body2">
       <FloatingActionButtons  personIcon={true} text={strings.SignUp.Labels.asVendorSignup}/>
       </Link>
     </ThemeProvider>
