@@ -49,7 +49,7 @@ function CustomerSignin() {
     };
     
     try{
-      const hitback = await axios.post("http://localhost:5000/customer/login",loginData,{
+      const hitback = await axios.post(process.env.REACT_APP_API_URL+"/customer/login",loginData,{
                 withCredentials: true
             });
             console.log(hitback)
@@ -60,7 +60,7 @@ function CustomerSignin() {
               setMessage("Welcome")
               setUser(hitback.data.customer.firstName)
               history.push({
-                pathname: '/customer/home',
+                pathname: '/customerview/home',
                 openSnackbar: true
               });            
             
@@ -138,7 +138,7 @@ function CustomerSignin() {
               
               </Grid>
               <Grid item>
-                <Link href="/customer/signup" variant="body2">
+                <Link href="/customerview/signup" variant="body2">
                   {strings.SignUp.Labels.noAccount}
                 </Link>
               </Grid>
@@ -147,7 +147,7 @@ function CustomerSignin() {
         </Box>
         
       </Container>
-      <Link href="/vendor/login" variant="body2">
+      <Link href="/vendorview/login" variant="body2">
       <FloatingActionButtons personIcon={true} text={strings.SignUp.Labels.asVendorLogin}/>
       </Link>
     </ThemeProvider>

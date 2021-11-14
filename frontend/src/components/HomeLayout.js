@@ -30,7 +30,7 @@ export default function HomeLayout() {
         variant="contained"
         size="large"
         component="a"
-        href="customer/login"
+        href="customerview/login"
         sx={{ minWidth: 200 , margin:"10px",textTransform:"none"}}
       >
         As Customer
@@ -43,7 +43,7 @@ export default function HomeLayout() {
         variant="contained"
         size="large"
         component="a"
-        href="vendor/login"
+        href="vendorview/login"
         sx={{ minWidth: 200 , margin:"10px", textTransform:"none"}}
       >
         As Vendor

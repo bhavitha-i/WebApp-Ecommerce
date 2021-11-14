@@ -27,24 +27,9 @@ class CustomerHome extends Component {
   }
 
   componentDidMount () {
-    const Bearer = "Bearer "+ Cookies.get('token')
-    let axiosConfig = {
-     headers: {
-         'Content-Type': 'application/json;charset=UTF-8',
-         "Authorization" : Bearer
-     }
-   };
- 
-          if(!Cookies.get('token')){
-          this.setState.loggedin = true
-          this.state.errAlert = "error"
-          this.state.message ="Only vendors can add products"
-         
-      }
-
 
     axios
-      .get(`http://localhost:5000/product/all`)
+      .get(process.env.REACT_APP_API_URL+`/product/all`)
       .then(response => {
         console.log("response" + response.data);
         this.setState({ products: response.data });

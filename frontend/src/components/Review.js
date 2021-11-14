@@ -69,7 +69,7 @@ export default function Review(props) {
               };
 
       console.log(newO,"newO")
-      const hitback =  await axios.get("http://localhost:5000/cart/mine",axiosConfig, {
+      const hitback =  await axios.get(process.env.REACT_APP_API_URL+"/cart/mine",axiosConfig, {
         withCredentials: true 
       });
       console.log(hitback.data,"  in basic card final try")
@@ -82,13 +82,13 @@ export default function Review(props) {
       }
       console.log(newO,"after assign")
 
-      axios.post(`http://localhost:5000/order/add`,newO,axiosConfig,{
+      axios.post(process.env.REACT_APP_API_URL+`/order/add`,newO,axiosConfig,{
         withCredentials: true })
         .then(response =>{ console.log(response.data,"from api")
             var o=response.data
             console.log(o,"Order placed")
             setOrder(o)
-            history.push("/customer/profile/2")
+            history.push("/customerview/profile/2")
       }).catch(error => {console.log(error)})
 
       }

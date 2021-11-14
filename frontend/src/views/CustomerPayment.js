@@ -51,7 +51,7 @@ class CustomerPayment extends Component {
 
 
     axios
-      .get(`http://localhost:5000/product/all`)
+      .get(process.env.REACT_APP_API_URL+`/product/all`)
       .then(response => {
         console.log("response" + response.data);
         this.setState({ products: response.data });
@@ -91,7 +91,7 @@ class CustomerPayment extends Component {
       try{
        
       
-        axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
+        axios.get(process.env.REACT_APP_API_URL+"/customers/myCart",axiosConfig, {
         withCredentials: true
         
     }).then(resposne =>{
@@ -118,7 +118,7 @@ class CustomerPayment extends Component {
 
 
 
-  axios.get("http://localhost:5000/addresses/mine",axiosConfig,{
+  axios.get(process.env.REACT_APP_API_URL+"/addresses/mine",axiosConfig,{
     withCredentials: true
 }).then(response =>{
 console.log(response.data,"addres")
@@ -139,18 +139,10 @@ console.log(this.state.address,"set")
 
   render() {
       return(
-  //   <div style={{ display: "inline-block" ,position:"relative",top:"50px",left:"110px"}}>
-  //   {this.state.products.map(currentproduct => (
-  //     <div style={{ display: "inline-block", margin: "20px" }}>
-  //       <RecipeReviewCard product={currentproduct} />
-  //     </div>
-  //   ))}
-  // </div>
+
 
   <div>
 
-{/* <AddressForm add={this.state.address} cart={this.state.oldCart} /> */}
-{/* <Checkout add={this.state.address} cart={this.state.oldCart} /> */}
 <PaymentForm />
   </div>
       

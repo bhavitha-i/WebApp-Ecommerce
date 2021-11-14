@@ -33,10 +33,9 @@ import styles from '../assets/styles';
             user:{},
             password : "",
             confirmPassword : "",
-          loggedin:false,
+          callFlag:false,
           errAlert:"",
           message:"",
-          loggedin:false,          
     
         };
       }
@@ -46,6 +45,7 @@ import styles from '../assets/styles';
             return true;
           else
             return false;
+            
       }
 
 
@@ -67,29 +67,29 @@ import styles from '../assets/styles';
             }
           };
 
-              axios.patch("http://localhost:5000/vendors/me",jusJson,axiosConfig,{
+              axios.patch(process.env.REACT_APP_API_URL+"/vendors/me",jusJson,axiosConfig,{
                 withCredentials: true
               }).then(response =>{
 
             console.log("customer updated")
 
                 this.setState({user:response.data})
-                this.setState({loggedin:true})
                 this.setState({errAlert:"success"})
                 this.setState({message:"changes updated"})
+                this.setState({callFlag:true})
             }).catch(error => {
-                this.setState({loggedin:true})
                 this.setState({errAlert:"error"})
                 this.setState({message:"Something went wrong"})
+                this.setState({callFlag:true})
                 console.log(error);
               });;
 
         }else{
           e.preventDefault();
 
-            this.setState({loggedin:true})
             this.setState({errAlert:"error"})
             this.setState({message:"Passwords do not match"})
+            this.setState({callFlag:true})
         }
         
         console.log(jusJson)
@@ -103,7 +103,7 @@ render(){
   return (
       <>
     <ThemeProvider theme={theme}>
-      { this.state.loggedin && <CustomizedSnackbars errAlert={this.state.errAlert} message={this.state.message} user={this.state.firstName} /> }
+      { this.state.callFlag && <CustomizedSnackbars errAlert={this.state.errAlert} message={this.state.message} user={this.state.firstName} /> }
       <Container component="main" maxWidth="xs" style={styles.TabContainer}>
         <Box
           sx={{
@@ -121,7 +121,7 @@ render(){
             <Grid container spacing={2}>
             <Grid item xs={12}>
                 <TextField
-                  
+                  required
                   fullWidth
                   name="password"
                   label="New Password"
@@ -135,7 +135,7 @@ render(){
 
               <Grid item xs={12}>
                 <TextField
-                  
+                  required
                   fullWidth
                   name="confirmPassword"
                   label="Confirm New Password"

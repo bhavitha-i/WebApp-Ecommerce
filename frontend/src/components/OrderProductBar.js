@@ -82,11 +82,11 @@ export default function OrderProductBar(props) {
 
 
 
-                axios.patch(`http://localhost:5000/order/status/${props.order_id}`,statusUpdate,axiosConfig,{
+                axios.patch(process.env.REACT_APP_API_URL+`/order/status/${props.order_id}`,statusUpdate,axiosConfig,{
                   withCredentials: true
               }).then(response =>{
               console.log(response.data," Status updates")
-              window.location.href = "/customer/profile/2";
+              window.location.href = "/customerview/profile/2";
               
               
               }).catch(error => {
@@ -174,7 +174,7 @@ export default function OrderProductBar(props) {
                                   sx={{ mt: 3, mb: 2 }} 
                                   size="small"     
                                   onClick={(e) => handleReturnRequest(e,item)}                                >
-                                Return Item
+                                Request Return
                             </Button>
                             </Box>
                           

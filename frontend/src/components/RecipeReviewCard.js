@@ -10,7 +10,7 @@ import trimWords from 'trim-words';
 import styles from '../assets/styles';
 import  { useState , useEffect} from "react"
 import Cookies from 'js-cookie';
-
+import CustomizedSnackbars from './CustomizedSnackbars';
 import axios from "axios";
 
 export default function RecipeReviewCard(props) {
@@ -45,7 +45,7 @@ export default function RecipeReviewCard(props) {
         }
       };
 
-      axios.patch(`http://localhost:5000/cart/addProduct`,selectedProd,axiosConfig,{
+      axios.patch(process.env.REACT_APP_API_URL+`/cart/addProduct`,selectedProd,axiosConfig,{
         withCredentials: true })
         .then(response =>{ 
           console.log(response.data.productlist,"from api")
@@ -54,7 +54,12 @@ export default function RecipeReviewCard(props) {
           setCallBack(true)
 
           })
-          .catch(error => {console.log(error)})
+          .catch(error => {
+            console.log(error)
+            setErrAlert("Error")
+            setMessage("Error adding product to cart")
+            setCallBack(true)
+          })
 
     }
   
@@ -62,6 +67,7 @@ export default function RecipeReviewCard(props) {
 
   return (
     <Card sx={{ minWidth:250, maxWidth:275, maxHeight:300 }}>
+                { callBack && <CustomizedSnackbars errAlert={errAlert} message={message}  /> }
       <CardMedia
         component="img"
         height="140"
@@ -71,7 +77,7 @@ export default function RecipeReviewCard(props) {
       
       <CardContent  sx={{ flexGrow: 1 }}>
         <Typography gutterBottom >
-          <Link underline="none" href={`/productS/${props.product._id}`} variant="h5" color="inherit" >
+          <Link underline="none" href={`/productsview/${props.product._id}`} variant="h5" color="inherit" >
           {trimWords(props.product.name, 2, '...')}
           </Link>
         </Typography>

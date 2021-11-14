@@ -48,7 +48,7 @@ function VendorSignIn() {
     
     try{
       setLoggedin(false)
-      const hitback = await axios.post("http://localhost:5000/vendor/login",loginData,{
+      const hitback = await axios.post(process.env.REACT_APP_API_URL+"/vendor/login",loginData,{
                 withCredentials: true
             });
             console.log(hitback)
@@ -60,7 +60,7 @@ function VendorSignIn() {
               setUser(hitback.data.vendor.firstName)
 
               history.push({
-                pathname: '/vendor/home',
+                pathname: '/vendorview/home',
                 openSnackbar: true
               });
             }
@@ -137,7 +137,7 @@ function VendorSignIn() {
               
               </Grid>
               <Grid item>
-                <Link href="/vendor/signup" variant="body2">
+                <Link href="/vendorview/signup" variant="body2">
                   {strings.SignUp.Labels.noAccount}
                 </Link>
               </Grid>
@@ -146,7 +146,7 @@ function VendorSignIn() {
         </Box>
         
       </Container>
-      <Link href="/customer/login" variant="body2">
+      <Link href="/customerview/login" variant="body2">
       <FloatingActionButtons  personIcon={true} text={strings.SignUp.Labels.asCustomerLogin}/>
       </Link>
     </ThemeProvider>

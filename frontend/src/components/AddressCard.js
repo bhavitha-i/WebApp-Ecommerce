@@ -31,7 +31,7 @@ export default function AddressCard(props) {
         <Typography variant="body2"> {props.address.street1} </Typography>
         <Typography variant="body2"> {props.address.street2} </Typography>
         <Typography variant="body2">   {props.address.city}, {props.address.state} </Typography>
-        <Typography variant="body2">  {props.address.zipcode} - {props.country} </Typography>
+        <Typography variant="body2">  {props.address.zipcode} - {props.address.country} </Typography>
        
 
       </CardContent>

@@ -53,7 +53,7 @@ export default function ButtonAppBar() {
     try{
 
 
-      axios.post(`http://localhost:5000/customer/logout`,axiosConfig,{
+      axios.post(process.env.REACT_APP_API_URL+`/customer/logout`,axiosConfig,{
               withCredentials: true 
             })
                 .then(response =>{ 
@@ -62,7 +62,7 @@ export default function ButtonAppBar() {
               })
                 .catch(error => {console.log(error)})
                 history.push({
-                  pathname: '/customer/login',
+                  pathname: '/customerview/login',
                 });
     }
     catch(err){
@@ -74,7 +74,7 @@ export default function ButtonAppBar() {
       console.log("in error")
       console.log(err)
       history.push({
-        pathname: '/customer/login',
+        pathname: '/customerview/login',
       });
     }
   }
@@ -91,7 +91,7 @@ export default function ButtonAppBar() {
               underline="none" 
               variant="h5" 
               color="inherit" 
-              href="/customer/home"
+              href="/customerview/home"
               sx={{ fontSize: 24 }}>
             {strings.Common.websiteName}
             </Link>
@@ -103,7 +103,7 @@ export default function ButtonAppBar() {
               size="large" 
               aria-label="show number of products in cart" 
               color="inherit"
-              href="/customer/cart">
+              href="/customerview/cart">
               <Badge 
                   // badgeContent={4} 
                   color="secondary">
@@ -114,7 +114,7 @@ export default function ButtonAppBar() {
             <IconButton
               size="large"
               aria-label="account of current user"
-              href="/customer/profile"
+              href="/customerview/profile"
               color="inherit"
             >
               <AccountCircle />

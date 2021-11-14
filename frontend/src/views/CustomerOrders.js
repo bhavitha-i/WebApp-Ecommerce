@@ -48,7 +48,7 @@ class CustomerOrders extends Component {
 
 
     axios
-      .get(`http://localhost:5000/product/all`)
+      .get(process.env.REACT_APP_API_URL+`/product/all`)
       .then(response => {
         console.log("response" + response.data);
         this.setState({ products: response.data });
@@ -81,7 +81,7 @@ class CustomerOrders extends Component {
                                       "returnReason": this.state.orders[i].productlist[j].returnReason,
 
                                   }
-                                  totalpri = totalpri + this.state.products[k].price
+                                  totalpri = totalpri + (this.state.products[k].price*this.state.orders[i].productlist[j].quantity)
                                   tempJson.items.push(item)
 
               }
@@ -99,7 +99,7 @@ class CustomerOrders extends Component {
 
       try{  
       
-            axios.get("http://localhost:5000/customers/myorders",axiosConfig, {
+            axios.get(process.env.REACT_APP_API_URL+"/customers/myorders",axiosConfig, {
               withCredentials: true
         
               }).then(resposne =>{

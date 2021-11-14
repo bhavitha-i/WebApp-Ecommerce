@@ -35,7 +35,7 @@ export default function ButtonAppBar() {
               color="inherit"
               underline="none"
               variant="h6"
-              href="/vendor/signup"
+              href="/vendorview/signup"
               style = {styles.HeaderIcons}
             >
                {strings.Common.signup} 
@@ -44,7 +44,7 @@ export default function ButtonAppBar() {
             <Link
               color="inherit"
               underline="none"
-              href="/vendor/login"
+              href="/vendorview/login"
               variant="h6"
               style = {styles.HeaderIcons}
             >

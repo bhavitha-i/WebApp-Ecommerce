@@ -56,7 +56,7 @@ export default function ButtonAppBar() {
     try{
 
 
-      axios.post("http://localhost:5000/vendor/logout",
+      axios.post(process.env.REACT_APP_API_URL+"/vendor/logout",
       {         headers: headers,
                 withCredentials: true })
                 .then(response =>{ 
@@ -64,7 +64,7 @@ export default function ButtonAppBar() {
             console.log(response.data.price,"from api")})
             .catch(error => {console.log(error)})
             history.push({
-              pathname: '/vendor/login',
+              pathname: '/vendorview/login',
             });
     }
     catch(err){
@@ -87,7 +87,7 @@ export default function ButtonAppBar() {
               underline="none" 
               variant="h5" 
               color="inherit" 
-              href="/vendor/home"
+              href="/vendorview/home"
               sx={{ fontSize: 24 }}>
             {strings.Common.websiteName}
             </Link>
@@ -100,7 +100,7 @@ export default function ButtonAppBar() {
               color="inherit"
               underline="none"
               variant="h6"
-              href="/vendor/sales"
+              href="/vendorview/sales"
               style = {styles.HeaderIcons}
             >
                {strings.vendor.sales} 
@@ -109,7 +109,7 @@ export default function ButtonAppBar() {
             <IconButton
               size="large"
               aria-label="account of current user"
-              href="/vendor/profile"
+              href="/vendorview/profile"
               color="inherit"
             >
               <AccountCircle />

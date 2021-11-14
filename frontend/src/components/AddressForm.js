@@ -58,7 +58,7 @@ export default function AddressForm(props) {
        }
      };
 
-              axios.get("http://localhost:5000/addresses/mine",axiosConfig,{
+              axios.get(process.env.REACT_APP_API_URL+"/addresses/mine",axiosConfig,{
                 withCredentials: true
             }).then(response =>{
             console.log(response.data,"addres")

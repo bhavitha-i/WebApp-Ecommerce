@@ -48,7 +48,7 @@ class CustomerCart extends Component {
 
       try{
       
-        const hitback =  await axios.get("http://localhost:5000/customers/myCart",axiosConfig, {
+        const hitback =  await axios.get(process.env.REACT_APP_API_URL+"/customers/myCart",axiosConfig, {
           withCredentials: true
           
       });
@@ -74,7 +74,7 @@ class CustomerCart extends Component {
   }
 
 
-      axios.get(`http://localhost:5000/product/all`,axiosConfig).then(response => {console.log("response" + response.data);
+      axios.get(process.env.REACT_APP_API_URL+`/product/all`,axiosConfig).then(response => {console.log("response" + response.data);
         this.setState({ productsAll: response.data });
         console.log(this.state.productsAll,"check")
         console.log(this.state.oldCart[0].productlist)

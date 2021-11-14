@@ -45,7 +45,7 @@ const CustomerSignUp = (callback) => {
 
       try{
         setLoggedin(false)
-        const hitback = await axios.post("http://localhost:5000/customer/signup",signupData,{
+        const hitback = await axios.post(process.env.REACT_APP_API_URL+"/customer/signup",signupData,{
                   withCredentials: true
               });
               console.log(hitback)
@@ -56,7 +56,7 @@ const CustomerSignUp = (callback) => {
                 setMessage("Welcome ",user.firstName)
                 setUser(hitback.data.customer.firstName)
                 history.push({
-                  pathname: '/customer/home',
+                  pathname: '/customerview/home',
                   openSnackbar: true
                 });
               }
@@ -149,6 +149,7 @@ const CustomerSignUp = (callback) => {
                   id="password"
                   autoComplete="new-password"
                   onChange={handleInputChange}
+                  inputProps={{ minLength: 8 }}
 
                 />
               </Grid>
@@ -187,7 +188,7 @@ const CustomerSignUp = (callback) => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/customer/login" variant="body2">
+                <Link href="/customerview/login" variant="body2">
                   {strings.SignUp.Labels.hasAccount}
                 </Link>
               </Grid>
@@ -196,7 +197,7 @@ const CustomerSignUp = (callback) => {
         </Box>
         
       </Container>
-      <Link href="/vendor/signup" variant="body2">
+      <Link href="/vendorview/signup" variant="body2">
       <FloatingActionButtons  personIcon={true} text={strings.SignUp.Labels.asVendorSignup}/>
       </Link>
     </ThemeProvider>

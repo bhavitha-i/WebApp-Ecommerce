@@ -51,7 +51,7 @@ function VendorSignUp() {
     
     try{
       setLoggedin(false)
-      const hitback = await axios.post("http://localhost:5000/vendor/signup",signupData,{
+      const hitback = await axios.post(process.env.REACT_APP_API_URL+"/vendor/signup",signupData,{
                 withCredentials: true
             });
             console.log(hitback)
@@ -62,7 +62,7 @@ function VendorSignUp() {
               setMessage("Welcome ",hitback.data.vendor.firstName)
               setUser(hitback.data.vendor.firstName)
               history.push({
-                pathname: '/vendor/home',
+                pathname: '/vendorview/home',
                 openSnackbar: true
               });
             }
@@ -145,6 +145,7 @@ function VendorSignUp() {
                   id="password"
                   autoComplete="new-password"
                   onChange={(e) => setPassword(e.target.value)} value={password}
+                  inputProps={{ minLength: 8 }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -178,7 +179,7 @@ function VendorSignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/vendor/login" variant="body2">
+                <Link href="/vendorview/login" variant="body2">
                   {strings.SignUp.Labels.hasAccount}
                 </Link>
               </Grid>
@@ -187,7 +188,7 @@ function VendorSignUp() {
         </Box>
         
       </Container>
-      <Link href="/customer/signup" variant="body2">
+      <Link href="/customerview/signup" variant="body2">
       <FloatingActionButtons personIcon={true} text={strings.SignUp.Labels.asCustomeSignup}/>
       </Link>
     </ThemeProvider>
