@@ -13,7 +13,7 @@ const vendorAuth = async(req,res,next) =>{
             token = Auth.replace('Bearer ','')
         }
 
-        console.log('token verify',req)
+        console.log('token verify',token)
         const decoded = jwt.verify(token,process.env.TOKEN_SECRET)
 
         // console.log(decoded)
