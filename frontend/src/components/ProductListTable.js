@@ -73,7 +73,7 @@ export default function ProductListTable(props) {
     console.log(hitback.data)
     // this.setState({ products: hitback.data });
     setErrAlert("success")
-    setMessage("Item deleted")
+    setMessage("Product deleted")
     setProd(product.name)
     // setProd(hitback.data.product.name)
     setLoggedin(true)
