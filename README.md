@@ -1,4 +1,4 @@
-# WebApp-Ecommerce
+# Eshop spot
 
 Eshop-spot is a web application based on MERN Stack.
 
