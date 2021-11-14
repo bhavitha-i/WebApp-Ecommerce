@@ -62,7 +62,7 @@ class VendorSales extends Component {
       try{
 
         axios.get(process.env.REACT_APP_API_URL+"/vendors/dashboard",axiosConfig,{
-            withCredentials: true
+          withCredentials: true
         }).then(response =>{
     
         console.log(response.data,"addres")

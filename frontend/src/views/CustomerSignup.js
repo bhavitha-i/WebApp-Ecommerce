@@ -149,6 +149,7 @@ const CustomerSignUp = (callback) => {
                   id="password"
                   autoComplete="new-password"
                   onChange={handleInputChange}
+                  inputProps={{ minLength: 8 }}
 
                 />
               </Grid>

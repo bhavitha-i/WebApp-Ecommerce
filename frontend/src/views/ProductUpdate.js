@@ -63,7 +63,7 @@ import Paper from "./../components/Paper"
      }
    };
 
-   axios.patch(process.env.REACT_APP_API_URL+`/${this.state.productId}`,jusJson,axiosConfig,{
+   axios.patch(process.env.REACT_APP_API_URL+`/product/${this.state.productId}`,jusJson,axiosConfig,{
     withCredentials: true
 }).then(response =>{
 
@@ -129,9 +129,6 @@ console.log("customer updated")
       })
       
 
-
-            console.log(this.state.name)
-            console.log(this.state.photo)
         this.setState({item:response.data})
     }).catch(error => {
         console.log(error);

@@ -81,7 +81,7 @@ class CustomerOrders extends Component {
                                       "returnReason": this.state.orders[i].productlist[j].returnReason,
 
                                   }
-                                  totalpri = totalpri + this.state.products[k].price
+                                  totalpri = totalpri + (this.state.products[k].price*this.state.orders[i].productlist[j].quantity)
                                   tempJson.items.push(item)
 
               }

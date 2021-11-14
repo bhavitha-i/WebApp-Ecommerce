@@ -145,6 +145,7 @@ function VendorSignUp() {
                   id="password"
                   autoComplete="new-password"
                   onChange={(e) => setPassword(e.target.value)} value={password}
+                  inputProps={{ minLength: 8 }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>

@@ -55,68 +55,15 @@ const ExpandMore = styled((props) => {
 
 export default function OrderCard(props) {
   const [expanded, setExpanded] = React.useState(false);
-  const [returnRes, setReturnRea] = React.useState();
-  const [callFlag, setCallFlag] = React.useState(false)
-  const [errAlert,setErrAlert] = useState("");
-  const [message,setMessage] = useState("");
 
-  const history = useHistory();
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  function onReasonChange(e){
-    console.log(e)
-    setReturnRea(e.target.value)
-  }
-
-  function handleReturnRequest(e,item){
-    e.preventDefault()
-
-    console.log(props.orderinfo.order_id,item  ,"on click==========")
-
-    const Bearer = "Bearer "+ Cookies.get('token')
-    let axiosConfig = {
-      headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          "Authorization" : Bearer
-      }
-    }
-    if(returnRes != null)
-     {
-      console.log("In return ")
 
 
-                const statusUpdate={
-                  "product":item.id,
-                  "status":"Return Request Initiated",
-                  "returnReason":returnRes
-                }
-
-
-
-                axios.patch(process.env.REACT_APP_API_URL+`/order/status/${props.orderinfo.order_id}`,statusUpdate,axiosConfig,{
-                  withCredentials: true
-              }).then(response =>{
-              console.log(response.data," Status updates")
-              window.location.href = "/customerview/profile/2";
-              
-              
-              }).catch(error => {
-
-                  console.log(error);
-                });
-     }
-          else{
-            console.log("No return ")
-            setCallFlag(true)
-            setErrAlert("error")
-            setMessage("Enter Reason for Return")
-
-          }
-
-  }
 
   return (
     <Card >

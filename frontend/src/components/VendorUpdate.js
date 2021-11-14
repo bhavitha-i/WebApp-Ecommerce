@@ -73,7 +73,7 @@ import styles from '../assets/styles';
           this.setState({user:response.data})
           this.setState({loggedin:true})
           this.setState({errAlert:"success"})
-          this.setState({message:"changes updated"})
+          this.setState({message:"Changes updated"})
       }).catch(error => {
           this.setState({loggedin:true})
           this.setState({errAlert:"error"})
@@ -151,7 +151,7 @@ render(){
 
                 <Grid item xs={12} sm={6}>
                 <TextField
-                  
+                  required
                   fullWidth
                   id="firstName"
                   label={strings.SignUp.Labels.firstName}
@@ -163,7 +163,7 @@ render(){
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  
+                  required
                   fullWidth
                   id="lastName"
                   label={strings.SignUp.Labels.lastName}
@@ -187,7 +187,7 @@ render(){
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  
+                  required
                   fullWidth
                   id="contact"
                   label={strings.SignUp.Labels.contact}

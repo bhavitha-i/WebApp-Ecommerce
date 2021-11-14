@@ -84,13 +84,15 @@ import styles from '../assets/styles';
 console.log("customer updated")
 
     this.setState({user:response.data})
-    this.setState({loggedin:true})
     this.setState({errAlert:"success"})
-    this.setState({message:"changes updated"})
-}).catch(error => {
+    this.setState({message:"Changes updated"})
     this.setState({loggedin:true})
+
+}).catch(error => {
     this.setState({errAlert:"error"})
     this.setState({message:"Something went wrong"})
+    this.setState({loggedin:true})
+
     console.log(error);
   });;
 
@@ -161,7 +163,7 @@ render(){
   
                 <Grid item xs={12} sm={6}>
                 <TextField
-                  
+                  required
                   fullWidth
                   id="firstName"
                   label={strings.SignUp.Labels.firstName}
@@ -173,7 +175,7 @@ render(){
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  
+                  required
                   fullWidth
                   id="lastName"
                   label={strings.SignUp.Labels.lastName}
@@ -196,7 +198,7 @@ render(){
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  
+                  required
                   fullWidth
                   id="contact"
                   label={strings.SignUp.Labels.contact}

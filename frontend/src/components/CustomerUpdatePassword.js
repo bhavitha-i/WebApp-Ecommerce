@@ -36,7 +36,6 @@ import styles from '../assets/styles';
           loggedin:false,
           errAlert:"",
           message:"",
-          loggedin:false,          
     
         };
       }
@@ -74,22 +73,21 @@ import styles from '../assets/styles';
             console.log("customer updated")
 
                 this.setState({user:response.data})
-                this.setState({loggedin:true})
                 this.setState({errAlert:"success"})
                 this.setState({message:"changes updated"})
-            }).catch(error => {
                 this.setState({loggedin:true})
+            }).catch(error => {
                 this.setState({errAlert:"error"})
                 this.setState({message:"Something went wrong"})
+                this.setState({loggedin:true})
                 console.log(error);
               });;
 
         }else{
           e.preventDefault();
-
-            this.setState({loggedin:true})
             this.setState({errAlert:"error"})
             this.setState({message:"Passwords do not match"})
+            this.setState({loggedin:true})
         }
         
         console.log(jusJson)
@@ -119,7 +117,7 @@ render(){
             <Grid container spacing={2}>
             <Grid item xs={12}>
                 <TextField
-                  
+                  required
                   fullWidth
                   name="password"
                   label="New Password"
@@ -133,7 +131,7 @@ render(){
 
               <Grid item xs={12}>
                 <TextField
-                  
+                  required
                   fullWidth
                   name="confirmPassword"
                   label="Confirm New Password"

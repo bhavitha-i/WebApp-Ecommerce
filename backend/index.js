@@ -37,10 +37,10 @@ app.use(express.json({limit: '25mb'}));
 app.use(express.urlencoded({limit: '25mb'}));
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(cors({
-//     origin:["http://localhost:3000"],
-//     credentials:true
-// }));
+app.use(cors({
+    origin:["http://localhost:3000"],
+    credentials:true
+}));
 
 
 
@@ -55,12 +55,12 @@ app.use(orderRouter)
 // For parsing application/x-www-form-urlencoded
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 
 app.listen(port,()=>{

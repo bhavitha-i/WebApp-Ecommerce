@@ -10,7 +10,7 @@ import trimWords from 'trim-words';
 import styles from '../assets/styles';
 import  { useState , useEffect} from "react"
 import Cookies from 'js-cookie';
-
+import CustomizedSnackbars from './CustomizedSnackbars';
 import axios from "axios";
 
 export default function RecipeReviewCard(props) {
@@ -54,7 +54,12 @@ export default function RecipeReviewCard(props) {
           setCallBack(true)
 
           })
-          .catch(error => {console.log(error)})
+          .catch(error => {
+            console.log(error)
+            setErrAlert("Error")
+            setMessage("Error adding product to cart")
+            setCallBack(true)
+          })
 
     }
   
@@ -62,6 +67,7 @@ export default function RecipeReviewCard(props) {
 
   return (
     <Card sx={{ minWidth:250, maxWidth:275, maxHeight:300 }}>
+                { callBack && <CustomizedSnackbars errAlert={errAlert} message={message}  /> }
       <CardMedia
         component="img"
         height="140"
